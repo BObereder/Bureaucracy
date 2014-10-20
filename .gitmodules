@@ -1,0 +1,3 @@
+[submodule "Submodules/SwiftHelpers"]
+	path = Submodules/SwiftHelpers
+	url = git@github.com:akolov/SwiftHelpers.git
