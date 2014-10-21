@@ -19,7 +19,7 @@ public class FormDataSource: NSObject, UITableViewDataSource {
 
   func registerReusableViews(tableView: UITableView) {
     for section in form.sections {
-      for field in section.fields {
+      for field in section.elements {
         field.registerReusableView(tableView)
       }
     }
@@ -36,7 +36,7 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   }
 
   public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let field = form.sections[indexPath.section].fields[indexPath.row]
+    let field = form.sections[indexPath.section].elements[indexPath.row]
     return field.dequeueReusableView(tableView, forIndexPath: indexPath)
   }
 

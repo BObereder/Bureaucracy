@@ -11,7 +11,11 @@ import UIKit
 
 public class FormCell: UITableViewCell {
 
-  public var formField: FormField? {
+  public required init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+
+  public var formElement: FormElement? {
     didSet {
       update()
     }

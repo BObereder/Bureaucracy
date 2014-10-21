@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class SegmentedFormField: FormField {
+public class SegmentedFormField<T, String, Int>: FormField<T, String, Int> {
 
   public var segments: [String] = []
 
@@ -18,8 +18,8 @@ public class SegmentedFormField: FormField {
     tableView.registerNib(nib, forCellReuseIdentifier: self.description())
   }
 
-  public override func description() -> String {
-    return "SegmentedFormField"
-  }
+//  public func description() -> String {
+//    return "SegmentedFormField"
+//  }
 
 }

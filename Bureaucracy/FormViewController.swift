@@ -26,7 +26,7 @@ public class FormViewController: UIViewController, UITableViewDelegate {
   // MARK: - UITableViewDelegate
 
   public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    dataSource?.form.sections[indexPath.section].fields[indexPath.row].didSelect()
+    dataSource?.form.sections[indexPath.section].elements[indexPath.row].didSelect()
   }
 
 }

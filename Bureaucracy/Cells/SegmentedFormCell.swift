@@ -13,7 +13,9 @@ public class SegmentedFormCell: FormCell {
   @IBOutlet weak var segmentedControl: UISegmentedControl!
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
-    formField?.formValue = sender.selectedSegmentIndex
+    if let field = formElement as? FormField<AnyObject, String, Int> {
+      field.value = sender.selectedSegmentIndex
+    }
   }
 
   // MARK: - FormCell
@@ -21,12 +23,12 @@ public class SegmentedFormCell: FormCell {
   public override func update() {
     segmentedControl.removeAllSegments()
 
-    if let field = formField as? SegmentedFormField {
+    if let field = formElement as? SegmentedFormField<AnyObject, String, Int> {
       for title in field.segments {
         segmentedControl.insertSegmentWithTitle(title, atIndex: segmentedControl.numberOfSegments, animated: false)
       }
 
-      if let index = formField?.formValue as? Int {
+      if let index = field.value as? Int {
         segmentedControl.selectedSegmentIndex = index
       }
     }

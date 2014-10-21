@@ -12,12 +12,12 @@ public class FormSection {
 
   public var title: String?
 
-  var fields: [FormField] = []
+  var elements: [FormElement] = []
 
   public init() { }
 
   public func numberOfFields() -> Int {
-    return fields.count
+    return elements.count
   }
 
 }

@@ -1,35 +1,29 @@
 //
-//  FormField.swift
+//  FormElement.swift
 //  Bureaucracy
 //
-//  Created by Alexander Kolov on 20.10.14.
+//  Created by Alexander Kolov on 21.10.14.
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
 import Foundation
 
-public class FormField {
+public class FormElement {
 
   public var title: String?
-  public var formValue: AnyObject?
+  public var cellClass: AnyClass
 
-  public var value: AnyObject? {
-    get {
-      return formValue
-    }
-
-    set {
-      formValue = value
-    }
+  init(cellClass: AnyClass) {
+    self.cellClass = cellClass
   }
 
   public func registerReusableView(tableView: UITableView) {
-    tableView.registerClass(FormField.self, forCellReuseIdentifier: self.description())
+    tableView.registerClass(cellClass, forCellReuseIdentifier: self.description())
   }
 
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(self.description(), forIndexPath: indexPath) as FormCell
-    cell.formField = self
+    cell.formElement = self
     return cell
   }
 
