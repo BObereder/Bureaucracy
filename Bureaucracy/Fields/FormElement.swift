@@ -13,7 +13,7 @@ public class FormElement {
   public var title: String?
   public var cellClass: AnyClass
 
-  init(cellClass: AnyClass) {
+  public init(cellClass: AnyClass) {
     self.cellClass = cellClass
   }
 
