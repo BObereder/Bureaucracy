@@ -11,11 +11,11 @@
 		FABA4E9019F53CC300574A68 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E8F19F53CC300574A68 /* FormSection.swift */; };
 		FABA4E9419F53E1400574A68 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9319F53E1400574A68 /* Form.swift */; };
 		FABA4E9919F54CE000574A68 /* SegmentedFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */; };
-		FABA4E9B19F54D0C00574A68 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9A19F54D0C00574A68 /* FormField.swift */; };
 		FABA4E9F19F54D7200574A68 /* SegmentedFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */; };
 		FABA4EA019F54D7200574A68 /* SegmentedFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = FABA4E9E19F54D7200574A68 /* SegmentedFormCell.xib */; };
 		FABA4EA219F54E9000574A68 /* FormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4EA119F54E9000574A68 /* FormCell.swift */; };
 		FABA4EA819F5634C00574A68 /* FormViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4EA719F5634C00574A68 /* FormViewController.swift */; };
+		FAC20AFB19F7E56A00F7CB28 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC20AFA19F7E56A00F7CB28 /* FormField.swift */; };
 		FAD4062019F69B50003ABE75 /* FormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4061F19F69B50003ABE75 /* FormElement.swift */; };
 		FAE0651519F5322E00279C6E /* Bureaucracy.h in Headers */ = {isa = PBXBuildFile; fileRef = FAE0651419F5322E00279C6E /* Bureaucracy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0650F19F5322E00279C6E /* Bureaucracy.framework */; };
@@ -53,11 +53,11 @@
 		FABA4E8F19F53CC300574A68 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		FABA4E9319F53E1400574A68 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormField.swift; sourceTree = "<group>"; };
-		FABA4E9A19F54D0C00574A68 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormCell.swift; sourceTree = "<group>"; };
 		FABA4E9E19F54D7200574A68 /* SegmentedFormCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SegmentedFormCell.xib; sourceTree = "<group>"; };
 		FABA4EA119F54E9000574A68 /* FormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormCell.swift; sourceTree = "<group>"; };
 		FABA4EA719F5634C00574A68 /* FormViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormViewController.swift; sourceTree = "<group>"; };
+		FAC20AFA19F7E56A00F7CB28 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
 		FAD4061F19F69B50003ABE75 /* FormElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormElement.swift; sourceTree = "<group>"; };
 		FAE0650F19F5322E00279C6E /* Bureaucracy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bureaucracy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE0651319F5322E00279C6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -93,7 +93,7 @@
 			isa = PBXGroup;
 			children = (
 				FAD4061F19F69B50003ABE75 /* FormElement.swift */,
-				FABA4E9A19F54D0C00574A68 /* FormField.swift */,
+				FAC20AFA19F7E56A00F7CB28 /* FormField.swift */,
 				FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */,
 			);
 			path = Fields;
@@ -317,7 +317,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FABA4E9B19F54D0C00574A68 /* FormField.swift in Sources */,
+				FAC20AFB19F7E56A00F7CB28 /* FormField.swift in Sources */,
 				FABA4E9919F54CE000574A68 /* SegmentedFormField.swift in Sources */,
 				FABA4EA219F54E9000574A68 /* FormCell.swift in Sources */,
 				FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */,
