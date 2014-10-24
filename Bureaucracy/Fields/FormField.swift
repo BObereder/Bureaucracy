@@ -42,5 +42,9 @@ public class FormField<Type, Internal, Representation>: FormElement {
   public var representationTransformer: (Type) -> (Representation) = { (var t) -> (Representation) in return t as Representation }
   public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
   public var error: NSError?
+  
+  public override func description() -> String {
+    return "FormField"
+  }
 
 }

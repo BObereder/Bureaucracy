@@ -8,14 +8,25 @@
 
 import Foundation
 
-public class SegmentedFormField<T, String, Int>: FormField<T, String, Int> {
+public class SegmentedFormField<T, Int, String>: FormField<T, Int, String> {
 
   public var segments: [String] = []
 
   public override func registerReusableView(tableView: UITableView) {
-    let bundle = NSBundle(forClass: self.dynamicType)
-    let nib: UINib! = UINib(nibName: self.description(), bundle: bundle)
-    tableView.registerNib(nib, forCellReuseIdentifier: self.description())
+    let bundle = NSBundle(forClass: self.cellClass)
+    let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
+    tableView.registerNib(nib, forCellReuseIdentifier: "SegmentedFormField")
+  }
+  
+  public override func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
+    let cell = tableView.dequeueReusableCellWithIdentifier("SegmentedFormField", forIndexPath: indexPath) as FormCell
+    cell.formElement = self
+    return cell
+  }
+  
+  public init(value: T, segments:[String]) {
+    self.segments = segments
+    super.init(cellClass: SegmentedFormCell.self, value: value)
   }
 
 //  public func description() -> String {

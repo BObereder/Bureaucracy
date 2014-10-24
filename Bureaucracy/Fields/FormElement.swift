@@ -28,7 +28,7 @@ public class FormElement {
   }
 
   public func description() -> String {
-    return "FormField"
+    return "FormElement"
   }
 
   public func didSelect() { }

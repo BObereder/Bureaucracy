@@ -20,9 +20,11 @@ public class Form {
 
   var sections: [FormSection] = []
 
+  public init() {}
   public func numberOfSections() -> Int {
     return sections.count
   }
+  
 
   public func numberOfFieldsInSection(section: Int) -> Int {
     return sections[section].numberOfFields()

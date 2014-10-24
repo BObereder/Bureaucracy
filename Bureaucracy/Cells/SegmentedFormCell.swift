@@ -23,15 +23,15 @@ public class SegmentedFormCell: FormCell {
   public override func update() {
     segmentedControl.removeAllSegments()
 
-    if let field = formElement as? SegmentedFormField<AnyObject, String, Int> {
-      for title in field.segments {
-        segmentedControl.insertSegmentWithTitle(title, atIndex: segmentedControl.numberOfSegments, animated: false)
+    if let field1 = formElement as? SegmentedFormField<Int, Int, String> {
+      for title in field1.segments {
+        segmentedControl.insertSegmentWithTitle(title, atIndex:segmentedControl.numberOfSegments, animated: false)
       }
 
-      if let index = field.value as? Int {
-        segmentedControl.selectedSegmentIndex = index
-      }
+//      if let index = field.value{
+//        segmentedControl.selectedSegmentIndex = index
+//      }
     }
-  }
+ }
 
 }

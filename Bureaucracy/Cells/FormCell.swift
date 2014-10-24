@@ -14,6 +14,10 @@ public class FormCell: UITableViewCell {
   public required init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
+  
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+  }
 
   public var formElement: FormElement? {
     didSet {
@@ -21,7 +25,9 @@ public class FormCell: UITableViewCell {
     }
   }
 
-  public func update() { }
+  public func update() {
+    textLabel.text = formElement?.title
+  }
 
   public override func awakeFromNib() {
     super.awakeFromNib()
