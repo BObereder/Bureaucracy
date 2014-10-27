@@ -33,7 +33,7 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
       if let field = cell.formElement as? SegmentedFormField<Type, Int, String> {
         if let realValues = field.representationValues {
           for v in realValues {
-            realCell.segmentedControl.insertSegmentWithTitle(v, atIndex:realCell.segmentedControl.numberOfSegments, animated: false)
+            realCell.segmentedControl.insertSegmentWithTitle(v, atIndex: realCell.segmentedControl.numberOfSegments, animated: false)
           }
           if let index = field.internalValue {
             realCell.segmentedControl.selectedSegmentIndex = index

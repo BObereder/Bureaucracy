@@ -19,7 +19,9 @@ public class FormField<Type, Internal, Representation>: FormElement {
   public var values: [Type] = []
   public var value: Type? {
     didSet {
-      error = validator(value!)
+      if let realValue = value {
+        error = validator(value!)
+      }
     }
   }
 
@@ -32,10 +34,12 @@ public class FormField<Type, Internal, Representation>: FormElement {
 
   public var internalValue: Internal? {
     didSet {
-      if let reversed = reverseValueTransformer?(internalValue!) {
-        error = validator(reversed)
-        if error == nil {
-          value = reversed
+      if let realInternalValue = internalValue {
+        if let reversed = reverseValueTransformer?(internalValue!) {
+          error = validator(reversed)
+          if error == nil {
+            value = reversed
+          }
         }
       }
     }

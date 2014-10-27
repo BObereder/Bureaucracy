@@ -24,7 +24,7 @@ public class FormCell: UITableViewCell {
     // Initialization code
   }
   
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+  public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     accessoryType = .None
   }
