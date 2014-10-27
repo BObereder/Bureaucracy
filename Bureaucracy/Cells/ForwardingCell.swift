@@ -1,26 +1,18 @@
 //
-//  SegmentedFormCell.swift
+//  ForwardingCell.swift
 //  Bureaucracy
 //
-//  Created by Alexander Kolov on 20.10.14.
+//  Created by Bernhard Obereder on 27.10.14.
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
 import UIKit
 
-public class SegmentedFormCell: FormCell {
+public class ForwardingCell: FormCell {
 
-  @IBOutlet weak var segmentedControl: UISegmentedControl!
-
-  @IBAction public func didChangeValue(sender: UISegmentedControl) {
-    if let realElement = formElement {
-      realElement.didChangeValue(self)
-    }
-  }
-  
   override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
-    selectionStyle = .None
+    accessoryType = .DisclosureIndicator
   }
   
   required public init(coder aDecoder: NSCoder) {
@@ -28,6 +20,7 @@ public class SegmentedFormCell: FormCell {
   }
   
   public override class func description() -> String {
-    return "SegmentedFormCell"
+    return "ForwardingCell"
   }
+  
 }

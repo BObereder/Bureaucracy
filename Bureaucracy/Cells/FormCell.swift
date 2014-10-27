@@ -11,14 +11,6 @@ import UIKit
 
 public class FormCell: UITableViewCell {
 
-  public required init(coder aDecoder: NSCoder) {
-    super.init(coder: aDecoder)
-  }
-  
-  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
-    super.init(style: style, reuseIdentifier: reuseIdentifier)
-  }
-
   public var formElement: FormElement? {
     didSet {
       if let realElement = formElement {
@@ -30,5 +22,18 @@ public class FormCell: UITableViewCell {
   public override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
+  }
+  
+  override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    accessoryType = .None
+  }
+  
+  required public init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  public override class func description() -> String {
+    return "FormCell"
   }
 }

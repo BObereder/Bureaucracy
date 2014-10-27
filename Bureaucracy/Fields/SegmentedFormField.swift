@@ -13,7 +13,7 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
   public override func registerReusableView(tableView: UITableView) {
     let bundle = NSBundle(forClass: self.cellClass)
     let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
-    tableView.registerNib(nib, forCellReuseIdentifier: self.description())
+    tableView.registerNib(nib, forCellReuseIdentifier: self.cellClass.description())
   }
 
   public init(value: Type, values:[Type]) {
@@ -21,9 +21,6 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     self.values = values
   }
 
-  public override func description() -> String {
-    return "SegmentedFormField"
-  }
   
   public var didChangeValue: () -> () = {
     println("valueChanged")
@@ -38,7 +35,7 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
           for v in realValues {
             realCell.segmentedControl.insertSegmentWithTitle(v, atIndex:realCell.segmentedControl.numberOfSegments, animated: false)
           }
-          if let index = field.internalValue{
+          if let index = field.internalValue {
             realCell.segmentedControl.selectedSegmentIndex = index
           }
         }
@@ -52,9 +49,7 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
         field.internalValue = realCell.segmentedControl.selectedSegmentIndex
         field.didChangeValue()
       }
-    
     }
-    
   }
   
 }
