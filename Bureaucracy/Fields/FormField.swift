@@ -16,7 +16,7 @@ public class FormField<Type, Internal, Representation>: FormElement {
     internalValue = valueTransformer(value)
   }
   
-  public init (cellClass: AnyClass, value: Type, valueTransformer: (Type) -> (Internal), reverseValueTransformer: (Internal) -> (Type)) {
+  public init(cellClass: AnyClass, value: Type, valueTransformer: (Type) -> (Internal), reverseValueTransformer: (Internal) -> (Type)) {
     self.value = value
     super.init(cellClass:cellClass)
     self.valueTransformer = valueTransformer
@@ -45,8 +45,7 @@ public class FormField<Type, Internal, Representation>: FormElement {
     }
   }
 
-  public var valueTransformer: (Type) -> (Internal) = { (var t) -> (Internal) in
-    return t as Internal }
+  public var valueTransformer: (Type) -> (Internal) = { (var t) -> (Internal) in return t as Internal }
   public var reverseValueTransformer: (Internal) -> (Type) = { (var i) -> (Type) in return i as Type }
   public var representationTransformer: (Type) -> (Representation) = { (var t) -> (Representation) in return t as Representation }
   public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
@@ -56,6 +55,4 @@ public class FormField<Type, Internal, Representation>: FormElement {
     return "FormField"
   }
   
-  public override func didSelect() { }
-
 }

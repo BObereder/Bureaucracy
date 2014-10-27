@@ -28,12 +28,8 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
   public override func description() -> String {
     return "SegmentedFormField"
   }
-
-  public override func didSelect() {
   
-  }
-  
-  public var onValueChanged: () -> () = {
+  public var didChangeValue: () -> () = {
     println("valueChanged")
   }
 }
