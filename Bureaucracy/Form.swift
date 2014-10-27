@@ -18,7 +18,7 @@ public class Form {
     }
   }
 
-  var sections: [FormSection] = []
+  public var sections: [FormSection] = []
 
   public init() {}
   public func numberOfSections() -> Int {

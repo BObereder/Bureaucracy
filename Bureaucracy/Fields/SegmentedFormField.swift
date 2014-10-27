@@ -8,29 +8,28 @@
 
 import Foundation
 
-public class SegmentedFormField<T, Int, String>: FormField<T, Int, String> {
+public class SegmentedFormField<Type, Internal, Representation>: FormField<Type, Int, String> {
 
   public var segments: [String] = []
 
   public override func registerReusableView(tableView: UITableView) {
     let bundle = NSBundle(forClass: self.cellClass)
     let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
-    tableView.registerNib(nib, forCellReuseIdentifier: "SegmentedFormField")
+    tableView.registerNib(nib, forCellReuseIdentifier: self.description())
   }
-  
-  public override func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier("SegmentedFormField", forIndexPath: indexPath) as FormCell
-    cell.formElement = self
-    return cell
-  }
-  
-  public init(value: T, segments:[String]) {
+
+  public init(value: Type, segments:[String], valueTransformer: (Type) -> (Int), reverseValueTransformer: (Int) -> (Type)) {
     self.segments = segments
-    super.init(cellClass: SegmentedFormCell.self, value: value)
+    super.init(cellClass: SegmentedFormCell.self, value: value, valueTransformer: valueTransformer, reverseValueTransformer: reverseValueTransformer)
+    self.valueTransformer = valueTransformer
+    self.reverseValueTransformer = reverseValueTransformer
   }
 
-//  public func description() -> String {
-//    return "SegmentedFormField"
-//  }
+  public override func description() -> String {
+    return "SegmentedFormField"
+  }
 
+  public override func didSelect() {
+  
+  }
 }

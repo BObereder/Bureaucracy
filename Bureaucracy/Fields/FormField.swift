@@ -12,14 +12,22 @@ public class FormField<Type, Internal, Representation>: FormElement {
 
   public init(cellClass: AnyClass, value: Type) {
     self.value = value
-    internalValue = valueTransformer(value)
     super.init(cellClass: cellClass)
+    internalValue = valueTransformer(value)
+  }
+  
+  public init (cellClass: AnyClass, value: Type, valueTransformer: (Type) -> (Internal), reverseValueTransformer: (Internal) -> (Type)) {
+    self.value = value
+    super.init(cellClass:cellClass)
+    self.valueTransformer = valueTransformer
+    self.reverseValueTransformer = reverseValueTransformer
+    internalValue = valueTransformer(value)
   }
 
   public var values: [Type] = []
-  public var value: Type {
+  public var value: Type? {
     didSet {
-      error = validator(value)
+      error = validator(value!)
     }
   }
 
@@ -27,9 +35,9 @@ public class FormField<Type, Internal, Representation>: FormElement {
     return values.map(representationTransformer)
   }
 
-  public var internalValue: Internal {
+  public var internalValue: Internal? {
     didSet {
-      var reversed = reverseValueTransformer(internalValue)
+      var reversed = reverseValueTransformer(internalValue!)
       error = validator(reversed)
       if error == nil {
         value = reversed
@@ -37,7 +45,8 @@ public class FormField<Type, Internal, Representation>: FormElement {
     }
   }
 
-  public var valueTransformer: (Type) -> (Internal) = { (var t) -> (Internal) in return t as Internal }
+  public var valueTransformer: (Type) -> (Internal) = { (var t) -> (Internal) in
+    return t as Internal }
   public var reverseValueTransformer: (Internal) -> (Type) = { (var i) -> (Type) in return i as Type }
   public var representationTransformer: (Type) -> (Representation) = { (var t) -> (Representation) in return t as Representation }
   public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
@@ -46,5 +55,7 @@ public class FormField<Type, Internal, Representation>: FormElement {
   public override func description() -> String {
     return "FormField"
   }
+  
+  public override func didSelect() { }
 
 }

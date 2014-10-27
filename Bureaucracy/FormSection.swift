@@ -12,7 +12,7 @@ public class FormSection {
 
   public var title: String?
 
-  var elements: [FormElement] = []
+  public var elements: [FormElement] = []
 
   public init() { }
 

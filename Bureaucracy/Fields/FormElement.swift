@@ -31,6 +31,8 @@ public class FormElement {
     return "FormElement"
   }
 
-  public func didSelect() { }
+  public func didSelect() {
+    println("selected")
+  }
 
 }
