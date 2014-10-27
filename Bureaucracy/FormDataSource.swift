@@ -13,8 +13,9 @@ public class FormDataSource: NSObject, UITableViewDataSource {
 
   var form: Form
 
-  init(form: Form) {
+  public init(form: Form) {
     self.form = form
+    super.init()
   }
 
   func registerReusableViews(tableView: UITableView) {

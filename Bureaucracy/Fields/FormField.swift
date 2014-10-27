@@ -12,34 +12,48 @@ public class FormField<Type, Internal, Representation>: FormElement {
 
   public init(cellClass: AnyClass, value: Type) {
     self.value = value
-    internalValue = valueTransformer(value)
     super.init(cellClass: cellClass)
+    internalValue = valueTransformer?(value)
   }
 
   public var values: [Type] = []
-  public var value: Type {
+  public var value: Type? {
     didSet {
-      error = validator(value)
-    }
-  }
-
-  public var representationValues: [Representation] {
-    return values.map(representationTransformer)
-  }
-
-  public var internalValue: Internal {
-    didSet {
-      var reversed = reverseValueTransformer(internalValue)
-      error = validator(reversed)
-      if error == nil {
-        value = reversed
+      if let realValue = value {
+        error = validator(value!)
       }
     }
   }
 
-  public var valueTransformer: (Type) -> (Internal) = { (var t) -> (Internal) in return t as Internal }
-  public var reverseValueTransformer: (Internal) -> (Type) = { (var i) -> (Type) in return i as Type }
-  public var representationTransformer: (Type) -> (Representation) = { (var t) -> (Representation) in return t as Representation }
+  public var representationValues: [Representation]? {
+    if let realTransformer = representationTransformer  {
+      return values.map(realTransformer)
+    }
+    return nil
+  }
+
+  public var internalValue: Internal? {
+    didSet {
+      if let realInternalValue = internalValue {
+        if let reversed = reverseValueTransformer?(realInternalValue) {
+          error = validator(reversed)
+          if error == nil {
+            value = reversed
+          }
+        }
+      }
+    }
+  }
+
+  public var valueTransformer: ((Type) -> (Internal))? {
+    didSet {
+      if let realValue = value {
+        internalValue = valueTransformer?(realValue)
+      }
+    }
+  }
+  public var reverseValueTransformer: ((Internal) -> (Type))?
+  public var representationTransformer: ((Type) -> (Representation))?
   public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
   public var error: NSError?
 

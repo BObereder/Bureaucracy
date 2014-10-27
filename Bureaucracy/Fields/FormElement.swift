@@ -18,19 +18,25 @@ public class FormElement {
   }
 
   public func registerReusableView(tableView: UITableView) {
-    tableView.registerClass(cellClass, forCellReuseIdentifier: self.description())
+    tableView.registerClass(cellClass, forCellReuseIdentifier: self.cellClass.description())
   }
 
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(self.description(), forIndexPath: indexPath) as FormCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(self.cellClass.description(), forIndexPath: indexPath) as FormCell
     cell.formElement = self
     return cell
   }
 
-  public func description() -> String {
-    return "FormField"
+  public var didSelect: () -> () = {
+    println("selected")
   }
+  
+  public func update(cell: FormCell) {
+    cell.textLabel.text = title
+  }
+  
+  public func didChangeValue(cell: FormCell) {
 
-  public func didSelect() { }
+  }
 
 }

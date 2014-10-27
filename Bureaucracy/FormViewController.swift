@@ -12,9 +12,10 @@ public class FormViewController: UIViewController, UITableViewDelegate {
 
   @IBOutlet weak var tableView: UITableView!
 
-  var dataSource: FormDataSource? {
+  public var dataSource: FormDataSource? {
     didSet {
       tableView.dataSource = dataSource
+      dataSource?.registerReusableViews(tableView)
     }
   }
 

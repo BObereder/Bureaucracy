@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7808CDDE19FEA1C600A83C6C /* ForwardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */; };
 		FA5D1B7B19F665C3004F1931 /* NSFormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* NSFormValidationError.swift */; };
 		FABA4E9019F53CC300574A68 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E8F19F53CC300574A68 /* FormSection.swift */; };
 		FABA4E9419F53E1400574A68 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9319F53E1400574A68 /* Form.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingCell.swift; sourceTree = "<group>"; };
 		FA5D1B7A19F665C3004F1931 /* NSFormValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFormValidationError.swift; sourceTree = "<group>"; };
 		FABA4E8F19F53CC300574A68 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		FABA4E9319F53E1400574A68 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
@@ -105,6 +107,7 @@
 				FABA4EA119F54E9000574A68 /* FormCell.swift */,
 				FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */,
 				FABA4E9E19F54D7200574A68 /* SegmentedFormCell.xib */,
+				7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -323,6 +326,7 @@
 				FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */,
 				FABA4E9419F53E1400574A68 /* Form.swift in Sources */,
 				FA5D1B7B19F665C3004F1931 /* NSFormValidationError.swift in Sources */,
+				7808CDDE19FEA1C600A83C6C /* ForwardingCell.swift in Sources */,
 				FAD4062019F69B50003ABE75 /* FormElement.swift in Sources */,
 				FABA4E9F19F54D7200574A68 /* SegmentedFormCell.swift in Sources */,
 				FABA4EA819F5634C00574A68 /* FormViewController.swift in Sources */,

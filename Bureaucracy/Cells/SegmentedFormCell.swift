@@ -13,25 +13,21 @@ public class SegmentedFormCell: FormCell {
   @IBOutlet weak var segmentedControl: UISegmentedControl!
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
-    if let field = formElement as? FormField<AnyObject, String, Int> {
-      field.value = sender.selectedSegmentIndex
+    if let realElement = formElement {
+      realElement.didChangeValue(self)
     }
   }
-
-  // MARK: - FormCell
-
-  public override func update() {
-    segmentedControl.removeAllSegments()
-
-    if let field = formElement as? SegmentedFormField<AnyObject, String, Int> {
-      for title in field.segments {
-        segmentedControl.insertSegmentWithTitle(title, atIndex: segmentedControl.numberOfSegments, animated: false)
-      }
-
-      if let index = field.value as? Int {
-        segmentedControl.selectedSegmentIndex = index
-      }
-    }
+  
+  public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
+    super.init(style: style, reuseIdentifier: reuseIdentifier)
+    selectionStyle = .None
   }
-
+  
+  required public init(coder aDecoder: NSCoder) {
+    super.init(coder: aDecoder)
+  }
+  
+  public override class func description() -> String {
+    return "SegmentedFormCell"
+  }
 }
