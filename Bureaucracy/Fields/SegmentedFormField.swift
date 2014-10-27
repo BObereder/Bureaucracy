@@ -18,11 +18,9 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     tableView.registerNib(nib, forCellReuseIdentifier: self.description())
   }
 
-  public init(value: Type, segments:[String], valueTransformer: (Type) -> (Int), reverseValueTransformer: (Int) -> (Type)) {
+  public init(value: Type, segments:[String]) {
     self.segments = segments
-    super.init(cellClass: SegmentedFormCell.self, value: value, valueTransformer: valueTransformer, reverseValueTransformer: reverseValueTransformer)
-    self.valueTransformer = valueTransformer
-    self.reverseValueTransformer = reverseValueTransformer
+    super.init(cellClass: SegmentedFormCell.self, value: value)
   }
 
   public override func description() -> String {
