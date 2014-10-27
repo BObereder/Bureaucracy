@@ -32,6 +32,10 @@ public class FormElement {
   }
 
   public func didSelect() {
+    self.onTap()
+  }
+  
+  public var onTap: () -> () = {
     println("selected")
   }
 
