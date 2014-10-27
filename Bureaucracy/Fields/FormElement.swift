@@ -34,5 +34,13 @@ public class FormElement {
   public var didSelect: () -> () = {
     println("selected")
   }
+  
+  public func update(cell: FormCell) {
+    cell.textLabel.text = title
+  }
+  
+  public func didChangeValue(cell: FormCell) {
+
+  }
 
 }

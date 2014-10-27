@@ -15,14 +15,6 @@ public class FormField<Type, Internal, Representation>: FormElement {
     super.init(cellClass: cellClass)
     internalValue = valueTransformer?(value)
   }
-  
-//  public init(cellClass: AnyClass, value: Type, valueTransformer: (Type) -> (Internal), reverseValueTransformer: (Internal) -> (Type)) {
-//    self.value = value
-//    super.init(cellClass:cellClass)
-//    self.valueTransformer = valueTransformer
-//    self.reverseValueTransformer = reverseValueTransformer
-//    internalValue = valueTransformer(value)
-//  }
 
   public var values: [Type] = []
   public var value: Type? {
@@ -40,7 +32,6 @@ public class FormField<Type, Internal, Representation>: FormElement {
 
   public var internalValue: Internal? {
     didSet {
-      
       if let reversed = reverseValueTransformer?(internalValue!) {
         error = validator(reversed)
         if error == nil {
@@ -50,15 +41,15 @@ public class FormField<Type, Internal, Representation>: FormElement {
     }
   }
 
-  public var valueTransformer: ((Type) -> (Internal))? = { (var t) -> (Internal) in return t as Internal } {
+  public var valueTransformer: ((Type) -> (Internal))? {
     didSet {
       if let realValue = value {
         internalValue = valueTransformer?(realValue)
       }
     }
   }
-  public var reverseValueTransformer: ((Internal) -> (Type))? = { (var i) -> (Type) in return i as Type } 
-  public var representationTransformer: ((Type) -> (Representation))? = { (var t) -> (Representation) in return t as Representation }
+  public var reverseValueTransformer: ((Internal) -> (Type))?
+  public var representationTransformer: ((Type) -> (Representation))?
   public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
   public var error: NSError?
   

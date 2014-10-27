@@ -21,23 +21,14 @@ public class FormCell: UITableViewCell {
 
   public var formElement: FormElement? {
     didSet {
-      update()
+      if let realElement = formElement {
+        realElement.update(self)
+      }
     }
   }
-
-  public func update() {
-    textLabel.text = formElement?.title
-  }
-
+  
   public override func awakeFromNib() {
     super.awakeFromNib()
     // Initialization code
   }
-
-  public override func setSelected(selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
-
-    // Configure the view for the selected state
-  }
-
 }
