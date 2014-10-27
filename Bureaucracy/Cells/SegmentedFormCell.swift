@@ -15,6 +15,7 @@ public class SegmentedFormCell: FormCell {
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
     if let field: SegmentedFormField = formElement as? SegmentedFormField<Int, Int, String> {
       field.internalValue = sender.selectedSegmentIndex
+      field.onValueChanged()
     }
   }
 

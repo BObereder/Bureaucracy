@@ -32,4 +32,8 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
   public override func didSelect() {
   
   }
+  
+  public var onValueChanged: () -> () = {
+    println("valueChanged")
+  }
 }
