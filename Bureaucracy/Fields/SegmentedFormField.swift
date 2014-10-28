@@ -22,7 +22,7 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
   }
 
   
-  public var didChangeValue: () -> () = {
+  public var didChangeValue: (cell: FormCell) -> () = { (let cell) in
     println("valueChanged")
   }
   
@@ -47,7 +47,7 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     if let realCell = cell as? SegmentedFormCell {
       if let field = realCell.formElement as? SegmentedFormField<Type, Int, String> {
         field.internalValue = realCell.segmentedControl.selectedSegmentIndex
-        field.didChangeValue()
+        field.didChangeValue(cell: cell)
       }
     }
   }
