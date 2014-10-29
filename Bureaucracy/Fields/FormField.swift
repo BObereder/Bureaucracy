@@ -24,10 +24,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   }
 
   public var representationValues: [Representation]? {
-    if let realTransformer = representationTransformer  {
-      return values.map(realTransformer)
-    }
-    return nil
+    return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
   }
 
   public var internalValue: Internal? {

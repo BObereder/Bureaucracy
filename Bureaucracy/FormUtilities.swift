@@ -42,4 +42,11 @@ class FormUtilities {
     return nil
   }
   
+  class func convertToRepresenationValues<Type, Representation>(values: [Type], representationTransformer: ((Type) -> (Representation))?) -> [Representation]? {
+    if let realTransformer = representationTransformer  {
+      return values.map(realTransformer)
+    }
+    return nil
+  }
+  
 }
