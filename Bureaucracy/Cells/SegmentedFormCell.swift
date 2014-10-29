@@ -14,7 +14,7 @@ public class SegmentedFormCell: FormCell {
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
     if let realElement = formElement {
-      realElement.didChangeValue(self)
+      realElement.cellDidChangeValue(self)
     }
   }
   
