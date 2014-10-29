@@ -19,11 +19,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   public var values: [Type] = []
   public var value: Type? {
     didSet {
-      if let realValue = value {
-        if let validatorError = validator?(realValue) {
-          error = validatorError
-        }
-      }
+      error = FormUtilities.validateValue(value, validator: validator)
     }
   }
 

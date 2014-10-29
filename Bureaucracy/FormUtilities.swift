@@ -35,4 +35,11 @@ class FormUtilities {
     return nil
   }
   
+  class func validateValue<Type>(value: Type?, validator: ((Type) -> (NSError?))?) -> NSError? {
+    if let realValue = value {
+      return validator?(realValue)
+    }
+    return nil
+  }
+  
 }
