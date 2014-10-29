@@ -11,10 +11,14 @@ import Foundation
 public class FormSection {
 
   public var title: String?
+  
+  public var form: Form
 
   public var elements: [FormElement] = []
 
-  public init() { }
+  public init(form: Form) {
+    self.form = form
+  }
 
   public func numberOfFields() -> Int {
     return elements.count

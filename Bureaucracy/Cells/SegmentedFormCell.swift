@@ -14,7 +14,7 @@ public class SegmentedFormCell: FormCell {
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
     if let realElement = formElement {
-      realElement.didChangeValue(self)
+      realElement.cellDidChangeValue(self)
     }
   }
   
@@ -25,6 +25,7 @@ public class SegmentedFormCell: FormCell {
   
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    selectionStyle = .None
   }
   
   public override class func description() -> String {

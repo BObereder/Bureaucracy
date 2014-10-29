@@ -12,8 +12,10 @@ public class FormElement {
 
   public var title: String?
   public var cellClass: AnyClass
+  public weak var formSection: FormSection
 
-  public init(cellClass: AnyClass) {
+  public init(formSection: FormSection, cellClass: AnyClass) {
+    self.formSection = formSection
     self.cellClass = cellClass
   }
 
@@ -35,8 +37,12 @@ public class FormElement {
     cell.textLabel.text = title
   }
   
-  public func didChangeValue(cell: FormCell) {
-
+  public func cellDidChangeValue(cell: FormCell) {
+    self.notifyDidChangeValue()
+  }
+  
+  public func notifyDidChangeValue() {
+    self.formSection.form.delegate?.didUpdateForm(self.formSection.form)
   }
 
 }

@@ -8,53 +8,39 @@
 
 import UIKit
 
-public class FormField<Type, Internal, Representation>: FormElement {
-
-  public init(cellClass: AnyClass, value: Type) {
+public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
+  
+  public init(formSection: FormSection, cellClass: AnyClass, value: Type) {
     self.value = value
-    super.init(cellClass: cellClass)
+    super.init(formSection: formSection, cellClass: cellClass)
     internalValue = valueTransformer?(value)
   }
 
   public var values: [Type] = []
   public var value: Type? {
     didSet {
-      if let realValue = value {
-        error = validator(value!)
-      }
+      error = FormUtilities.validateValue(value, validator: validator)
     }
   }
 
   public var representationValues: [Representation]? {
-    if let realTransformer = representationTransformer  {
-      return values.map(realTransformer)
-    }
-    return nil
+    return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
   }
 
   public var internalValue: Internal? {
     didSet {
-      if let realInternalValue = internalValue {
-        if let reversed = reverseValueTransformer?(internalValue!) {
-          error = validator(reversed)
-          if error == nil {
-            value = reversed
-          }
-        }
-      }
+      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
   public var valueTransformer: ((Type) -> (Internal))? {
     didSet {
-      if let realValue = value {
-        internalValue = valueTransformer?(realValue)
-      }
+      internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
     }
   }
   public var reverseValueTransformer: ((Internal) -> (Type))?
   public var representationTransformer: ((Type) -> (Representation))?
-  public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
+  public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
 
 }
