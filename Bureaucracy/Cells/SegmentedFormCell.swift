@@ -25,6 +25,7 @@ public class SegmentedFormCell: FormCell {
   
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
+    selectionStyle = .None
   }
   
   public override class func description() -> String {

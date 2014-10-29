@@ -12,7 +12,7 @@ public class FormElement {
 
   public var title: String?
   public var cellClass: AnyClass
-  public var formSection: FormSection
+  public weak var formSection: FormSection
 
   public init(formSection: FormSection, cellClass: AnyClass) {
     self.formSection = formSection
