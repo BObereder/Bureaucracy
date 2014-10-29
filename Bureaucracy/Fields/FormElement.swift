@@ -12,7 +12,7 @@ public class FormElement {
 
   public var title: String?
   public var cellClass: AnyClass
-  public weak var formSection: FormSection
+  public weak var formSection: FormSection?
 
   public init(formSection: FormSection, cellClass: AnyClass) {
     self.formSection = formSection
@@ -38,11 +38,13 @@ public class FormElement {
   }
   
   public func cellDidChangeValue(cell: FormCell) {
-    self.notifyDidChangeValue()
+    notifyDidChangeValue()
   }
   
   public func notifyDidChangeValue() {
-    self.formSection.form.delegate?.didUpdateForm(self.formSection.form)
+    if let realSection = formSection {
+      realSection.form.delegate?.didUpdateForm(realSection.form)
+    }
   }
 
 }
