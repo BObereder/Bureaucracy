@@ -47,7 +47,7 @@ public class FormElement {
     }
   }
   
-  public func valueDict() -> Dictionary<String, Any>? {
+  public func valueDict() -> [String: Any]? {
     return nil
   }
   
