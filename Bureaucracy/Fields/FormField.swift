@@ -29,19 +29,19 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var internalValue: Internal? {
     didSet {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
-    }
-  }
-
-  public var valueTransformer: ((Type) -> (Internal))? {
-    didSet {
       if let realReverse = reverseValueTransformer {
-        internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
+        (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
       }
       else {
         assert(false, "reverseTransformer has to be set first")
       }
       
+    }
+  }
+
+  public var valueTransformer: ((Type) -> (Internal))? {
+    didSet {
+        internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
     }
   }
   public var reverseValueTransformer: ((Internal) -> (Type))?
