@@ -10,7 +10,6 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
-  typealias MyType = Type
   public init(formSection: FormSection, cellClass: AnyClass, value: Type) {
     self.value = value
     super.init(formSection: formSection, cellClass: cellClass)
@@ -50,7 +49,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
   
-  public override func valueDict() -> Dictionary<String, Any>? {
+  public override func valueDict() -> [String: Any]? {
     if let realTitle = title {
       if let realValue = value {
         var dict = [realTitle : realValue as Any]

@@ -34,8 +34,8 @@ public class FormSection {
     return field
   }
   
-  public func values() -> Array<Dictionary<String,Any>> {
-    var values: Array<Dictionary<String,Any>> = []
+  public func values() -> [[String: Any]] {
+    var values: [[String: Any]] = []
     for element in elements {
 
         if let dict = element.valueDict() {

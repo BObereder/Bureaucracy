@@ -8,11 +8,8 @@
 
 import Foundation
 
-//public typealias FormElement = GenericFormElement<Any>
-
 public class FormElement {
 
-  public typealias MyType = Any
   public var title: String?
   public var cellClass: AnyClass
   public weak var formSection: FormSection?

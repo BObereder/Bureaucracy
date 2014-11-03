@@ -39,8 +39,8 @@ public class Form {
     return section
   }
   
-  public func values() -> Array<Array<Dictionary<String,Any>>> {
-    var values1: Array<Array<Dictionary<String,Any>>> = []
+  public func values() -> [[[String: Any]]] {
+    var values1: [[[String: Any]]] = []
     for section in sections {
       values1.append(section.values())
     }
