@@ -41,7 +41,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var valueTransformer: ((Type) -> (Internal))? {
     didSet {
-        internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
+      internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
     }
   }
   public var reverseValueTransformer: ((Internal) -> (Type))?

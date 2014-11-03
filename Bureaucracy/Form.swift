@@ -45,7 +45,6 @@ public class Form {
       values1.append(section.values())
     }
     return values1
-    
   }
 
 }
