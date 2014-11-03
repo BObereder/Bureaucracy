@@ -10,6 +10,7 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
+  typealias MyType = Type
   public init(formSection: FormSection, cellClass: AnyClass, value: Type) {
     self.value = value
     super.init(formSection: formSection, cellClass: cellClass)
@@ -35,12 +36,28 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var valueTransformer: ((Type) -> (Internal))? {
     didSet {
-      internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
+      if let realReverse = reverseValueTransformer {
+        internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
+      }
+      else {
+        assert(false, "reverseTransformer has to be set first")
+      }
+      
     }
   }
   public var reverseValueTransformer: ((Internal) -> (Type))?
   public var representationTransformer: ((Type) -> (Representation))?
   public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
+  
+  public override func valueDict() -> Dictionary<String, Any>? {
+    if let realTitle = title {
+      if let realValue = value {
+        var dict = [realTitle : realValue as Any]
+        return dict
+      }
+    }
+    return nil
+  }
 
 }

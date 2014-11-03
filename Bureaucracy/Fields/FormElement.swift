@@ -8,8 +8,11 @@
 
 import Foundation
 
+//public typealias FormElement = GenericFormElement<Any>
+
 public class FormElement {
 
+  public typealias MyType = Any
   public var title: String?
   public var cellClass: AnyClass
   public weak var formSection: FormSection?
@@ -46,5 +49,9 @@ public class FormElement {
       realSection.form.delegate?.didUpdateForm(realSection.form)
     }
   }
-
+  
+  public func valueDict() -> Dictionary<String, Any>? {
+    return nil
+  }
+  
 }

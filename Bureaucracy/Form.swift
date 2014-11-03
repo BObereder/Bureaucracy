@@ -38,6 +38,15 @@ public class Form {
     delegate?.didUpdateForm(self)
     return section
   }
+  
+  public func values() -> Array<Array<Dictionary<String,Any>>> {
+    var values1: Array<Array<Dictionary<String,Any>>> = []
+    for section in sections {
+      values1.append(section.values())
+    }
+    return values1
+    
+  }
 
 }
 
