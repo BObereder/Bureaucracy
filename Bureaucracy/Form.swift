@@ -14,7 +14,7 @@ public class Form {
 
   public var title: String? {
     didSet {
-      delegate?.didUpdateForm()
+      delegate?.didUpdateForm(self)
     }
   }
 
@@ -31,16 +31,24 @@ public class Form {
   }
 
   public func addSection(title: String) -> FormSection {
-    var section = FormSection()
+    var section = FormSection(form: self)
     section.title = title
 
     sections += [section]
-    delegate?.didUpdateForm()
+    delegate?.didUpdateForm(self)
     return section
+  }
+  
+  public func values() -> [[[String: Any]]] {
+    var values1: [[[String: Any]]] = []
+    for section in sections {
+      values1.append(section.values())
+    }
+    return values1
   }
 
 }
 
 public protocol FormDelegate: class {
-  func didUpdateForm()
+  func didUpdateForm(form: Form)
 }
