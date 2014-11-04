@@ -16,8 +16,8 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     tableView.registerNib(nib, forCellReuseIdentifier: self.cellClass.description())
   }
 
-  public init(formSection: FormSection, value: Type, title: String, values: [Type]) {
-    super.init(formSection: formSection, cellClass: SegmentedFormCell.self, title: title, value: value)
+  public init(formSection: FormSection, name: String, value: Type, values: [Type]) {
+    super.init(formSection: formSection, cellClass: SegmentedFormCell.self, name: name, value: value)
     self.values = values
   }
 

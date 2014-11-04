@@ -29,10 +29,8 @@ public class Form {
     return sections[section].numberOfFields()
   }
 
-  public func addSection(title: String) -> FormSection {
-    var section = FormSection(form: self)
-    section.title = title
-
+  public func addSection(name: String) -> FormSection {
+    var section = FormSection(form: self, name: name)
     sections += [section]
     delegate?.didUpdateForm(self)
     return section
