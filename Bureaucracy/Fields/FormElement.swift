@@ -36,7 +36,7 @@ public class FormElement {
   }
   
   public func update(cell: FormCell) {
-    cell.textLabel.text = name
+    cell.textLabel.text = localizedTitle ?? name
   }
   
   public func cellDidChangeValue(cell: FormCell) {
