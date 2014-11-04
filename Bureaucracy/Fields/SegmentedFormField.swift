@@ -21,7 +21,6 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     self.values = values
   }
 
-  
   public var didChangeValue: () -> () = {
     println("valueChanged")
   }

@@ -9,6 +9,7 @@
 import UIKit
 
 public class NSFormValidationError: NSError {
+
   init() {
     super.init(domain: "com.bureaucracy", code: 1, userInfo: nil)
   }
@@ -16,4 +17,5 @@ public class NSFormValidationError: NSError {
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
+
 }
