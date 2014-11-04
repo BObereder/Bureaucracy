@@ -29,7 +29,13 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var internalValue: Internal? {
     didSet {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      if let realReverse = reverseValueTransformer {
+        (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      }
+      else {
+        assert(false, "reverseTransformer has to be set first")
+      }
+      
     }
   }
 
@@ -42,5 +48,15 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   public var representationTransformer: ((Type) -> (Representation))?
   public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
+  
+  public override func valueDict() -> [String: Any]? {
+    if let realTitle = title {
+      if let realValue = value {
+        var dict = [realTitle : realValue as Any]
+        return dict
+      }
+    }
+    return nil
+  }
 
 }

@@ -46,5 +46,9 @@ public class FormElement {
       realSection.form.delegate?.didUpdateForm(realSection.form)
     }
   }
-
+  
+  public func valueDict() -> [String: Any]? {
+    return nil
+  }
+  
 }

@@ -38,6 +38,14 @@ public class Form {
     delegate?.didUpdateForm(self)
     return section
   }
+  
+  public func values() -> [[[String: Any]]] {
+    var values1: [[[String: Any]]] = []
+    for section in sections {
+      values1.append(section.values())
+    }
+    return values1
+  }
 
 }
 
