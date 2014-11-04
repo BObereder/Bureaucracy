@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		7808CDDE19FEA1C600A83C6C /* ForwardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */; };
+<<<<<<< HEAD
 		7884543D1A01141E004507BD /* ForwardingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884543C1A01141E004507BD /* ForwardingElement.swift */; };
 		78CD458A19FFDF14001DF3B9 /* SelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458919FFDF14001DF3B9 /* SelectorFormSection.swift */; };
 		78CD458E19FFDFAB001DF3B9 /* FormDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormDataProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
+		FA5D1B7B19F665C3004F1931 /* NSFormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* NSFormValidationError.swift */; };
+=======
+>>>>>>> development-selector-section
 		FABA4E9019F53CC300574A68 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E8F19F53CC300574A68 /* FormSection.swift */; };
 		FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */; };
 		FABA4E9419F53E1400574A68 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9319F53E1400574A68 /* Form.swift */; };
@@ -55,10 +59,14 @@
 
 /* Begin PBXFileReference section */
 		7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingCell.swift; sourceTree = "<group>"; };
+<<<<<<< HEAD
 		7884543C1A01141E004507BD /* ForwardingElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingElement.swift; sourceTree = "<group>"; };
 		78CD458919FFDF14001DF3B9 /* SelectorFormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorFormSection.swift; sourceTree = "<group>"; };
 		78CD458D19FFDFAB001DF3B9 /* FormDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
+		FA5D1B7A19F665C3004F1931 /* NSFormValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSFormValidationError.swift; sourceTree = "<group>"; };
+=======
+>>>>>>> development-selector-section
 		FABA4E8F19F53CC300574A68 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidationError.swift; sourceTree = "<group>"; };
 		FABA4E9319F53E1400574A68 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
@@ -340,8 +348,12 @@
 				7884543D1A01141E004507BD /* ForwardingElement.swift in Sources */,
 				FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */,
 				FABA4E9419F53E1400574A68 /* Form.swift in Sources */,
-				FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */,
+<<<<<<< HEAD
+				FA5D1B7B19F665C3004F1931 /* NSFormValidationError.swift in Sources */,
 				78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */,
+=======
+				FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */,
+>>>>>>> development-selector-section
 				7808CDDE19FEA1C600A83C6C /* ForwardingCell.swift in Sources */,
 				FAD4062019F69B50003ABE75 /* FormElement.swift in Sources */,
 				FABA4E9F19F54D7200574A68 /* SegmentedFormCell.swift in Sources */,
