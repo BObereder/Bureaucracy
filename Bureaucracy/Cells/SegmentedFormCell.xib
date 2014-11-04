@@ -15,7 +15,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <segmentedControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="plain" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="WgY-6A-fRV">
-                        <rect key="frame" x="8" y="13" width="304" height="18"/>
+                        <rect key="frame" x="8" y="8" width="304" height="28"/>
                         <segments>
                             <segment title="First"/>
                             <segment title="Second"/>
@@ -27,9 +27,9 @@
                 </subviews>
                 <constraints>
                     <constraint firstAttribute="centerY" secondItem="WgY-6A-fRV" secondAttribute="centerY" id="GdX-il-Vrm"/>
-                    <constraint firstAttribute="bottomMargin" secondItem="WgY-6A-fRV" secondAttribute="bottom" constant="5" id="Jsd-iU-4TJ"/>
+                    <constraint firstAttribute="bottomMargin" secondItem="WgY-6A-fRV" secondAttribute="bottom" id="Jsd-iU-4TJ"/>
                     <constraint firstItem="WgY-6A-fRV" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="OB2-nv-15j"/>
-                    <constraint firstItem="WgY-6A-fRV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" constant="5" id="uz2-j0-1Ny"/>
+                    <constraint firstItem="WgY-6A-fRV" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="uz2-j0-1Ny"/>
                     <constraint firstItem="WgY-6A-fRV" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="ykA-JK-tLF"/>
                 </constraints>
             </tableViewCellContentView>

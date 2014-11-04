@@ -27,6 +27,7 @@ public class FormCell: UITableViewCell {
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     accessoryType = .None
+    selectionStyle = .None
   }
   
   required public init(coder aDecoder: NSCoder) {
