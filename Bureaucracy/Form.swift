@@ -38,7 +38,7 @@ public class Form {
     return section
   }
   
-  public func serialize() -> [[[String: Any]]] {
+  public func serialize() -> [[[String: Any?]]] {
     return sections.map { $0.values() }
   }
 

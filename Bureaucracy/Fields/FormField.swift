@@ -10,9 +10,9 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
-  public init(formSection: FormSection, cellClass: AnyClass, value: Type) {
+  public init(formSection: FormSection, cellClass: AnyClass, title: String, value: Type) {
     self.value = value
-    super.init(formSection: formSection, cellClass: cellClass)
+    super.init(formSection: formSection, cellClass: cellClass, title: title)
     internalValue = valueTransformer?(value)
   }
 
@@ -45,14 +45,8 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
   
-  public override func serialize() -> [String: Any]? {
-    if let realTitle = title {
-      if let realValue = value {
-        var dict = [realTitle : realValue as Any]
-        return dict
-      }
-    }
-    return nil
+  public override func serialize() -> [String: Any?] {
+    return [title: value]
   }
 
 }

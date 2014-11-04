@@ -10,8 +10,8 @@ import UIKit
 
 public class ForwardingElement: FormElement {
   
-  public init(formSection: FormSection) {
-    super.init(formSection: formSection, cellClass: FormCell.self)
+  public init(formSection: FormSection, title: String) {
+    super.init(formSection: formSection, cellClass: FormCell.self, title: title)
   }
   
   public override func update(cell: FormCell) {
