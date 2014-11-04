@@ -45,8 +45,8 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
   
-  public override func serialize() -> [String: Any?] {
-    return [name: value]
+  public override func serialize() -> (String, Any?) {
+    return (name, value)
   }
 
 }

@@ -49,8 +49,8 @@ public class FormElement {
     }
   }
   
-  public func serialize() -> [String: Any?] {
-    return [name: nil]
+  public func serialize() -> (String, Any?){
+    return (name, nil)
   }
   
 }
