@@ -38,12 +38,8 @@ public class Form {
     return section
   }
   
-    var values1: [[[String: Any]]] = []
-    for section in sections {
-      values1.append(section.values())
-    }
-    return values1
   public func serialize() -> [[[String: Any]]] {
+    return sections.map { $0.values() }
   }
 
 }
