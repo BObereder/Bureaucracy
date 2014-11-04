@@ -24,7 +24,6 @@ public class Form {
   public func numberOfSections() -> Int {
     return sections.count
   }
-  
 
   public func numberOfFieldsInSection(section: Int) -> Int {
     return sections[section].numberOfFields()
