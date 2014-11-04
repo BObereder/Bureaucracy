@@ -10,9 +10,9 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
-  public init(formSection: FormSection, cellClass: AnyClass, title: String, value: Type) {
+  public init(formSection: FormSection, cellClass: AnyClass, name: String, value: Type) {
     self.value = value
-    super.init(formSection: formSection, cellClass: cellClass, title: title)
+    super.init(formSection: formSection, cellClass: cellClass, name: name)
     internalValue = valueTransformer?(value)
   }
 
@@ -46,7 +46,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   public var error: NSError?
   
   public override func serialize() -> [String: Any?] {
-    return [title: value]
+    return [name: value]
   }
 
 }
