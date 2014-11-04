@@ -157,9 +157,9 @@
 				FAC10D371A092B95005C7252 /* Sections */,
 				FABA4E9319F53E1400574A68 /* Form.swift */,
 				FAE0652B19F5327C00279C6E /* FormDataSource.swift */,
-				FABA4EA719F5634C00574A68 /* FormViewController.swift */,
-				FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */,
 				78CD458D19FFDFAB001DF3B9 /* FormDataProtocol.swift */,
+				FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */,
+				FABA4EA719F5634C00574A68 /* FormViewController.swift */,
 				78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */,
 				FAE0651219F5322E00279C6E /* Supporting Files */,
 			);
