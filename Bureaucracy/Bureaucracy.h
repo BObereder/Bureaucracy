@@ -6,12 +6,10 @@
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
-#import <UIKit/UIKit.h>
+@import UIKit;
 
 //! Project version number for Bureaucracy.
 FOUNDATION_EXPORT double BureaucracyVersionNumber;
 
 //! Project version string for Bureaucracy.
 FOUNDATION_EXPORT const unsigned char BureaucracyVersionString[];
-
-

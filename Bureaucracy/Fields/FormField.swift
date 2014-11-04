@@ -17,6 +17,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
   }
 
   public var values: [Type] = []
+
   public var value: Type? {
     didSet {
       error = FormUtilities.validateValue(value, validator: validator)
@@ -44,6 +45,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
       internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
     }
   }
+
   public var reverseValueTransformer: ((Internal) -> (Type))?
   public var representationTransformer: ((Type) -> (Representation))?
   public var validator: ((Type) -> (NSError?))? 

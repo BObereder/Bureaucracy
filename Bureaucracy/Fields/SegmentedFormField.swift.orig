@@ -21,7 +21,12 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     self.values = values
   }
 
+<<<<<<< HEAD
+  public var didChangeValue: () -> () = {
+=======
+  
   public var didChangeValue: (cell: FormCell) -> () = { (let cell) in
+>>>>>>> origin/development
     println("valueChanged")
   }
   
