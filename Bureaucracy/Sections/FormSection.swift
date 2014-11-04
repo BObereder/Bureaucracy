@@ -11,7 +11,7 @@ import Foundation
 public class FormSection {
 
   public var title: String?
-  
+
   public var form: Form
 
   public var elements: [FormElement] = []
@@ -23,25 +23,19 @@ public class FormSection {
   public func numberOfFields() -> Int {
     return elements.count
   }
-  
+
   public func addElement(element: FormElement) -> FormElement {
     elements += [element]
     return element
   }
-  
+
   public func addField <Type, Internal, Representation> (field: FormField<Type, Internal, Representation>) -> FormField <Type, Internal, Representation> {
     elements += [field]
     return field
   }
-  
-  public func values() -> [[String: Any]] {
-    var values: [[String: Any]] = []
-    for element in elements {
-        if let dict = element.serialize() {
-          values.append(dict)
-        }
-    }
-    return values
+
+  public func values() -> [[String: Any?]] {
+    return elements.map { ($0 as FormElement).serialize() }
   }
 
 }

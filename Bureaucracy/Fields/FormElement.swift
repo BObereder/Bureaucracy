@@ -10,13 +10,15 @@ import Foundation
 
 public class FormElement {
 
-  public var title: String?
+  public var title: String
+  public var localizedTitle: String?
   public var cellClass: AnyClass
   public weak var formSection: FormSection?
 
-  public init(formSection: FormSection, cellClass: AnyClass) {
+  public init(formSection: FormSection, cellClass: AnyClass, title: String) {
     self.formSection = formSection
     self.cellClass = cellClass
+    self.title = title
   }
 
   public func registerReusableView(tableView: UITableView) {
@@ -47,8 +49,8 @@ public class FormElement {
     }
   }
   
-  public func serialize() -> [String: Any]? {
-    return nil
+  public func serialize() -> [String: Any?] {
+    return [title: nil]
   }
   
 }
