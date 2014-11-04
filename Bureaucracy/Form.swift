@@ -24,7 +24,6 @@ public class Form {
   public func numberOfSections() -> Int {
     return sections.count
   }
-  
 
   public func numberOfFieldsInSection(section: Int) -> Int {
     return sections[section].numberOfFields()
@@ -39,12 +38,8 @@ public class Form {
     return section
   }
   
-  public func values() -> [[[String: Any]]] {
-    var values1: [[[String: Any]]] = []
-    for section in sections {
-      values1.append(section.values())
-    }
-    return values1
+  public func serialize() -> [[[String: Any]]] {
+    return sections.map { $0.values() }
   }
 
 }
