@@ -17,6 +17,7 @@ public class FormField<Type, Internal, Representation>: FormElement {
   }
 
   public var values: [Type] = []
+
   public var value: Type? {
     didSet {
       if let realValue = value {
@@ -52,6 +53,7 @@ public class FormField<Type, Internal, Representation>: FormElement {
       }
     }
   }
+
   public var reverseValueTransformer: ((Internal) -> (Type))?
   public var representationTransformer: ((Type) -> (Representation))?
   public var validator: (Type) -> (NSError?) = { (var t) -> (NSError?) in return nil }
