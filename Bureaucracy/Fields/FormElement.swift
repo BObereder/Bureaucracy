@@ -47,7 +47,7 @@ public class FormElement {
     }
   }
   
-  public func valueDict() -> [String: Any]? {
+  public func serialize() -> [String: Any]? {
     return nil
   }
   

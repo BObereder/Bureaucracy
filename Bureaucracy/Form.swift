@@ -39,12 +39,12 @@ public class Form {
     return section
   }
   
-  public func values() -> [[[String: Any]]] {
     var values1: [[[String: Any]]] = []
     for section in sections {
       values1.append(section.values())
     }
     return values1
+  public func serialize() -> [[[String: Any]]] {
   }
 
 }
