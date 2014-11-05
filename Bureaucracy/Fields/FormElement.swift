@@ -11,7 +11,6 @@ import Foundation
 public class FormElement {
 
   public init(cellClass: AnyClass, name: String) {
-    self.formSection = formSection
     self.cellClass = cellClass
     self.name = name
   }
