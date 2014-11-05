@@ -101,17 +101,6 @@ class BureaucracyTests: XCTestCase {
     let testSection = form!.addSection("Test Section")
     let segmentedField = SegmentedFormField<TestGender, Int, String>(name: "SegmentedField", value: .Female, values: [.Female, .Male])
     
-    segmentedField.reverseValueTransformer = { (var segmentedIndex) -> (TestGender) in
-      switch segmentedIndex {
-      case 0:
-        return .Female
-      case 1:
-        return .Male
-      default:
-        return .Female
-      }
-    }
-    
     segmentedField.valueTransformer = { (var genderType) -> (Int) in
       switch genderType {
       case .Female:
@@ -123,6 +112,16 @@ class BureaucracyTests: XCTestCase {
       }
     }
 
+    segmentedField.reverseValueTransformer = { (var segmentedIndex) -> (TestGender) in
+      switch segmentedIndex {
+      case 0:
+        return .Female
+      case 1:
+        return .Male
+      default:
+        return .Female
+      }
+    }
     
     segmentedField.representationTransformer = { (var genderType) -> String in
       switch genderType {
@@ -140,15 +139,20 @@ class BureaucracyTests: XCTestCase {
     //Test Form
     XCTAssertTrue(form?.item(indexPath: NSIndexPath(forRow: 0, inSection: 0)) === segmentedField, "Wrong element is returned from form")
     XCTAssertEqual(form!.numberOfFieldsInSection(0), 1, "Section should have an Element")
-    let values = form!.serialize()
+    var values = form!.serialize()
     XCTAssertNotNil(values.isEmpty, "Their should be a value since there is an element in the section")
-//    XCTAssertFalse(values.first?["SegmentedField"] == .Female, "element should not have a value")
-//    
-//    // Test Selection
-//    allProductsField.didSelect()
-//    XCTAssertTrue((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Selection did not update the form")
+    var gender = values.first!["SegmentedField"] as TestGender
+    XCTAssertTrue(gender == .Female, "value of SegmentedField has not expected value")
     
+    //Test Selection
+    segmentedField.internalValue = 1
+    values = form!.serialize()
+    XCTAssertNotNil(values.isEmpty, "Their should be a value since there is an element in the section")
+    gender = values.first!["SegmentedField"] as TestGender
+    XCTAssertTrue(gender == .Male, "value of SegmentedField has not expected value")
     
+    //Test if Delegate is called
+    XCTAssertTrue((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Selection did not update the form")
   }
   
 }
