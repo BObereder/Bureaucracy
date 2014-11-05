@@ -27,7 +27,7 @@ public class FormSection: SequenceType {
 
   public func append(item: FormElement) -> FormElement {
     item.formSection = self
-    items += [item]
+    items.append(item)
     return item
   }
 
@@ -41,6 +41,10 @@ public class FormSection: SequenceType {
         dict[key] = value
         return dict
       }
+  }
+
+  public func didUpdate() {
+    form.didUpdate()
   }
 
   // MARK: - SequenceType

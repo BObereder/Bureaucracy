@@ -41,7 +41,11 @@ public class Form: SequenceType {
     delegate?.didUpdateForm(self)
     return section
   }
-  
+
+  public func didUpdate() {
+    delegate?.didUpdateForm(self)
+  }
+
   public func serialize() -> [[String: Any?]] {
     return sections.map { $0.serialize() }
   }

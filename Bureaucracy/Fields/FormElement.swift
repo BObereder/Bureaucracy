@@ -29,27 +29,22 @@ public class FormElement {
     cell.formElement = self
     return cell
   }
-
-  public var didSelect: () -> () = {
-    println("selected")
-  }
   
   public func update(cell: FormCell) {
     cell.textLabel.text = localizedTitle ?? name
   }
-  
-  public func cellDidChangeValue(cell: FormCell) {
-    notifyDidChangeValue()
-  }
-  
-  public func notifyDidChangeValue() {
-    if let realSection = formSection {
-      realSection.form.delegate?.didUpdateForm(realSection.form)
-    }
-  }
-  
+
   public func serialize() -> (String, Any?){
     return (name, nil)
+  }
+
+  public var didSelect: () -> () = {
+    println("selected")
+  }
+
+  // FIXME: Workaround for UIKit not supporting Generics, should be moved into FormField and accept Internal type
+  public func didChangeInternalValue(cell: FormCell) {
+    // noop
   }
   
 }

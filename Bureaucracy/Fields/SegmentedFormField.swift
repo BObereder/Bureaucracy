@@ -20,10 +20,6 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
     tableView.registerNib(nib, forCellReuseIdentifier: self.cellClass.description())
   }
-
-  public var didChangeValue: (cell: FormCell) -> () = { (let cell) in
-    println("valueChanged")
-  }
   
   public override func update(cell: FormCell) {
     if let realCell = cell as? SegmentedFormCell {
@@ -42,14 +38,11 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     }
   }
   
-  public override func cellDidChangeValue(cell: FormCell) {
-    if let realCell = cell as? SegmentedFormCell {
-      if let field = realCell.formElement as? SegmentedFormField<Type, Int, String> {
-        field.internalValue = realCell.segmentedControl.selectedSegmentIndex
-        field.didChangeValue(cell: cell)
-        super.notifyDidChangeValue()
-      }
+  public override func didChangeInternalValue(cell: FormCell) {
+    if let field = cell.formElement as? SegmentedFormField {
+      field.internalValue = (cell as SegmentedFormCell).segmentedControl.selectedSegmentIndex
     }
+    super.didChangeInternalValue(cell)
   }
-  
+
 }

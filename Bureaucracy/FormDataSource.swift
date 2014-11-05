@@ -6,8 +6,8 @@
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
-import SwiftHelpers
 import UIKit
+import SwiftHelpers
 
 public class FormDataSource: NSObject, UITableViewDataSource {
 
