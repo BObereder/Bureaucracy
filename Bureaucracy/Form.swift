@@ -27,7 +27,10 @@ public class Form {
   
 
   public func numberOfFieldsInSection(section: Int) -> Int {
-    return sections[section].numberOfFields()
+    if sections.count > section {
+      return sections[section].numberOfFields()
+    }
+    return 0
   }
 
   public func addSection(title: String) -> FormSection {
