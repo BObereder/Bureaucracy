@@ -70,14 +70,14 @@ class BureaucracyTests: XCTestCase {
     XCTAssertEqual(section.numberOfFields(), 0, "Section should contain elements yet")
   }
   
-  func test02addFormElement() {
-    let testSection = form?.addSection("Test Section")
-    let allProductsField = testSection.addElement(ForwardingElement(formSection: allProductsSection))
-    allProductsField.title = NSLocalizedString("All Products", comment: "All Products")
-    allProductsField.didSelect = { [unowned self] () in
-      self.didSelectFormElement()
-    }
-  }
+//  func test02addFormElement() {
+//    let testSection = form?.addSection("Test Section")
+//    let allProductsField = testSection.addElement(ForwardingElement())
+//    allProductsField.title = NSLocalizedString("All Products", comment: "All Products")
+//    allProductsField.didSelect = { [unowned self] () in
+//      self.didSelectFormElement()
+//    }
+//  }
   
   func testPerformanceExample() {
     // This is an example of a performance test case.

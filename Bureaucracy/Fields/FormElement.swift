@@ -14,8 +14,7 @@ public class FormElement {
   public var cellClass: AnyClass
   public weak var formSection: FormSection?
 
-  public init(formSection: FormSection, cellClass: AnyClass) {
-    self.formSection = formSection
+  public init(cellClass: AnyClass) {
     self.cellClass = cellClass
   }
 

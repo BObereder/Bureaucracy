@@ -25,11 +25,13 @@ public class FormSection {
   }
   
   public func addElement(element: FormElement) -> FormElement {
+    element.formSection = self
     elements += [element]
     return element
   }
   
   public func addField <Type, Internal, Representation> (field: FormField<Type, Internal, Representation>) -> FormField <Type, Internal, Representation> {
+    field.formSection = self
     elements += [field]
     return field
   }
