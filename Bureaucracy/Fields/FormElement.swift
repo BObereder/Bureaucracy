@@ -10,16 +10,15 @@ import Foundation
 
 public class FormElement {
 
+  public init(cellClass: AnyClass, name: String) {
+    self.cellClass = cellClass
+    self.name = name
+  }
+  
   public var name: String
   public var localizedTitle: String?
   public var cellClass: AnyClass
   public weak var formSection: FormSection?
-
-  public init(formSection: FormSection, cellClass: AnyClass, name: String) {
-    self.formSection = formSection
-    self.cellClass = cellClass
-    self.name = name
-  }
 
   public func registerReusableView(tableView: UITableView) {
     tableView.registerClass(cellClass, forCellReuseIdentifier: self.cellClass.description())

@@ -10,15 +10,15 @@ import Foundation
 
 public class SegmentedFormField<Type, Internal, Representation>: FormField<Type, Int, String> {
 
+  public init(name: String, value: Type, values: [Type]) {
+    super.init(cellClass: SegmentedFormCell.self, name: name, value: value)
+    self.values = values
+  }
+  
   public override func registerReusableView(tableView: UITableView) {
     let bundle = NSBundle(forClass: self.cellClass)
     let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
     tableView.registerNib(nib, forCellReuseIdentifier: self.cellClass.description())
-  }
-
-  public init(formSection: FormSection, name: String, value: Type, values: [Type]) {
-    super.init(formSection: formSection, cellClass: SegmentedFormCell.self, name: name, value: value)
-    self.values = values
   }
   
   public override func update(cell: FormCell) {
