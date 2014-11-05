@@ -21,11 +21,11 @@ public class FormElement {
   public weak var formSection: FormSection?
 
   public func registerReusableView(tableView: UITableView) {
-    tableView.registerClass(cellClass, forCellReuseIdentifier: self.cellClass.description())
+    tableView.registerClass(cellClass, forCellReuseIdentifier: cellClass.description())
   }
 
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(self.cellClass.description(), forIndexPath: indexPath) as FormCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(cellClass.description(), forIndexPath: indexPath) as FormCell
     cell.formElement = self
     return cell
   }

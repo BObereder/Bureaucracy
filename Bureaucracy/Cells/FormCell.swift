@@ -30,9 +30,5 @@ public class FormCell: UITableViewCell {
   required public init(coder aDecoder: NSCoder) {
     super.init(coder: aDecoder)
   }
-  
-  public override class func description() -> String {
-    return "FormCell"
-  }
 
 }
