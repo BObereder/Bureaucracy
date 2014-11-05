@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 public class FormElement {
 
