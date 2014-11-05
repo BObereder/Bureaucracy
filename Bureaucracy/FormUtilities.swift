@@ -9,6 +9,7 @@
 import Foundation
 
 class FormUtilities {
+
   class func convertInternalValue<Type, Internal>(value: Internal?, transformer: ((Internal) -> (Type))?, validator: ((Type) -> (NSError?))?) -> (value: Type?, error: NSError?) {
     
     var returnValue: Type?

@@ -24,7 +24,6 @@ public class Form {
   public func numberOfSections() -> Int {
     return sections.count
   }
-  
 
   public func numberOfFieldsInSection(section: Int) -> Int {
     if sections.count > section {
@@ -33,21 +32,15 @@ public class Form {
     return 0
   }
 
-  public func addSection(title: String) -> FormSection {
-    var section = FormSection(form: self)
-    section.title = title
-
+  public func addSection(name: String) -> FormSection {
+    var section = FormSection(form: self, name: name)
     sections += [section]
     delegate?.didUpdateForm(self)
     return section
   }
   
-  public func values() -> [[[String: Any]]] {
-    var values1: [[[String: Any]]] = []
-    for section in sections {
-      values1.append(section.values())
-    }
-    return values1
+  public func serialize() -> [[String: Any?]] {
+    return sections.map { $0.serialize() }
   }
 
 }

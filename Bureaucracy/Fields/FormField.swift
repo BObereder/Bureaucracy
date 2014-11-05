@@ -10,13 +10,14 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
-  public init(cellClass: AnyClass, value: Type) {
+  public init(cellClass: AnyClass, name: String, value: Type) {
     self.value = value
-    super.init(cellClass: cellClass)
+    super.init(cellClass: cellClass, name: name)
     internalValue = valueTransformer?(value)
   }
 
   public var values: [Type] = []
+
   public var value: Type? {
     didSet {
       error = FormUtilities.validateValue(value, validator: validator)
@@ -29,13 +30,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var internalValue: Internal? {
     didSet {
-      if let realReverse = reverseValueTransformer {
-        (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
-      }
-      else {
-        assert(false, "reverseTransformer has to be set first")
-      }
-      
+      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
@@ -44,19 +39,14 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
       internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
     }
   }
+
   public var reverseValueTransformer: ((Internal) -> (Type))?
   public var representationTransformer: ((Type) -> (Representation))?
   public var validator: ((Type) -> (NSError?))? 
   public var error: NSError?
   
-  public override func valueDict() -> [String: Any]? {
-    if let realTitle = title {
-      if let realValue = value {
-        var dict = [realTitle : realValue as Any]
-        return dict
-      }
-    }
-    return nil
+  public override func serialize() -> (String, Any?) {
+    return (name, value)
   }
 
 }

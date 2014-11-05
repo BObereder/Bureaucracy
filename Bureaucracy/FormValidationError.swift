@@ -1,5 +1,5 @@
 //
-//  NSFormValidationError.swift
+//  FormValidationError.swift
 //  Bureaucracy
 //
 //  Created by Alexander Kolov on 21.10.14.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class NSFormValidationError: NSError {
+public class FormValidationError: NSError {
 
   init() {
     super.init(domain: "com.bureaucracy", code: 1, userInfo: nil)

@@ -16,12 +16,11 @@ public class SegmentedFormField<Type, Internal, Representation>: FormField<Type,
     tableView.registerNib(nib, forCellReuseIdentifier: self.cellClass.description())
   }
 
-  public init(value: Type, values: [Type]) {
-    super.init(cellClass: SegmentedFormCell.self, value: value)
+  public init(name: String, value: Type, values: [Type]) {
+    super.init(cellClass: SegmentedFormCell.self, name: name, value: value)
     self.values = values
   }
 
-  
   public var didChangeValue: (cell: FormCell) -> () = { (let cell) in
     println("valueChanged")
   }
