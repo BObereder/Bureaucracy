@@ -34,7 +34,7 @@ public class FormElement {
     cell.textLabel.text = localizedTitle ?? name
   }
 
-  public func serialize() -> (String, Any?){
+  public func serialize() -> (String, Any?) {
     return (name, nil)
   }
 
