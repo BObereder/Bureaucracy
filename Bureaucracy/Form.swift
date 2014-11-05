@@ -28,10 +28,7 @@ public class Form: SequenceType {
   }
 
   public func numberOfFieldsInSection(section: Int) -> Int {
-    if sections.count > section {
-      return sections[section].numberOfFields()
-    }
-    return 0
+    return sections[section].count
   }
 
   public func item(#indexPath: NSIndexPath) -> FormElement {

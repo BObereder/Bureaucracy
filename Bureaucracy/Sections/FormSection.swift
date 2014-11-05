@@ -11,7 +11,6 @@ import SwiftHelpers
 
 public class FormSection: SequenceType {
 
-  
   public init(form: Form, name: String) {
     self.form = form
     self.name = name
@@ -26,16 +25,10 @@ public class FormSection: SequenceType {
     return items.count
   }
 
-  public func addElement(element: FormElement) -> FormElement {
-    element.formSection = self
-    elements += [element]
+  public func append(item: FormElement) -> FormElement {
+    item.formSection = self
+    items += [item]
     return item
-  }
-
-  public func addField <Type, Internal, Representation> (field: FormField<Type, Internal, Representation>) -> FormField <Type, Internal, Representation> {
-    field.formSection = self
-    elements += [field]
-    return field
   }
 
   public func serialize() -> [String: Any?] {
