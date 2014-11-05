@@ -13,9 +13,7 @@ public class SegmentedFormCell: FormCell {
   @IBOutlet weak var segmentedControl: UISegmentedControl!
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
-    if let realElement = formElement {
-      realElement.cellDidChangeValue(self)
-    }
+    formElement?.cellDidChangeValue(self)
   }
   
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
@@ -31,4 +29,5 @@ public class SegmentedFormCell: FormCell {
   public override class func description() -> String {
     return "SegmentedFormCell"
   }
+
 }

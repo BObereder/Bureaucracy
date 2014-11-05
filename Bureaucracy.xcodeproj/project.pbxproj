@@ -114,9 +114,9 @@
 			isa = PBXGroup;
 			children = (
 				FABA4EA119F54E9000574A68 /* FormCell.swift */,
+				7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */,
 				FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */,
 				FABA4E9E19F54D7200574A68 /* SegmentedFormCell.xib */,
-				7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";

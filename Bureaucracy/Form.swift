@@ -11,7 +11,7 @@ import Foundation
 public class Form {
 
   public init() {}
-  
+
   public weak var delegate: FormDelegate?
 
   public var title: String? {
@@ -31,6 +31,10 @@ public class Form {
       return sections[section].numberOfFields()
     }
     return 0
+  }
+
+  public func elementAtIndex(indexPath: NSIndexPath) -> FormElement {
+    return sections[indexPath.section].elements[indexPath.item]
   }
 
   public func addSection(name: String) -> FormSection {

@@ -15,12 +15,10 @@ public class FormSection {
     self.form = form
     self.name = name
   }
-  
+
   public var name: String
   public var localizedTitle: String?
-
   public var form: Form
-
   public var elements: [FormElement] = []
 
   public func numberOfFields() -> Int {
