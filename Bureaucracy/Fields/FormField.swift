@@ -29,7 +29,9 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var internalValue: Internal? {
     didSet {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      if let transformer = reverseValueTransformer {
+        (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: transformer, validator: validator)
+      }
     }
   }
 
