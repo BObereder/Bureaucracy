@@ -101,17 +101,6 @@ class BureaucracyTests: XCTestCase {
     let testSection = form!.addSection("Test Section")
     let segmentedField = SegmentedFormField<TestGender, Int, String>(name: "SegmentedField", value: .Female, values: [.Female, .Male])
     
-    segmentedField.valueTransformer = { (var genderType) -> (Int) in
-      switch genderType {
-      case .Female:
-        return 0
-      case .Male:
-        return 1
-      default:
-        return 0
-      }
-    }
-    
     segmentedField.reverseValueTransformer = { (var segmentedIndex) -> (TestGender) in
       switch segmentedIndex {
       case 0:
@@ -122,6 +111,18 @@ class BureaucracyTests: XCTestCase {
         return .Female
       }
     }
+    
+    segmentedField.valueTransformer = { (var genderType) -> (Int) in
+      switch genderType {
+      case .Female:
+        return 0
+      case .Male:
+        return 1
+      default:
+        return 0
+      }
+    }
+
     
     segmentedField.representationTransformer = { (var genderType) -> String in
       switch genderType {
