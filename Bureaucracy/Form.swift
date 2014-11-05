@@ -10,6 +10,8 @@ import Foundation
 
 public class Form {
 
+  public init() {}
+
   public weak var delegate: FormDelegate?
 
   public var title: String? {
@@ -20,13 +22,16 @@ public class Form {
 
   public var sections: [FormSection] = []
 
-  public init() {}
   public func numberOfSections() -> Int {
     return sections.count
   }
 
   public func numberOfFieldsInSection(section: Int) -> Int {
     return sections[section].numberOfFields()
+  }
+
+  public func elementAtIndex(indexPath: NSIndexPath) -> FormElement {
+    return sections[indexPath.section].elements[indexPath.item]
   }
 
   public func addSection(name: String) -> FormSection {
