@@ -42,6 +42,10 @@ public class FormSection: SequenceType {
       }
   }
 
+  public func didUpdate() {
+    form.didUpdate()
+  }
+
   // MARK: - SequenceType
 
   public func generate() -> GenericGenerator<FormElement> {
