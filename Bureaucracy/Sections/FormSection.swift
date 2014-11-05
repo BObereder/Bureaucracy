@@ -26,7 +26,7 @@ public class FormSection: SequenceType {
   }
 
   public func append(item: FormElement) -> FormElement {
-    items += [item]
+    items.append(item)
     return item
   }
 
