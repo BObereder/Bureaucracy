@@ -11,12 +11,12 @@ import UIKit
 
 public class FormDataSource: NSObject, UITableViewDataSource {
 
-  var form: Form
-
   public init(form: Form) {
     self.form = form
     super.init()
   }
+  
+  var form: Form
 
   func registerReusableViews(tableView: UITableView) {
     for section in form.sections {

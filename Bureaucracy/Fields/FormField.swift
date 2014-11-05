@@ -16,8 +16,9 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
     internalValue = valueTransformer?(value)
   }
 
+  // MARK: FormDataProtocol
+  
   public var values: [Type] = []
-
   public var value: Type? {
     didSet {
       error = FormUtilities.validateValue(value, validator: validator)

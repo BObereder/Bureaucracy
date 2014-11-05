@@ -10,17 +10,18 @@ import Foundation
 
 public class FormSection {
 
+  
+  public init(form: Form, name: String) {
+    self.form = form
+    self.name = name
+  }
+  
   public var name: String
   public var localizedTitle: String?
 
   public var form: Form
 
   public var elements: [FormElement] = []
-
-  public init(form: Form, name: String) {
-    self.form = form
-    self.name = name
-  }
 
   public func numberOfFields() -> Int {
     return elements.count
