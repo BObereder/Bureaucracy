@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SwiftHelpers
 
-public class Form {
+public class Form: SequenceType {
 
   public init() {}
 
@@ -33,8 +34,8 @@ public class Form {
     return 0
   }
 
-  public func elementAtIndex(indexPath: NSIndexPath) -> FormElement {
-    return sections[indexPath.section].elements[indexPath.item]
+  public func item(#indexPath: NSIndexPath) -> FormElement {
+    return sections[indexPath.section].items[indexPath.item]
   }
 
   public func addSection(name: String) -> FormSection {
@@ -46,6 +47,12 @@ public class Form {
   
   public func serialize() -> [[String: Any?]] {
     return sections.map { $0.serialize() }
+  }
+
+  // MARK: - SequenceType
+
+  public func generate() -> GenericGenerator<FormSection> {
+    return GenericGenerator(items: sections)
   }
 
 }

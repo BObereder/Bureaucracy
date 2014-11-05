@@ -19,9 +19,9 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   var form: Form
 
   func registerReusableViews(tableView: UITableView) {
-    for section in form.sections {
-      for field in section.elements {
-        field.registerReusableView(tableView)
+    SwiftHelpers.each(form) { (var section) in
+      SwiftHelpers.each(section) { (var item) in
+        item.registerReusableView(tableView)
       }
     }
   }
@@ -33,11 +33,11 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   }
 
   public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-    return form.sections[section].numberOfFields()
+    return form.sections[section].count
   }
 
   public func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-    let field = form.sections[indexPath.section].elements[indexPath.row]
+    let field = form.item(indexPath: indexPath)
     return field.dequeueReusableView(tableView, forIndexPath: indexPath)
   }
 

@@ -7,8 +7,9 @@
 //
 
 import Foundation
+import SwiftHelpers
 
-public class FormSection {
+public class FormSection: SequenceType {
 
   
   public init(form: Form, name: String) {
@@ -19,16 +20,16 @@ public class FormSection {
   public var name: String
   public var localizedTitle: String?
   public var form: Form
-  public var elements: [FormElement] = []
+  public var items: [FormElement] = []
 
-  public func numberOfFields() -> Int {
-    return elements.count
+  public var count: Int {
+    return items.count
   }
 
   public func addElement(element: FormElement) -> FormElement {
     element.formSection = self
     elements += [element]
-    return element
+    return item
   }
 
   public func addField <Type, Internal, Representation> (field: FormField<Type, Internal, Representation>) -> FormField <Type, Internal, Representation> {
@@ -38,7 +39,7 @@ public class FormSection {
   }
 
   public func serialize() -> [String: Any?] {
-    return elements
+    return items
       .map { (var el) -> (String, Any?) in
         el.serialize()
       }
@@ -47,6 +48,12 @@ public class FormSection {
         dict[key] = value
         return dict
       }
+  }
+
+  // MARK: - SequenceType
+
+  public func generate() -> GenericGenerator<FormElement> {
+    return GenericGenerator(items: self.items)
   }
 
 }

@@ -13,15 +13,12 @@ public class FormCell: UITableViewCell {
 
   public var formElement: FormElement? {
     didSet {
-      if let realElement = formElement {
-        realElement.update(self)
-      }
+      formElement?.update(self)
     }
   }
   
   public override func awakeFromNib() {
     super.awakeFromNib()
-    // Initialization code
   }
   
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
