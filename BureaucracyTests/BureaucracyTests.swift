@@ -25,13 +25,10 @@ enum TestGender: Int {
   case Male = 3
 }
 
-enum TestCountry: Int {
+enum TestCountry: Int, Printable {
   case Unknown = 0
   case Germany = 2
   case Austria = 3
-}
-
-extension TestCountry: Printable {
   
   var description: String {
     switch self {
@@ -43,7 +40,6 @@ extension TestCountry: Printable {
       return "Unknown Country"
     }
   }
-
 }
 
 class BureaucracyTests: XCTestCase {
@@ -86,15 +82,15 @@ class BureaucracyTests: XCTestCase {
     let testSection = form!.addSection("Test Section")
     let allProductsField = testSection.append(ForwardingElement("Test Element"))
     
-    allProductsField.didSelect = { () in
-      allProductsField.formSection!.form.delegate!.didUpdateForm(allProductsField.formSection!.form)
+    allProductsField.didSelect = {
+      allProductsField.formSection!.form!.delegate!.didUpdateForm(allProductsField.formSection!.form!)
     }
     
     // Test Form
     XCTAssertTrue(form?.item(indexPath: NSIndexPath(forRow: 0, inSection: 0)) === allProductsField, "Expected the field that was previously added to the form")
     XCTAssertEqual(form!.numberOfFieldsInSection(0), 1, "Section should have an element")
     let values = form!.serialize()
-    XCTAssertNotNil(values.isEmpty, "There should be a value since there is an element in the section")
+    XCTAssertFalse(values.isEmpty, "There should be a value since there is an element in the section")
     XCTAssertEqual(values.count, 1, "There should only be one value since there is only one element in the section")
     XCTAssertFalse(values.first?["Test Element"] == nil, "ForwardingElement should not have a value")
     
@@ -114,17 +110,17 @@ class BureaucracyTests: XCTestCase {
     XCTAssertTrue(form?.item(indexPath: NSIndexPath(forRow: 0, inSection: 0)) === segmentedField, "Expected the field that was previously added to the form")
     XCTAssertEqual(form!.numberOfFieldsInSection(0), 1, "Section should have an Element")
     var values = form!.serialize()
-    XCTAssertNotNil(values.isEmpty, "Their should be a value since there is an element in the section")
+    XCTAssertFalse(values.isEmpty, "Their should be a value since there is an element in the section")
     XCTAssertEqual(values.count, 1, "There should only be one value since there is only one element in the section")
     var country = values.first!["SegmentedField"] as TestCountry
-    XCTAssertTrue(country == .Germany, "value of SegmentedField has not expected value")
+    XCTAssertEqual(country, TestCountry.Germany, "value of SegmentedField has not expected value")
     
     // Test Selection
     segmentedField.internalValue = 1
     values = form!.serialize()
-    XCTAssertNotNil(values.isEmpty, "Their should be a value since there is an element in the section")
+    XCTAssertFalse(values.isEmpty, "Their should be a value since there is an element in the section")
     country = values.first!["SegmentedField"] as TestCountry
-    XCTAssertTrue(country == .Austria, "value of SegmentedField has not expected value")
+    XCTAssertEqual(country, TestCountry.Austria, "value of SegmentedField has not expected value")
     
     // Test if Delegate is called
     XCTAssertTrue((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Selection did not update the form")
@@ -199,16 +195,16 @@ class BureaucracyTests: XCTestCase {
     XCTAssertTrue(form?.item(indexPath: NSIndexPath(forRow: 0, inSection: 0)) === segmentedField, "Expected the field that was previously added to the form")
     XCTAssertEqual(form!.numberOfFieldsInSection(0), 1, "Section should have an Element")
     var values = form!.serialize()
-    XCTAssertNotNil(values.isEmpty, "There should be a value since there is an element in the section")
+    XCTAssertFalse(values.isEmpty, "There should be a value since there is an element in the section")
     XCTAssertEqual(values.count, 1, "There should only be one value since there is only one element in the section")
     var gender = values.first!["SegmentedField"] as TestGender
-    XCTAssertTrue(gender == .Female, "value of SegmentedField has not expected value")
+    XCTAssertEqual(gender, TestGender.Female, "value of SegmentedField has not expected value")
     
     // Test Selection
     segmentedField.internalValue = 1
     values = form!.serialize()
     gender = values.first!["SegmentedField"] as TestGender
-    XCTAssertTrue(gender == .Male, "Expected gender to be Male after selection")
+    XCTAssertEqual(gender, TestGender.Male, "Expected gender to be Male after selection")
     
     // Test if Delegate is called
     XCTAssertTrue((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Selection did not update the FormDelegate")
@@ -231,6 +227,7 @@ class BureaucracyTests: XCTestCase {
     // Test Field Validation with invalid value
     segmentedField.value = .Unknown
     XCTAssertFalse((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Expected that FormDelegate did not update when setting invalid value")
+    // XCTAssertNotNil crashes here
     XCTAssertTrue(segmentedField.error != nil, "There should be an error after setting an invalid value")
     
     // Test Field
