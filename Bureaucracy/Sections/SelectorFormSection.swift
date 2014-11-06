@@ -10,16 +10,18 @@ import UIKit
 
 public class SelectorFormSection<Type, Internal, Representation>: FormSection, FormDataProtocol {
 
-  public var values: [Type] = []
+  public init(_ name: String, value: Type, values: [Type]) {
+    self.values = values
+    super.init(name)
+    internalValue = valueTransformer?(value)
+  }
+
+  // MARK: Value
 
   public var value: Type? {
     didSet {
       error = FormUtilities.validateValue(value, validator: validator)
     }
-  }
-
-  public var representationValues: [Representation]? {
-    return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
   }
 
   public var internalValue: Internal? {
@@ -35,9 +37,23 @@ public class SelectorFormSection<Type, Internal, Representation>: FormSection, F
   }
 
   public var reverseValueTransformer: ((Internal) -> (Type))?
+
+  // MARK: Values
+
+  public var values: [Type] = []
+
+  public var representationValues: [Representation]? {
+    return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
+  }
+
   public var representationTransformer: ((Type) -> (Representation))?
+
+  // MARK: Validation
+
   public var validator: ((Type) -> (NSError?))?
   public var error: NSError?
+
+  // MARK: Serialization
 
   public override func serialize() -> [String: Any?] {
     return [name: value]

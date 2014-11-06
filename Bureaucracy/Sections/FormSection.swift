@@ -11,14 +11,13 @@ import SwiftHelpers
 
 public class FormSection: SequenceType {
 
-  public init(form: Form, name: String) {
-    self.form = form
+  public init(_ name: String) {
     self.name = name
   }
 
   public var name: String
   public var localizedTitle: String?
-  public var form: Form
+  public var form: Form?
   public var items: [FormElement] = []
 
   public var count: Int {
@@ -44,7 +43,7 @@ public class FormSection: SequenceType {
   }
 
   public func didUpdate() {
-    form.didUpdate()
+    form?.didUpdate()
   }
 
   // MARK: - SequenceType
