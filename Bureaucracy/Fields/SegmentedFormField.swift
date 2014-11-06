@@ -17,7 +17,7 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
   public init(name: String, value: Type, values: [Type]) {
     super.init(cellClass: SegmentedFormCell.self, name: name, value: value)
     self.values = values
-
+    self.accessibilityLabel = "SegmentedFormField"
     valueTransformer = { (var x) -> Internal in return find(values, x)! }
     reverseValueTransformer = { (var idx) -> Type in return values[idx] }
     representationTransformer = { (var x) -> Representation in

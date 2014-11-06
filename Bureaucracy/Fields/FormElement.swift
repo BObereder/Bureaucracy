@@ -13,13 +13,14 @@ public class FormElement {
   public init(cellClass: AnyClass, name: String) {
     self.cellClass = cellClass
     self.name = name
+    self.accessibilityLabel = "FormElement"
   }
   
   public var name: String
   public var localizedTitle: String?
   public var cellClass: AnyClass
   public weak var formSection: FormSection?
-
+  public var accessibilityLabel: String
   public func registerReusableView(tableView: UITableView) {
     tableView.registerClass(cellClass, forCellReuseIdentifier: cellClass.description())
   }
@@ -27,6 +28,7 @@ public class FormElement {
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(cellClass.description(), forIndexPath: indexPath) as FormCell
     cell.formElement = self
+    cell.accessibilityLabel = accessibilityLabel
     return cell
   }
   

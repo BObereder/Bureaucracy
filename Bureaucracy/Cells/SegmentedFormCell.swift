@@ -16,6 +16,12 @@ public class SegmentedFormCell: FormCell {
     formElement?.didChangeInternalValue(self)
   }
   
+  public override var accessibilityLabel: String! {
+    didSet {
+      segmentedControl.accessibilityLabel = accessibilityLabel
+    }
+  }
+  
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     selectionStyle = .None
