@@ -142,7 +142,6 @@ class BureaucracyTests: XCTestCase {
     // Test Field
     XCTAssertEqual(segmentedField.representationValues!, ["Germany", "Austria"], "Representation is expected to return the values set in representationTransformer ")
   }
-
   
   func test04addCustomSegmentedFormField() {
     
