@@ -9,13 +9,13 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: Equatable, Internal, Representation>: FormField<Type, Int, String> {
+public class SegmentedFormField<Type: Equatable, Internal, Representation>: FormField<Type, Internal, Representation> {
 
   public typealias Internal = Int
   public typealias Representation = String
 
-  public init(name: String, value: Type, values: [Type]) {
-    super.init(cellClass: SegmentedFormCell.self, name: name, value: value)
+  public init(_ name: String, value: Type, values: [Type]) {
+    super.init(name, value: value, cellClass: SegmentedFormCell.self)
     self.values = values
 
     valueTransformer = { (var x) -> Internal in return find(values, x)! }
