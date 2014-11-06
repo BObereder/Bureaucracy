@@ -28,12 +28,12 @@ public class FormElement {
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(cellClass.description(), forIndexPath: indexPath) as FormCell
     cell.formElement = self
-    cell.accessibilityLabel = accessibilityLabel
     return cell
   }
   
   public func update(cell: FormCell) {
     cell.textLabel.text = localizedTitle ?? name
+    cell.accessibilityLabel = accessibilityLabel
   }
 
   public func serialize() -> (String, Any?) {

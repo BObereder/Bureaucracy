@@ -40,6 +40,7 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
 
   public override func update(cell: FormCell) {
     if let realCell = cell as? SegmentedFormCell {
+      realCell.segmentedControl.accessibilityLabel = accessibilityLabel
       realCell.segmentedControl.removeAllSegments()
   
       if let field = cell.formElement as? SegmentedFormField<Type, Int, String> {

@@ -10,7 +10,7 @@ import UIKit
 
 public class FormViewController: UIViewController, UITableViewDelegate {
 
-  @IBOutlet weak var tableView: UITableView!
+  @IBOutlet weak public var tableView: UITableView!
 
   public var dataSource: FormDataSource? {
     didSet {
