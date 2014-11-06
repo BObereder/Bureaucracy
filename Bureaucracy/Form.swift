@@ -36,7 +36,8 @@ public class Form: SequenceType {
   }
 
   public func addSection(name: String) -> FormSection {
-    var section = FormSection(form: self, name: name)
+    var section = FormSection(name)
+    section.form = self
     sections += [section]
     delegate?.didUpdateForm(self)
     return section

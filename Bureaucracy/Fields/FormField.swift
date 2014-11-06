@@ -10,9 +10,9 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
-  public init(cellClass: AnyClass, name: String, value: Type) {
+  public init(_ name: String, value: Type, cellClass: AnyClass) {
     self.value = value
-    super.init(cellClass: cellClass, name: name)
+    super.init(name, cellClass: cellClass)
     internalValue = valueTransformer?(value)
   }
 

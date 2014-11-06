@@ -10,8 +10,8 @@ import UIKit
 
 public class ForwardingElement: FormElement {
   
-  public init(name: String) {
-    super.init(cellClass: FormCell.self, name: name)
+  public init(_ name: String) {
+    super.init(name, cellClass: FormCell.self)
     self.accessibilityLabel = "ForwardingElement"
   }
   

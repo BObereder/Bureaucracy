@@ -10,7 +10,7 @@ import UIKit
 
 public class FormElement {
 
-  public init(cellClass: AnyClass, name: String) {
+  public init(_ name: String, cellClass: AnyClass) {
     self.cellClass = cellClass
     self.name = name
     self.accessibilityLabel = "FormElement"
