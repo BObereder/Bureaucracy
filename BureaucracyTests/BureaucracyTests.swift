@@ -84,7 +84,7 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    let allProductsField = testSection.append(ForwardingElement(name: "Test Element"))
+    let allProductsField = testSection.append(ForwardingElement("Test Element"))
     
     allProductsField.didSelect = { () in
       allProductsField.formSection!.form.delegate!.didUpdateForm(allProductsField.formSection!.form)
@@ -107,7 +107,7 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    let segmentedField = SegmentedFormField<TestGender, Int, String>(name: "SegmentedField", value: .Female, values: [.Female, .Male])
+    let segmentedField = SegmentedFormField<TestGender, Int, String>("SegmentedField", value: .Female, values: [.Female, .Male])
     
     segmentedField.valueTransformer = { (var genderType) -> (Int) in
       switch genderType {
@@ -201,7 +201,7 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    let segmentedField = SegmentedFormField<TestCountry, Int, String>(name: "SegmentedField", value: .Germany, values: [.Germany, .Austria])
+    let segmentedField = SegmentedFormField<TestCountry, Int, String>("SegmentedField", value: .Germany, values: [.Germany, .Austria])
     testSection.append(segmentedField)
     
     // Test Form
@@ -228,7 +228,7 @@ class BureaucracyTests: XCTestCase {
     // Just to be sure it is reset
     XCTAssertFalse((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Should be reset")
     
-    // Test Field Validation with valid value
+    // Test Field Validation
     segmentedField.value = .Germany
     XCTAssertTrue((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Value change did not update the FormDelegate")
     XCTAssertNil(segmentedField.error, "There should not be an error after setting the value")
