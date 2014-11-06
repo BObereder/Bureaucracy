@@ -25,9 +25,5 @@ public class SegmentedFormCell: FormCell {
     super.init(coder: aDecoder)
     selectionStyle = .None
   }
-  
-  public override class func description() -> String {
-    return "SegmentedFormCell"
-  }
 
 }

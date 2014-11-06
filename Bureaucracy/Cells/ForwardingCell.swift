@@ -19,8 +19,4 @@ public class ForwardingCell: FormCell {
     super.init(coder: aDecoder)
   }
   
-  public override class func description() -> String {
-    return "ForwardingCell"
-  }
-  
 }
