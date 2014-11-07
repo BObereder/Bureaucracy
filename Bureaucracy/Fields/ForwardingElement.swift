@@ -12,6 +12,7 @@ public class ForwardingElement: FormElement {
   
   public init(_ name: String) {
     super.init(name, cellClass: FormCell.self)
+    self.accessibilityLabel = "ForwardingElement"
   }
   
   public override func update(cell: FormCell) {
