@@ -17,7 +17,7 @@ public class Form: SequenceType {
 
   public var title: String? {
     didSet {
-      delegate?.didUpdateForm(self)
+      delegate?.didUpdateForm(self, section: nil, item: nil)
     }
   }
 
@@ -36,15 +36,18 @@ public class Form: SequenceType {
   }
 
   public func addSection(name: String) -> FormSection {
-    var section = FormSection(name)
+    return addSection(FormSection(name))
+  }
+
+  public func addSection(section: FormSection) -> FormSection {
     section.form = self
     sections += [section]
-    delegate?.didUpdateForm(self)
+    delegate?.didUpdateForm(self, section: section, item: nil)
     return section
   }
 
-  public func didUpdate() {
-    delegate?.didUpdateForm(self)
+  public func didUpdate(#section: FormSection, item: FormElement) {
+    delegate?.didUpdateForm(self, section: section, item: nil)
   }
 
   public func serialize() -> [[String: Any?]] {
@@ -60,5 +63,5 @@ public class Form: SequenceType {
 }
 
 public protocol FormDelegate: class {
-  func didUpdateForm(form: Form)
+  func didUpdateForm(form: Form, section: FormSection?, item: FormElement?)
 }

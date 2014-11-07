@@ -9,7 +9,11 @@
 import Foundation
 import SwiftHelpers
 
-public class FormSection: SequenceType {
+public func ==(lhs: FormSection, rhs: FormSection) -> Bool {
+  return lhs === rhs
+}
+
+public class FormSection: SequenceType, Equatable {
 
   public init(_ name: String) {
     self.name = name
@@ -22,6 +26,10 @@ public class FormSection: SequenceType {
 
   public var count: Int {
     return items.count
+  }
+
+  public var index: Int {
+    return find(form!.sections, self)!
   }
 
   public func append(item: FormElement) -> FormElement {
@@ -42,8 +50,8 @@ public class FormSection: SequenceType {
       }
   }
 
-  public func didUpdate() {
-    form?.didUpdate()
+  public func didUpdate(#item: FormElement) {
+    form?.didUpdate(section: self, item: item)
   }
 
   // MARK: - SequenceType

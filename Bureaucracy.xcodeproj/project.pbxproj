@@ -106,9 +106,9 @@
 			children = (
 				FAD4061F19F69B50003ABE75 /* FormElement.swift */,
 				7884543C1A01141E004507BD /* ForwardingElement.swift */,
-				FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */,
 				FAC20AFA19F7E56A00F7CB28 /* FormField.swift */,
 				FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */,
+				FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */,
 			);
 			path = Fields;
 			sourceTree = "<group>";

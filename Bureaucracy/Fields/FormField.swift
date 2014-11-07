@@ -22,7 +22,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
     didSet {
       error = FormUtilities.validateValue(value, validator: validator)
       if error == nil {
-        formSection?.didUpdate()
+        formSection?.didUpdate(item: self)
       }
     }
   }

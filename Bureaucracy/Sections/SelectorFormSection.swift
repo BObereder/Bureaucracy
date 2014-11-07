@@ -8,12 +8,32 @@
 
 import UIKit
 
-public class SelectorFormSection<Type, Internal, Representation>: FormSection, FormDataProtocol {
+public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSection, FormDataProtocol {
+
+  public typealias Internal = Int
+  public typealias Representation = String
 
   public init(_ name: String, value: Type, values: [Type]) {
     self.values = values
     super.init(name)
     internalValue = valueTransformer?(value)
+
+    valueTransformer = { (var x) -> Internal in return find(values, x)! }
+    reverseValueTransformer = { (var idx) -> Type in return values[idx] }
+    representationTransformer = { (var x) -> Representation in
+      if let theRepresentation = self.representation {
+        if let idx = find(values, x) {
+          return theRepresentation[idx]
+        }
+      }
+      return "\(x)"
+    }
+
+    for i in 0..<values.count {
+      var x = values[i]
+      let field = append(SelectorGroupFormField("\(name).\(i)", value: x == value))
+      field.localizedTitle = representationTransformer?(x)
+    }
   }
 
   // MARK: Value
@@ -42,6 +62,8 @@ public class SelectorFormSection<Type, Internal, Representation>: FormSection, F
 
   public var values: [Type] = []
 
+  public var representation: [Representation]?
+
   public var representationValues: [Representation]? {
     return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
   }
@@ -57,6 +79,20 @@ public class SelectorFormSection<Type, Internal, Representation>: FormSection, F
 
   public override func serialize() -> [String: Any?] {
     return [name: value]
+  }
+
+  // MARK: FormSection
+
+  public override func didUpdate(#item: FormElement) {
+    for aItem in items {
+      if item !== aItem {
+        if let theItem = aItem as? SelectorGroupFormField {
+          theItem.value = false
+        }
+      }
+    }
+
+    form?.didUpdate(section: self, item: item)
   }
 
 }
