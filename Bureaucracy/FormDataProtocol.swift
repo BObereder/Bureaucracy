@@ -8,7 +8,7 @@
 
 import Foundation
 
-public protocol FormDataProtocol {
+protocol FormDataProtocol {
   
   typealias Type
   typealias Representation
@@ -20,10 +20,10 @@ public protocol FormDataProtocol {
   var representationValues: [Representation]? { get }
   var internalValue: Internal? { get set }
   
-  var valueTransformer: ((Type) -> (Internal))? { get set }
-  var reverseValueTransformer: ((Internal) -> (Type))? { get set }
-  var representationTransformer: ((Type) -> (Representation))? { get set }
-  var validator: ((Type) -> (NSError?))? { get set }
+  var valueTransformer: Type -> Internal { get set }
+  var reverseValueTransformer: Internal -> Type { get set }
+  var representationTransformer: (Type -> Representation)? { get set }
+  var validator: (Type -> NSError?)? { get set }
   var error: NSError? { get set }
   
 }
