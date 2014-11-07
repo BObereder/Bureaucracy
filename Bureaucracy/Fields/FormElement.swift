@@ -13,13 +13,14 @@ public class FormElement {
   public init(_ name: String, cellClass: AnyClass) {
     self.cellClass = cellClass
     self.name = name
+    self.accessibilityLabel = "FormElement"
   }
   
   public var name: String
   public var localizedTitle: String?
   public var cellClass: AnyClass
   public weak var formSection: FormSection?
-
+  public var accessibilityLabel: String
   public func registerReusableView(tableView: UITableView) {
     tableView.registerClass(cellClass, forCellReuseIdentifier: cellClass.description())
   }
@@ -32,6 +33,7 @@ public class FormElement {
   
   public func update(cell: FormCell) {
     cell.textLabel.text = localizedTitle ?? name
+    cell.accessibilityLabel = accessibilityLabel
   }
 
   public func serialize() -> (String, Any?) {

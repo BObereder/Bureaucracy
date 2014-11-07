@@ -17,7 +17,7 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
   public init(_ name: String, value: Type, values: [Type]) {
     super.init(name, value: value, cellClass: SegmentedFormCell.self)
     self.values = values
-
+    self.accessibilityLabel = "SegmentedFormField"
     valueTransformer = { (var x) -> Internal in return find(values, x)! }
     reverseValueTransformer = { (var idx) -> Type in return values[idx] }
     representationTransformer = { (var x) -> Representation in
@@ -40,6 +40,7 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
 
   public override func update(cell: FormCell) {
     if let realCell = cell as? SegmentedFormCell {
+      realCell.segmentedControl.accessibilityLabel = accessibilityLabel
       realCell.segmentedControl.removeAllSegments()
   
       if let field = cell.formElement as? SegmentedFormField<Type, Int, String> {
