@@ -14,14 +14,15 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
   public typealias Internal = Int
   public typealias Representation = String
 
-  public init(_ name: String, value: Type, values: [Type], transformer: Type -> Internal, reverse: Internal -> Type) {
+  public init(_ name: String, value: Type, options: [Type], transformer: Type -> Internal, reverse: Internal -> Type) {
     super.init(name, value: value, cellClass: SegmentedFormCell.self, transformer: transformer, reverse: reverse)
-    self.values = values
-    self.accessibilityLabel = "SegmentedFormField"
+    self.options = options
+
+    accessibilityLabel = "SegmentedFormField"
     
-    self.representationTransformer = { (var x) -> Representation in
+    representationTransformer = { (var x) -> Representation in
       if let theRepresentation = self.representation {
-        if let idx = find(values, x) {
+        if let idx = find(options, x) {
           return theRepresentation[idx]
         }
       }
@@ -29,10 +30,10 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
     }
   }
   
-  public convenience init(_ name: String, value: Type, values: [Type]) {
-    let transformer: Type -> Internal = { (var x) -> Internal in return find(values, x)! }
-    let reverse: Internal -> Type = { (var idx) -> Type in return values[idx] }
-    self.init(name, value: value, values: values, transformer: transformer, reverse: reverse)
+  public convenience init(_ name: String, value: Type, options: [Type]) {
+    let transformer: Type -> Internal = { (var x) -> Internal in return find(options, x)! }
+    let reverse: Internal -> Type = { (var idx) -> Type in return options[idx] }
+    self.init(name, value: value, options: options, transformer: transformer, reverse: reverse)
   }
 
   public var representation: [Representation]?
@@ -49,10 +50,11 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
       realCell.segmentedControl.removeAllSegments()
   
       if let field = cell.formElement as? SegmentedFormField<Type, Int, String> {
-        if let realValues = field.representationValues {
-          for v in realValues {
-            realCell.segmentedControl.insertSegmentWithTitle(v, atIndex: realCell.segmentedControl.numberOfSegments, animated: false)
+        for i in 0..<field.optionCount {
+          if let title = field.representation(i) {
+            realCell.segmentedControl.insertSegmentWithTitle(title, atIndex: realCell.segmentedControl.numberOfSegments, animated: false)
           }
+
           if let index = field.internalValue {
             realCell.segmentedControl.selectedSegmentIndex = index
           }

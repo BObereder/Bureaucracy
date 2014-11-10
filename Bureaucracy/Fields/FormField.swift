@@ -31,7 +31,7 @@ public class FormField<Type: Equatable, Internal, Representation>: FormElement, 
     }
   }
 
-  public var internalValue: Internal? {
+  var internalValue: Internal? {
     get {
       return FormUtilities.convertValue(value, transformer: valueTransformer)
     }
@@ -56,10 +56,18 @@ public class FormField<Type: Equatable, Internal, Representation>: FormElement, 
 
   // MARK: Values
 
-  public var values: [Type] = []
+  var options: [Type] = []
 
-  public var representationValues: [Representation]? {
-    return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
+  func option(index: Int) -> Type {
+    return options[index]
+  }
+
+  var optionCount: Int {
+    return options.count
+  }
+
+  func representation(index: Int) -> Representation? {
+    return representationTransformer?(option(index))
   }
 
   var representationTransformer: (Type -> Representation)?

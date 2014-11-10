@@ -13,37 +13,38 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   public typealias Internal = Int
   public typealias Representation = String
 
-  public init(_ name: String, value: Type, values: [Type]) {
-    valueTransformer = { (var x) -> Internal in return find(values, x)! }
-    reverseValueTransformer = { (var idx) -> Type in return values[idx] }
+  public init(_ name: String, value: Type, options: [Type]) {
+    valueTransformer = { return find(options, $0)! }
+    reverseValueTransformer = { return options[$0] }
 
     super.init(name)
 
-    self.values = values
+    self.options = options
     self.value = value
     internalValue = valueTransformer(value)
 
     representationTransformer = { (var x) -> Representation in
-      if let theRepresentation = self.representation {
-        if let idx = find(values, x) {
-          return theRepresentation[idx]
-        }
-      }
       return "\(x)"
     }
 
-    for i in 0..<values.count {
-      var x = values[i]
+    for i in 0..<options.count {
+      var x = options[i]
       let field = append(SelectorGroupFormField("\(name).\(i)", value: x == value))
       field.localizedTitle = representationTransformer?(x)
     }
   }
+  
+  // MARK: FormDataProtocol
 
-  // MARK: PreviousValue
-  
-  var previousValue: Type?
-  
-  // MARK: Value
+  var options: [Type] = []
+
+  func option(index: Int) -> Type {
+    return options[index]
+  }
+
+  var optionCount: Int {
+    return options.count
+  }
 
   public var value: Type? {
     didSet {
@@ -53,7 +54,9 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
   }
 
-  public var internalValue: Internal? {
+  var previousValue: Type?
+
+  var internalValue: Internal? {
     get {
       return FormUtilities.convertValue(value, transformer: valueTransformer)
     }
@@ -73,24 +76,14 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
   }
 
-  // MARK: Values
-
-  var values: [Type] = []
-
-  public var representation: [Representation]?
-
-  public var representationValues: [Representation]? {
-    return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
+  func representation(index: Int) -> Representation? {
+    return representationTransformer?(option(index))
   }
 
   public var representationTransformer: ((Type) -> (Representation))?
 
-  // MARK: Validation
-
   public var validator: ((Type) -> (NSError?))?
   public var error: NSError?
-
-  // MARK: Serialization
 
   public override func serialize() -> [String: Any?] {
     return [name: value]

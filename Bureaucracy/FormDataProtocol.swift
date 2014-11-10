@@ -13,12 +13,15 @@ protocol FormDataProtocol {
   typealias Type
   typealias Representation
   typealias Internal
-  
-  var values: [Type] { get set }
+
+  func option(index: Int) -> Type
+  var optionCount: Int { get }
+
   var value: Type? { get set }
   var previousValue: Type? { get set }
-  
-  var representationValues: [Representation]? { get }
+
+  func representation(index: Int) -> Representation?
+
   var internalValue: Internal? { get set }
   
   var valueTransformer: Type -> Internal { get set }
