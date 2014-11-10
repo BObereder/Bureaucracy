@@ -14,6 +14,7 @@ public class Form: SequenceType {
   public init() {}
 
   public weak var delegate: FormDelegate?
+  public weak var dataSource: FormDataSource?
 
   public var title: String? {
     didSet {
@@ -32,7 +33,7 @@ public class Form: SequenceType {
   }
 
   public func item(#indexPath: NSIndexPath) -> FormElement {
-    return sections[indexPath.section].items[indexPath.item]
+    return sections[indexPath.section].item(indexPath.item)
   }
 
   public func addSection(name: String) -> FormSection {
@@ -46,12 +47,16 @@ public class Form: SequenceType {
     return section
   }
 
-  public func didUpdate(#section: FormSection, item: FormElement) {
+  public func didUpdate(#section: FormSection?, item: FormElement?) {
     delegate?.didUpdateForm(self, section: section, item: nil)
   }
 
   public func serialize() -> [[String: Any?]] {
     return sections.map { $0.serialize() }
+  }
+
+  public func reloadInterface() {
+    dataSource?.reloadTable()
   }
 
   // MARK: - SequenceType

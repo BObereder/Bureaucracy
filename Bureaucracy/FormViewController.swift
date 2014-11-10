@@ -15,7 +15,7 @@ public class FormViewController: UIViewController, UITableViewDelegate {
   public var dataSource: FormDataSource? {
     didSet {
       tableView.dataSource = dataSource
-      dataSource?.registerReusableViews(tableView)
+      dataSource?.register(tableView)
     }
   }
 

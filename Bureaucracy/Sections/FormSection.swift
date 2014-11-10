@@ -22,7 +22,12 @@ public class FormSection: SequenceType, Equatable {
   public var name: String
   public var localizedTitle: String?
   public var form: Form?
-  public var items: [FormElement] = []
+
+  var items: [FormElement] = []
+
+  public func item(index: Int) -> FormElement {
+    return items[index]
+  }
 
   public var count: Int {
     return items.count
@@ -50,7 +55,7 @@ public class FormSection: SequenceType, Equatable {
       }
   }
 
-  public func didUpdate(#item: FormElement) {
+  public func didUpdate(#item: FormElement?) {
     form?.didUpdate(section: self, item: item)
   }
 

@@ -64,7 +64,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   // MARK: Values
 
-  public var values: [Type] = []
+  var values: [Type] = []
 
   public var representation: [Representation]?
 
@@ -87,7 +87,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   // MARK: FormSection
 
-  public override func didUpdate(#item: FormElement) {
+  public override func didUpdate(#item: FormElement?) {
     for aItem in items {
       if item !== aItem {
         if let theItem = aItem as? SelectorGroupFormField {

@@ -14,11 +14,15 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   public init(form: Form) {
     self.form = form
     super.init()
+    form.dataSource = self
   }
   
   var form: Form
+  weak var tableView: UITableView?
 
-  func registerReusableViews(tableView: UITableView) {
+  func register(tableView: UITableView) {
+    self.tableView = tableView
+
     SwiftHelpers.each(form) { (var section) in
       SwiftHelpers.each(section) { (var item) in
         item.registerReusableView(tableView)
@@ -26,10 +30,14 @@ public class FormDataSource: NSObject, UITableViewDataSource {
     }
   }
 
+  public func reloadTable() {
+    tableView?.reloadData()
+  }
+
   // MARK: - UITableViewDataSource
 
   public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return form.sections.count
+    return form.numberOfSections()
   }
 
   public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
