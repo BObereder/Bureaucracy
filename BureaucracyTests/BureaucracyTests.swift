@@ -19,10 +19,21 @@ class FormTestDelegate: FormDelegate {
   }
 }
 
-enum TestGender: Int {
+enum TestGender: Int, Printable {
   case Unknown = 0
   case Female = 2
   case Male = 3
+  
+  var description: String {
+    switch self {
+    case .Female:
+      return "Female"
+    case .Male:
+      return "Male"
+    case .Unknown:
+      return "Unknown Gender"
+    }
+  }
 }
 
 enum TestCountry: Int, Printable {
@@ -185,18 +196,7 @@ class BureaucracyTests: XCTestCase {
       }
     }
     
-    let representation: TestGender -> String = { (var genderType) -> String in
-      switch genderType {
-      case .Female:
-        return NSLocalizedString("Female", comment: "Female gender")
-      case .Male:
-        return NSLocalizedString("Male", comment: "Male gender")
-      default:
-        return NSLocalizedString("Female", comment: "Female gender")
-      }
-    }
-    
-    let segmentedField = SegmentedFormField<TestGender, Int, String>("SegmentedField", value: .Female, values: [.Female, .Male], transformer: transformer, reverse: reverse, representationTransformer: representation)
+    let segmentedField = SegmentedFormField<TestGender, Int, String>("SegmentedField", value: .Female, values: [.Female, .Male], transformer: transformer, reverse: reverse)
     segmentedField.validator = { (var genderType) -> NSError? in
       switch genderType {
       case .Female, .Male:

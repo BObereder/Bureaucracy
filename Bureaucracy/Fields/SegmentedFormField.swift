@@ -14,30 +14,25 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
   public typealias Internal = Int
   public typealias Representation = String
 
-  public init(_ name: String, value: Type, values: [Type], transformer: Type -> Internal, reverse: Internal -> Type, representationTransformer: (Type -> Representation)?) {
+  public init(_ name: String, value: Type, values: [Type], transformer: Type -> Internal, reverse: Internal -> Type) {
     super.init(name, value: value, cellClass: SegmentedFormCell.self, transformer: transformer, reverse: reverse)
     self.values = values
     self.accessibilityLabel = "SegmentedFormField"
     
-    if let realRepresenationTransformer = representationTransformer {
-      self.representationTransformer = realRepresenationTransformer
-    }
-    else {
-      self.representationTransformer = { (var x) -> Representation in
-        if let theRepresentation = self.representation {
-          if let idx = find(values, x) {
-            return theRepresentation[idx]
-          }
+    self.representationTransformer = { (var x) -> Representation in
+      if let theRepresentation = self.representation {
+        if let idx = find(values, x) {
+          return theRepresentation[idx]
         }
-        return "\(x)"
       }
+      return "\(x)"
     }
   }
   
   public convenience init(_ name: String, value: Type, values: [Type]) {
     let transformer: Type -> Internal = { (var x) -> Internal in return find(values, x)! }
     let reverse: Internal -> Type = { (var idx) -> Type in return values[idx] }
-    self.init(name, value: value, values: values, transformer: transformer, reverse: reverse, representationTransformer:nil)
+    self.init(name, value: value, values: values, transformer: transformer, reverse: reverse)
   }
 
   public var representation: [Representation]?
