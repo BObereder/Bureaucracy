@@ -287,7 +287,7 @@ class BureaucracyTests: XCTestCase {
     
     // SelectorGroupFormField
     let selectorGroupFormField = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
-    XCTAssertEqual(selectorGroupFormField!.accessibilityLabel!, "SelectorGroupFormField", "Cell is expected to have the standard accessibilityLabel")
+    XCTAssertEqual(selectorGroupFormField!.accessibilityLabel!, "SelectorGroupFormField.0", "Cell is expected to have the standard accessibilityLabel")
     
     // test setting accessibility
     testElement.accessibilityLabel = "TestForwardingField"

@@ -36,6 +36,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
       var x = values[i]
       let field = append(SelectorGroupFormField("\(name).\(i)", value: x == value))
       field.localizedTitle = representationTransformer?(x)
+      field.accessibilityLabel += ".\(i)"
     }
   }
 
