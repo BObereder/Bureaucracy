@@ -8,7 +8,7 @@
 
 import Foundation
 
-typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bool>
+public typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bool>
 
 public class _SelectorGroupFormField<Type: BooleanLiteralConvertible, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
 

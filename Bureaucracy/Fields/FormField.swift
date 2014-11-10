@@ -21,7 +21,9 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var value: Type? {
     didSet {
-      didSetValue(oldValue: oldValue, newValue: value)
+      if !processingUndoo {
+        didSetValue(oldValue: oldValue, newValue: value)
+      }
     }
   }
 
@@ -30,7 +32,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
       return FormUtilities.convertValue(value, transformer: valueTransformer)
     }
     set {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
@@ -43,13 +45,20 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
       formSection?.didUpdate(item: self)
     }
     else {
-      value = oldValue
+      undoValueChange(oldValue)
     }
+  }
+  
+  var processingUndoo: Bool = false
+  
+  func undoValueChange(oldValue: Type?) {
+    processingUndoo = true
+    value = oldValue
   }
 
   // MARK: Values
 
-  public var values: [Type] = []
+  var values: [Type] = []
 
   public var representationValues: [Representation]? {
     return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
