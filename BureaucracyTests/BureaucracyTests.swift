@@ -163,7 +163,6 @@ class BureaucracyTests: XCTestCase {
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
     
-    
     let transformer: TestGender -> Int = { (var genderType) -> (Int) in
       switch genderType {
       case .Female:
