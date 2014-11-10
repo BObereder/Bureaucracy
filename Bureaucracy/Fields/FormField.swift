@@ -10,38 +10,42 @@ import UIKit
 
 public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
   
-  public init(_ name: String, value: Type, cellClass: AnyClass) {
+  public init(_ name: String, value: Type, cellClass: AnyClass, transformer: Type -> Internal, reverse: Internal -> Type) {
+    valueTransformer = transformer
+    reverseValueTransformer = reverse
     self.value = value
     super.init(name, cellClass: cellClass)
-    internalValue = valueTransformer?(value)
   }
 
   // MARK: Value
 
   public var value: Type? {
     didSet {
-      error = FormUtilities.validateValue(value, validator: validator)
-      if error == nil {
-        formSection?.didUpdate(item: self)
-      }
+      didSetValue(oldValue: oldValue, newValue: value)
     }
   }
 
   public var internalValue: Internal? {
-    didSet {
-      if let transformer = reverseValueTransformer {
-        (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: transformer, validator: validator)
-      }
+    get {
+      return FormUtilities.convertValue(value, transformer: valueTransformer)
+    }
+    set {
+      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
-  public var valueTransformer: ((Type) -> (Internal))? {
-    didSet {
-      internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
+  var valueTransformer: Type -> Internal
+  var reverseValueTransformer: Internal -> Type
+
+  func didSetValue(#oldValue: Type?, newValue: Type?) {
+    error = FormUtilities.validateValue(newValue, validator: validator)
+    if error == nil {
+      formSection?.didUpdate(item: self)
+    }
+    else {
+      value = oldValue
     }
   }
-
-  public var reverseValueTransformer: ((Internal) -> (Type))?
 
   // MARK: Values
 
@@ -51,7 +55,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
     return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
   }
 
-  public var representationTransformer: ((Type) -> (Representation))?
+  var representationTransformer: (Type -> Representation)?
 
   // MARK: Validation
 

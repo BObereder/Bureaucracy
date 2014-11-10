@@ -14,12 +14,15 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   public typealias Representation = String
 
   public init(_ name: String, value: Type, values: [Type]) {
-    self.values = values
-    super.init(name)
-    internalValue = valueTransformer?(value)
-
     valueTransformer = { (var x) -> Internal in return find(values, x)! }
     reverseValueTransformer = { (var idx) -> Type in return values[idx] }
+
+    super.init(name)
+
+    self.values = values
+    self.value = value
+    internalValue = valueTransformer(value)
+
     representationTransformer = { (var x) -> Representation in
       if let theRepresentation = self.representation {
         if let idx = find(values, x) {
@@ -38,25 +41,26 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   // MARK: Value
 
-  public var value: Type? {
-    didSet {
-      error = FormUtilities.validateValue(value, validator: validator)
-    }
-  }
+  public var value: Type?
 
   public var internalValue: Internal? {
-    didSet {
+    get {
+      return FormUtilities.convertValue(value, transformer: valueTransformer)
+    }
+    set {
       (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
-  public var valueTransformer: ((Type) -> (Internal))? {
-    didSet {
-      internalValue = FormUtilities.convertValue(value, transformer: valueTransformer)
+  var valueTransformer: Type -> Internal
+  var reverseValueTransformer: Internal -> Type
+
+  func didSetValue(#oldValue: Type?, newValue: Type?) {
+    error = FormUtilities.validateValue(newValue, validator: validator)
+    if error != nil {
+      value = oldValue
     }
   }
-
-  public var reverseValueTransformer: ((Internal) -> (Type))?
 
   // MARK: Values
 
