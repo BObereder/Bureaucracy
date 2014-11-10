@@ -10,7 +10,7 @@ import Foundation
 
 public typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bool>
 
-public class _SelectorGroupFormField<Type: BooleanLiteralConvertible, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
+public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralConvertible>, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
 
   public init(_ name: String, value: Type) {
     let transformer: Type -> Internal = { return $0 as Internal }
