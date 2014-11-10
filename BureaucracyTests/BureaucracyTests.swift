@@ -285,8 +285,8 @@ class BureaucracyTests: XCTestCase {
     XCTAssertEqual(segmentedControl!.accessibilityLabel!, "SegmentedFormField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
     
     // SelectorGroupFormField
-    let selectorGroupFormField = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
-    XCTAssertEqual(selectorGroupFormField!.accessibilityLabel!, "SelectorGroupFormField.0", "Cell is expected to have the standard accessibilityLabel")
+    let selectorGroupFormFieldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
+    XCTAssertEqual(selectorGroupFormFieldCell!.accessibilityLabel!, "allProducts.0", "Cell is expected to have the standard accessibilityLabel")
     
     // test setting accessibility
     testElement.accessibilityLabel = "TestForwardingField"
@@ -305,8 +305,8 @@ class BureaucracyTests: XCTestCase {
     XCTAssertEqual(customSegmentedCell.segmentedControl!.accessibilityLabel!, "TestSegmentedField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
     
     // SelectorGroupFormField
-    let customSelectorGroupFormField = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
-    XCTAssertEqual(customSelectorGroupFormField!.accessibilityLabel!, "TestSelectorGroupFormField", "Cell is expected to have the standard accessibilityLabel")
+    let customSelectorGroupFormFieldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
+    XCTAssertEqual(customSelectorGroupFormFieldCell!.accessibilityLabel!, "TestSelectorGroupFormField", "Cell is expected to have the standard accessibilityLabel")
   }
   
 }

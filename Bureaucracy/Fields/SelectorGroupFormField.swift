@@ -18,7 +18,7 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
 
     super.init(name, value: value, cellClass: FormCell.self, transformer: transformer, reverse: reverse)
     values = [true, false]
-    accessibilityLabel = "SelectorGroupFormField"
+    accessibilityLabel = name
     representationTransformer = { return $0 as Representation }
     didSelect = { self.internalValue = true }
   }
