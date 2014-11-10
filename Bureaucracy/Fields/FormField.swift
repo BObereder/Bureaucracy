@@ -21,7 +21,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   public var value: Type? {
     didSet {
-      if !processingUndoo {
+      if !processingUndo {
         didSetValue(oldValue: oldValue, newValue: value)
       }
     }
@@ -49,10 +49,10 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
     }
   }
   
-  var processingUndoo: Bool = false
+  var processingUndo: Bool = false
   
   func undoValueChange(oldValue: Type?) {
-    processingUndoo = true
+    processingUndo = true
     value = oldValue
   }
 
