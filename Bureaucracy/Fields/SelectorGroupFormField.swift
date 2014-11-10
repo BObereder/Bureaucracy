@@ -8,9 +8,9 @@
 
 import Foundation
 
-typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bool>
+public typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bool>
 
-public class _SelectorGroupFormField<Type: BooleanLiteralConvertible, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
+public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralConvertible>, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
 
   public init(_ name: String, value: Type) {
     let transformer: Type -> Internal = { return $0 as Internal }
@@ -18,6 +18,7 @@ public class _SelectorGroupFormField<Type: BooleanLiteralConvertible, Internal: 
 
     super.init(name, value: value, cellClass: FormCell.self, transformer: transformer, reverse: reverse)
     values = [true, false]
+    accessibilityLabel = name
     representationTransformer = { return $0 as Representation }
     didSelect = { self.internalValue = true }
   }

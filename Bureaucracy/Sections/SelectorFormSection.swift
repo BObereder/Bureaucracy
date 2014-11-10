@@ -39,9 +39,19 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
   }
 
+  // MARK: PreviousValue
+  
+  var previousValue: Type?
+  
   // MARK: Value
 
-  public var value: Type?
+  public var value: Type? {
+    didSet {
+      if previousValue != value {
+        didSetValue(oldValue: oldValue, newValue: value)
+      }
+    }
+  }
 
   public var internalValue: Internal? {
     get {
@@ -58,6 +68,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   func didSetValue(#oldValue: Type?, newValue: Type?) {
     error = FormUtilities.validateValue(newValue, validator: validator)
     if error != nil {
+      previousValue = oldValue
       value = oldValue
     }
   }

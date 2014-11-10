@@ -16,6 +16,7 @@ protocol FormDataProtocol {
   
   var values: [Type] { get set }
   var value: Type? { get set }
+  var previousValue: Type? { get set }
   
   var representationValues: [Representation]? { get }
   var internalValue: Internal? { get set }

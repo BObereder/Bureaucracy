@@ -14,15 +14,26 @@ class FormTestDelegate: FormDelegate {
   
   var calledDidUpdateForm: Bool = false
   
-  func didUpdateForm(form: Form) {
+  func didUpdateForm(form: Form, section: FormSection?, item: FormElement?) {
     calledDidUpdateForm = true
   }
 }
 
-enum TestGender: Int {
+enum TestGender: Int, Printable {
   case Unknown = 0
   case Female = 2
   case Male = 3
+  
+  var description: String {
+    switch self {
+    case .Female:
+      return "Female"
+    case .Male:
+      return "Male"
+    case .Unknown:
+      return "Unknown Gender"
+    }
+  }
 }
 
 enum TestCountry: Int, Printable {
@@ -40,6 +51,25 @@ enum TestCountry: Int, Printable {
       return "Unknown Country"
     }
   }
+}
+
+func ==(lhs: AllProducts, rhs: AllProducts) -> Bool {
+  return true
+}
+
+struct AllProducts: Equatable, Printable {
+  
+  static var sharedInstance : AllProducts {
+    struct Static {
+      static let instance : AllProducts = AllProducts()
+    }
+    return Static.instance
+  }
+  
+  var description: String {
+    return NSLocalizedString("categories.all", comment: "All products")
+  }
+  
 }
 
 class BureaucracyTests: XCTestCase {
@@ -83,7 +113,7 @@ class BureaucracyTests: XCTestCase {
     let allProductsField = testSection.append(ForwardingElement("Test Element"))
     
     allProductsField.didSelect = {
-      allProductsField.formSection!.form!.delegate!.didUpdateForm(allProductsField.formSection!.form!)
+      allProductsField.formSection!.form!.delegate!.didUpdateForm(allProductsField.formSection!.form!, section: testSection, item: allProductsField)
     }
     
     // Test Form
@@ -143,9 +173,8 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    let segmentedField = SegmentedFormField<TestGender, Int, String>("SegmentedField", value: .Female, values: [.Female, .Male])
     
-    segmentedField.valueTransformer = { (var genderType) -> (Int) in
+    let transformer: TestGender -> Int = { (var genderType) -> (Int) in
       switch genderType {
       case .Female:
         return 0
@@ -155,8 +184,8 @@ class BureaucracyTests: XCTestCase {
         return 0
       }
     }
-
-    segmentedField.reverseValueTransformer = { (var segmentedIndex) -> (TestGender) in
+    
+    let reverse: Int -> TestGender = { (var segmentedIndex) -> (TestGender) in
       switch segmentedIndex {
       case 0:
         return .Female
@@ -167,17 +196,7 @@ class BureaucracyTests: XCTestCase {
       }
     }
     
-    segmentedField.representationTransformer = { (var genderType) -> String in
-      switch genderType {
-      case .Female:
-        return NSLocalizedString("Female", comment: "Female gender")
-      case .Male:
-        return NSLocalizedString("Male", comment: "Male gender")
-      default:
-        return NSLocalizedString("Female", comment: "Female gender")
-      }
-    }
-    
+    let segmentedField = SegmentedFormField<TestGender, Int, String>("SegmentedField", value: .Female, values: [.Female, .Male], transformer: transformer, reverse: reverse)
     segmentedField.validator = { (var genderType) -> NSError? in
       switch genderType {
       case .Female, .Male:
@@ -188,7 +207,7 @@ class BureaucracyTests: XCTestCase {
         return NSError()
       }
     }
-    
+
     testSection.append(segmentedField)
     
     // Test Form
@@ -232,6 +251,62 @@ class BureaucracyTests: XCTestCase {
     
     // Test Field
     XCTAssertEqual(segmentedField.representationValues!, ["Female", "Male"], "Representation is expected to return the values set in representationTransformer ")
+  }
+  
+  func test05AccessibilityTest() {
+    // Add Section and Elements
+    let testSection = form!.addSection("Test Section")
+    let testElement = testSection.append(ForwardingElement("Test Element"))
+    let segmentedField = SegmentedFormField<TestCountry, Int, String>("SegmentedField", value: .Germany, values: [.Germany, .Austria])
+    testSection.append(segmentedField)
+    
+    // All Products Section
+    var section = SelectorFormSection("allProducts", value: AllProducts.sharedInstance, values: [AllProducts.sharedInstance])
+    let allProductsSection = form!.addSection(section)
+    
+    // Setup FormViewController and DataSoure
+    let formVC = FormViewController()
+    let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+    formVC.tableView = tableView
+    formVC.dataSource = FormDataSource(form: form!)
+    formVC.view.frame = CGRect(x: 0, y: 0, width: 320, height: 480)
+    formVC.view.addSubview(tableView)
+    let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+    window.rootViewController = formVC
+    window.hidden = false
+    
+    // ForwardingCell
+    let forwardingCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+    XCTAssertEqual(forwardingCell!.accessibilityLabel!, "ForwardingElement", "Cell is expected to have the standard accessibilityLabel")
+    
+    // SegmentedCell
+    let segmentedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as SegmentedFormCell
+    let segmentedControl = segmentedCell.segmentedControl
+    XCTAssertEqual(segmentedControl!.accessibilityLabel!, "SegmentedFormField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
+    
+    // SelectorGroupFormField
+    let selectorGroupFormFieldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
+    XCTAssertEqual(selectorGroupFormFieldCell!.accessibilityLabel!, "allProducts.0", "Cell is expected to have the standard accessibilityLabel")
+    
+    // test setting accessibility
+    testElement.accessibilityLabel = "TestForwardingField"
+    segmentedField.accessibilityLabel = "TestSegmentedField"
+    var item = section.items.first as SelectorGroupFormField
+    item.accessibilityLabel = "TestSelectorGroupFormField"
+    
+    formVC.tableView.reloadData()
+    
+    // ForwardingCell
+    let customForwardingCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+    XCTAssertEqual(customForwardingCell!.accessibilityLabel!, "TestForwardingField", "Cell is expected to have the standard accessibilityLabel")
+    
+    // SegmentedCell
+    let customSegmentedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as SegmentedFormCell
+    XCTAssertEqual(customSegmentedCell.segmentedControl!.accessibilityLabel!, "TestSegmentedField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
+    
+    // SelectorGroupFormField
+    let customSelectorGroupFormFieldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
+    XCTAssertEqual(customSelectorGroupFormFieldCell!.accessibilityLabel!, "TestSelectorGroupFormField", "Cell is expected to have the standard accessibilityLabel")
   }
   
 }
