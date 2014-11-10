@@ -10,7 +10,7 @@ import UIKit
 
 public class SegmentedFormCell: FormCell {
 
-  @IBOutlet weak var segmentedControl: UISegmentedControl!
+  @IBOutlet public weak var segmentedControl: UISegmentedControl!
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
     formElement?.didChangeInternalValue(self)

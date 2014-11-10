@@ -14,7 +14,7 @@ class FormTestDelegate: FormDelegate {
   
   var calledDidUpdateForm: Bool = false
   
-  func didUpdateForm(form: Form) {
+  func didUpdateForm(form: Form, section: FormSection?, item: FormElement?) {
     calledDidUpdateForm = true
   }
 }
@@ -83,7 +83,7 @@ class BureaucracyTests: XCTestCase {
     let allProductsField = testSection.append(ForwardingElement("Test Element"))
     
     allProductsField.didSelect = {
-      allProductsField.formSection!.form!.delegate!.didUpdateForm(allProductsField.formSection!.form!)
+      allProductsField.formSection!.form!.delegate!.didUpdateForm(allProductsField.formSection!.form!, section: testSection, item: allProductsField)
     }
     
     // Test Form
@@ -155,7 +155,7 @@ class BureaucracyTests: XCTestCase {
         return 0
       }
     }
-
+    
     segmentedField.reverseValueTransformer = { (var segmentedIndex) -> (TestGender) in
       switch segmentedIndex {
       case 0:
@@ -232,6 +232,48 @@ class BureaucracyTests: XCTestCase {
     
     // Test Field
     XCTAssertEqual(segmentedField.representationValues!, ["Female", "Male"], "Representation is expected to return the values set in representationTransformer ")
+  }
+  
+  func test05AccessibilityTest() {
+    // Add Section and Elements
+    let testSection = form!.addSection("Test Section")
+    let testElement = testSection.append(ForwardingElement("Test Element"))
+    let segmentedField = SegmentedFormField<TestCountry, Int, String>("SegmentedField", value: .Germany, values: [.Germany, .Austria])
+    testSection.append(segmentedField)
+    
+    // Setup FormViewController and DataSoure
+    let formVC = FormViewController()
+    let tableView = UITableView(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+    formVC.tableView = tableView
+    formVC.dataSource = FormDataSource(form: form!)
+    formVC.view.frame = CGRect(x: 0, y: 0, width: 320, height: 480)
+    formVC.view.addSubview(tableView)
+    let window = UIWindow(frame: CGRect(x: 0, y: 0, width: 320, height: 480))
+    window.rootViewController = formVC
+    window.hidden = false
+    
+    // ForwardingCell
+    let forwardingCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+    XCTAssertEqual(forwardingCell!.accessibilityLabel!, "ForwardingElement", "Cell is expected to have the standard accessibilityLabel")
+    
+    // SegmentedCell
+    let segmentedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as SegmentedFormCell
+    let segmentedControl = segmentedCell.segmentedControl
+    XCTAssertEqual(segmentedControl!.accessibilityLabel!, "SegmentedFormField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
+    
+    // test setting accessibility
+    testElement.accessibilityLabel = "TestForwardingField"
+    segmentedField.accessibilityLabel = "TestSegmentedField"
+    
+    formVC.tableView.reloadData()
+    
+    // ForwardingCell
+    let customForwardingCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0))
+    XCTAssertEqual(customForwardingCell!.accessibilityLabel!, "TestForwardingField", "Cell is expected to have the standard accessibilityLabel")
+    
+    // SegmentedCell
+    let customSegmentedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as SegmentedFormCell
+    XCTAssertEqual(customSegmentedCell.segmentedControl!.accessibilityLabel!, "TestSegmentedField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
   }
   
 }

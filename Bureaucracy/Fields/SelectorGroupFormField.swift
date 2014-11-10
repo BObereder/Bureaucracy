@@ -15,6 +15,7 @@ public class _SelectorGroupFormField<Type: BooleanLiteralConvertible, Internal: 
   public init(_ name: String, value: Type) {
     super.init(name, value: value, cellClass: FormCell.self)
     values = [true, false]
+    accessibilityLabel = "SelectorGroupFormField"
     valueTransformer = { return $0 as Internal }
     reverseValueTransformer = { return $0 as Type }
     representationTransformer = { return $0 as Representation }
