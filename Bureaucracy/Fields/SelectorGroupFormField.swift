@@ -28,7 +28,7 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
     if error == nil {
       if let theValue = newValue as? Bool {
         if theValue == true {
-          formSection?.didUpdate(item: self)
+          section?.didUpdate(item: self)
         }
       }
     }

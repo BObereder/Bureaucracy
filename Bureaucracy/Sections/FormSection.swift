@@ -38,7 +38,7 @@ public class FormSection: SequenceType, Equatable {
   }
 
   public func append(item: FormElement) -> FormElement {
-    item.formSection = self
+    item.section = self
     items.append(item)
     return item
   }

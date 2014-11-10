@@ -8,7 +8,11 @@
 
 import UIKit
 
-public class FormElement {
+public func ==(lhs: FormElement, rhs: FormElement) -> Bool {
+  return lhs === rhs
+}
+
+public class FormElement: Equatable {
 
   public init(_ name: String, cellClass: AnyClass) {
     self.cellClass = cellClass
@@ -19,8 +23,9 @@ public class FormElement {
   public var name: String
   public var localizedTitle: String?
   public var cellClass: AnyClass
-  public weak var formSection: FormSection?
+  public weak var section: FormSection?
   public var accessibilityLabel: String
+
   public func registerReusableView(tableView: UITableView) {
     tableView.registerClass(cellClass, forCellReuseIdentifier: cellClass.description())
   }
@@ -38,6 +43,10 @@ public class FormElement {
 
   public func serialize() -> (String, Any?) {
     return (name, nil)
+  }
+
+  public var index: Int {
+    return find(section!.items, self)!
   }
 
   public var didSelect: () -> () = {

@@ -61,7 +61,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
       return FormUtilities.convertValue(value, transformer: valueTransformer)
     }
     set {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
@@ -93,10 +93,11 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   public override func didUpdate(#item: FormElement?) {
     for aItem in items {
-      if item !== aItem {
-        if let theItem = aItem as? SelectorGroupFormField {
-          theItem.value = false
-        }
+      if item === aItem {
+        internalValue = item?.index
+      }
+      else if let theItem = aItem as? SelectorGroupFormField {
+        theItem.value = false
       }
     }
 

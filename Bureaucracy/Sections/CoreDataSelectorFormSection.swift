@@ -36,7 +36,13 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
     return 0
   }
 
-  public var value: Type?
+  public var value: Type? {
+    didSet {
+      if previousValue === value {
+        didSetValue(oldValue: oldValue, newValue: value)
+      }
+    }
+  }
 
   var previousValue: Type?
 
@@ -45,7 +51,7 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
       return FormUtilities.convertValue(value, transformer: valueTransformer)
     }
     set {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
@@ -91,6 +97,10 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
     return optionCount
   }
 
+  public override func serialize() -> [String: Any?] {
+    return [name: value]
+  }
+
   // MARK: CoreData
 
   var fetchRequest: NSFetchRequest
@@ -112,6 +122,21 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
   public func controllerDidChangeContent(controller: NSFetchedResultsController) {
     items.removeAll(keepCapacity: false)
     form?.reloadInterface()
+  }
+
+  // MARK: FormSection
+
+  public override func didUpdate(#item: FormElement?) {
+    for aItem in items {
+      if item === aItem {
+        internalValue = item?.index
+      }
+      else if let theItem = aItem as? SelectorGroupFormField {
+        theItem.value = false
+      }
+    }
+
+    form?.didUpdate(section: self, item: item)
   }
 
 }
