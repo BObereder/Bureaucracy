@@ -291,8 +291,6 @@ class BureaucracyTests: XCTestCase {
     // test setting accessibility
     testElement.accessibilityLabel = "TestForwardingField"
     segmentedField.accessibilityLabel = "TestSegmentedField"
-    var item = section.items.first as SelectorGroupFormField
-    item.accessibilityLabel = "TestSelectorGroupFormField"
     
     formVC.tableView.reloadData()
     
@@ -303,10 +301,6 @@ class BureaucracyTests: XCTestCase {
     // SegmentedCell
     let customSegmentedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as SegmentedFormCell
     XCTAssertEqual(customSegmentedCell.segmentedControl!.accessibilityLabel!, "TestSegmentedField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
-    
-    // SelectorGroupFormField
-    let customSelectorGroupFormFieldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
-    XCTAssertEqual(customSelectorGroupFormFieldCell!.accessibilityLabel!, "TestSelectorGroupFormField", "Cell is expected to have the standard accessibilityLabel")
   }
   
 }
