@@ -58,7 +58,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
 
   // MARK: Values
 
-  var values: [Type] = []
+  public var values: [Type] = []
 
   public var representationValues: [Representation]? {
     return FormUtilities.convertToRepresenationValues(values, representationTransformer: representationTransformer)
