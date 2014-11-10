@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormField<Type, Internal, Representation>: FormElement, FormDataProtocol {
+public class FormField<Type: Equatable, Internal, Representation>: FormElement, FormDataProtocol {
   
   public init(_ name: String, value: Type, cellClass: AnyClass, transformer: Type -> Internal, reverse: Internal -> Type) {
     valueTransformer = transformer
@@ -16,12 +16,18 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
     self.value = value
     super.init(name, cellClass: cellClass)
   }
+  
+  // MARK: PreviousValue
+  
+  var previousValue: Type?
 
   // MARK: Value
-
+  
   public var value: Type? {
     didSet {
-      didSetValue(oldValue: oldValue, newValue: value)
+      if previousValue != value {
+        didSetValue(oldValue: oldValue, newValue: value)
+      }
     }
   }
 
@@ -30,7 +36,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
       return FormUtilities.convertValue(value, transformer: valueTransformer)
     }
     set {
-      (value, error) = FormUtilities.convertInternalValue(internalValue, transformer: reverseValueTransformer, validator: validator)
+      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
     }
   }
 
@@ -43,6 +49,7 @@ public class FormField<Type, Internal, Representation>: FormElement, FormDataPro
       formSection?.didUpdate(item: self)
     }
     else {
+      previousValue = oldValue
       value = oldValue
     }
   }
