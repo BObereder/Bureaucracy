@@ -12,14 +12,14 @@ public func ==<Type>(lhs: SelectorFormSection<Type>, rhs: SelectorFormSection<Ty
   return lhs === rhs
 }
 
-public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSection, FormDataSectionProtocol {
+public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSection, FormDataProtocol {
 
   public typealias Internal = Int
   public typealias Representation = String
 
   public init(_ name: String, value: Type?, options: [Type]) {
     self.options = options
-    self.value = value
+    currentValue = value
     super.init(name)
   }
 
@@ -34,7 +34,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   public override subscript(position: Int) -> FormElement {
     if (position == endIndex) {
       let object = option(position)
-      let element = append(SelectorGroupFormField("\(name).\(position)", value: object == value))
+      let element = append(SelectorGroupFormField("\(name).\(position)", value: object == currentValue))
       element.localizedTitle = typeToRepresentation(object)
       return element
     }
@@ -47,23 +47,27 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   private var options: [Type]
 
-  func option(index: Int) -> Type {
-    return options[index]
+  public func option(position: Int) -> Type {
+    return options[position]
   }
 
-  var optionCount: Int {
+  public func optionIndex(option: Type) -> Int {
+    return find(options, option)!
+  }
+
+  public var optionCount: Int {
     return options.count
   }
 
   // MARK: - Values
 
-  public final var value: Type? {
+  public final var currentValue: Type? {
     didSet {
-      didSetValue(oldValue: oldValue, newValue: value)
+      didSetValue(oldValue: oldValue, newValue: currentValue)
     }
   }
 
-  func didSetValue(#oldValue: Type?, newValue: Type?) {
+  public func didSetValue(#oldValue: Type?, newValue: Type?) {
     if previousValue == newValue {
       return
     }
@@ -71,18 +75,18 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     error = validate(newValue)
     if error != nil {
       previousValue = oldValue
-      value = oldValue
+      currentValue = oldValue
     }
   }
 
-  var previousValue: Type?
+  public var previousValue: Type?
 
-  var internalValue: Internal? {
+  public var internalValue: Internal? {
     get {
-      return typeToInternal(value)
+      return typeToInternal(currentValue)
     }
     set(newOption) {
-      value = internalToType(newOption)
+      currentValue = internalToType(newOption)
     }
   }
 
@@ -93,7 +97,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
       return nil
     }
     else {
-      return find(options, value!)
+      return optionIndex(value!)
     }
   }
 
@@ -107,17 +111,12 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   }
 
   public func typeToRepresentation(value: Type?) -> Representation? {
-    if value == nil {
-      return nil
-    }
-    else {
-      return value!.description
-    }
+    return value?.description
   }
 
   // MARK: - Validation
 
-  func validate(value: Type?) -> NSError? {
+  public func validate(value: Type?) -> NSError? {
     return nil
   }
 
@@ -126,7 +125,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   // MARK: - Serialization
 
   public override func serialize() -> [String: Any?] {
-    return [name: value]
+    return [name: currentValue]
   }
 
   // MARK: - Callbacks
@@ -134,10 +133,10 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   public override func didUpdate(#field: FormElement?) {
     for x in self {
       if field == x {
-        internalValue = field?.index
+        internalValue = field?.fieldIndex
       }
       else {
-        (x as? SelectorGroupFormField)?.value = false
+        (x as? SelectorGroupFormField)?.currentValue = false
       }
     }
 

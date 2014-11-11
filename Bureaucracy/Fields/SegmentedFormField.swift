@@ -9,34 +9,16 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: Equatable, Internal, Representation>: FormField<Type, Internal, Representation> {
+public class SegmentedFormField<Type: protocol<Equatable, Printable>, Internal, Representation>: FormField<Type, Internal, Representation> {
 
-  public typealias Internal = Int
-  public typealias Representation = String
-
-  public init(_ name: String, value: Type, options: [Type], transformer: Type -> Internal, reverse: Internal -> Type) {
-    super.init(name, value: value, cellClass: SegmentedFormCell.self, transformer: transformer, reverse: reverse)
-    self.options = options
-
+  public init(_ name: String, value: Type, options: [Type]) {
+    super.init(name, value: value, options: options, cellClass: SegmentedFormCell.self)
     accessibilityLabel = "SegmentedFormField"
-    
-    representationTransformer = { (var x) -> Representation in
-      if let theRepresentation = self.representation {
-        if let idx = find(options, x) {
-          return theRepresentation[idx]
-        }
-      }
-      return "\(x)"
-    }
-  }
-  
-  public convenience init(_ name: String, value: Type, options: [Type]) {
-    let transformer: Type -> Internal = { (var x) -> Internal in return find(options, x)! }
-    let reverse: Internal -> Type = { (var idx) -> Type in return options[idx] }
-    self.init(name, value: value, options: options, transformer: transformer, reverse: reverse)
   }
 
-  public var representation: [Representation]?
+  // MARK: - FormElementProtocol
+
+  // MARK: Interface
 
   public override func registerReusableView(tableView: UITableView) {
     let bundle = NSBundle(forClass: self.cellClass)
@@ -44,30 +26,56 @@ public class SegmentedFormField<Type: Equatable, Internal, Representation>: Form
     tableView.registerNib(nib, forCellReuseIdentifier: self.cellClass.description())
   }
 
-  public override func update(cell: FormCell) {
+  public override func configureCell(cell: FormCell) {
     if let realCell = cell as? SegmentedFormCell {
-      realCell.segmentedControl.accessibilityLabel = accessibilityLabel
+      realCell.segmentedControl.accessibilityLabel = "SegmentedControl"
       realCell.segmentedControl.removeAllSegments()
-  
-      if let field = cell.formElement as? SegmentedFormField<Type, Int, String> {
-        for i in 0..<field.optionCount {
-          if let title = field.representation(i) {
-            realCell.segmentedControl.insertSegmentWithTitle(title, atIndex: realCell.segmentedControl.numberOfSegments, animated: false)
-          }
 
-          if let index = field.internalValue {
-            realCell.segmentedControl.selectedSegmentIndex = index
-          }
+      for i in 0..<optionCount {
+        if let title = typeToRepresentation(option(i)) as? String {
+          realCell.segmentedControl.insertSegmentWithTitle(title, atIndex: realCell.segmentedControl.numberOfSegments, animated: false)
         }
+      }
+
+      if let index = internalValue {
+        realCell.segmentedControl.selectedSegmentIndex = index as Int
       }
     }
   }
-  
+
+  // MARK: Callbacks
+
   public override func didChangeInternalValue(cell: FormCell) {
     if let field = cell.formElement as? SegmentedFormField {
-      field.internalValue = (cell as SegmentedFormCell).segmentedControl.selectedSegmentIndex
+      field.internalValue = (cell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex as? Internal
     }
     super.didChangeInternalValue(cell)
+  }
+
+  // MARK: - FormDataProtocol
+
+  // MARK: Value transformers
+
+  public override func typeToInternal(value: Type?) -> Internal? {
+    if value == nil {
+      return nil
+    }
+    else {
+      return optionIndex(value!) as? Internal
+    }
+  }
+
+  public override func internalToType(internalValue: Internal?) -> Type? {
+    if internalValue == nil {
+      return nil
+    }
+    else {
+      return option(internalValue! as Int)
+    }
+  }
+
+  public override func typeToRepresentation(value: Type?) -> Representation? {
+    return value?.description as? Representation
   }
 
 }

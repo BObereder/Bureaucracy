@@ -13,7 +13,7 @@ public func ==(lhs: FormSection, rhs: FormSection) -> Bool {
   return lhs === rhs
 }
 
-public class FormSection: Equatable, CollectionType {
+public class FormSection: FormSectionProtocol {
 
   public init(_ name: String) {
     self.name = name
@@ -21,9 +21,9 @@ public class FormSection: Equatable, CollectionType {
 
   // MARK: - Form relationship
 
-  public var form: Form?
+  public weak var form: Form?
 
-  public var index: Int {
+  public var sectionIndex: Int {
     return find(form!.sections, self)!
   }
 

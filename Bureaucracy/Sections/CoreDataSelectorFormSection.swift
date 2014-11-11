@@ -15,7 +15,7 @@ public func ==<Type: NSManagedObject>(lhs: CoreDataSelectorFormSection<Type>, rh
   return lhs === rhs
 }
 
-public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, FormDataSectionProtocol, NSFetchedResultsControllerDelegate {
+public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, FormDataProtocol, NSFetchedResultsControllerDelegate {
 
   public typealias Internal = Int
   public typealias Representation = String
@@ -42,7 +42,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   public override subscript(position: Int) -> FormElement {
     if (position == endIndex) {
       let object = option(position)
-      let element = append(SelectorGroupFormField("\(name).\(position)", value: object == value))
+      let element = append(SelectorGroupFormField("\(name).\(position)", value: object == currentValue))
       element.localizedTitle = typeToRepresentation(object)
       return element
     }
@@ -53,12 +53,16 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   // MARK: - Options
 
-  func option(index: Int) -> Type {
-    let indexPath = NSIndexPath(forItem: index, inSection: 0)
+  public func option(position: Int) -> Type {
+    let indexPath = NSIndexPath(forItem: position, inSection: 0)
     return fetchedResultsController.objectAtIndexPath(indexPath) as Type
   }
 
-  var optionCount: Int {
+  public func optionIndex(option: Type) -> Int {
+    return self.fetchedResultsController.indexPathForObject(option)!.item
+  }
+
+  public var optionCount: Int {
     if let section: NSFetchedResultsSectionInfo = fetchedResultsController.sections?.first as? NSFetchedResultsSectionInfo {
       return section.numberOfObjects
     }
@@ -69,13 +73,13 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   // MARK: - Values
 
-  public final var value: Type? {
+  public final var currentValue: Type? {
     didSet {
-      didSetValue(oldValue: oldValue, newValue: value)
+      didSetValue(oldValue: oldValue, newValue: currentValue)
     }
   }
 
-  func didSetValue(#oldValue: Type?, newValue: Type?) {
+  public func didSetValue(#oldValue: Type?, newValue: Type?) {
     if previousValue == newValue {
       return
     }
@@ -83,18 +87,18 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
     error = validate(newValue)
     if error != nil {
       previousValue = oldValue
-      value = oldValue
+      currentValue = oldValue
     }
   }
 
-  var previousValue: Type?
+  public var previousValue: Type?
 
-  var internalValue: Internal? {
+  public var internalValue: Internal? {
     get {
-      return typeToInternal(value)
+      return typeToInternal(currentValue)
     }
     set(newOption) {
-      value = internalToType(newOption)
+      currentValue = internalToType(newOption)
     }
   }
 
@@ -105,7 +109,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
       return nil
     }
     else {
-      return self.fetchedResultsController.indexPathForObject(value!)!.item
+      return optionIndex(value!)
     }
   }
 
@@ -133,7 +137,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   // MARK: - Serialization
 
   public override func serialize() -> [String: Any?] {
-    return [name: value]
+    return [name: currentValue]
   }
 
   // MARK: - Callbacks
@@ -141,10 +145,10 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   public override func didUpdate(#field: FormElement?) {
     for x in self {
       if field == x {
-        internalValue = field?.index
+        internalValue = field?.fieldIndex
       }
       else {
-        (x as? SelectorGroupFormField)?.value = false
+        (x as? SelectorGroupFormField)?.currentValue = false
       }
     }
 

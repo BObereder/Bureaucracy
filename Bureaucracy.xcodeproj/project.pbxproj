@@ -9,7 +9,7 @@
 /* Begin PBXBuildFile section */
 		7808CDDE19FEA1C600A83C6C /* ForwardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */; };
 		7884543D1A01141E004507BD /* ForwardingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884543C1A01141E004507BD /* ForwardingElement.swift */; };
-		78CD458E19FFDFAB001DF3B9 /* FormDataProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormDataProtocol.swift */; };
+		78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
 		FA45562F1A0B82EA00960033 /* SelectorGroupFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */; };
 		FA4BF9FB1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */; };
@@ -58,7 +58,7 @@
 /* Begin PBXFileReference section */
 		7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingCell.swift; sourceTree = "<group>"; };
 		7884543C1A01141E004507BD /* ForwardingElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingElement.swift; sourceTree = "<group>"; };
-		78CD458D19FFDFAB001DF3B9 /* FormDataProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataProtocol.swift; sourceTree = "<group>"; };
+		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
 		FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorGroupFormField.swift; sourceTree = "<group>"; };
 		FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataSelectorFormSection.swift; sourceTree = "<group>"; };
@@ -163,7 +163,7 @@
 				FAC10D371A092B95005C7252 /* Sections */,
 				FABA4E9319F53E1400574A68 /* Form.swift */,
 				FAE0652B19F5327C00279C6E /* FormDataSource.swift */,
-				78CD458D19FFDFAB001DF3B9 /* FormDataProtocol.swift */,
+				78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */,
 				FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */,
 				FABA4EA719F5634C00574A68 /* FormViewController.swift */,
 				78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */,
@@ -348,7 +348,7 @@
 			files = (
 				FAC10D3B1A092B95005C7252 /* SelectorFormSection.swift in Sources */,
 				FAC20AFB19F7E56A00F7CB28 /* FormField.swift in Sources */,
-				78CD458E19FFDFAB001DF3B9 /* FormDataProtocol.swift in Sources */,
+				78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */,
 				FABA4E9919F54CE000574A68 /* SegmentedFormField.swift in Sources */,
 				FABA4EA219F54E9000574A68 /* FormCell.swift in Sources */,
 				FAC10D3A1A092B95005C7252 /* FormSection.swift in Sources */,

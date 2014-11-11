@@ -10,77 +10,104 @@ import UIKit
 
 public class FormField<Type: Equatable, Internal, Representation>: FormElement, FormDataProtocol {
   
-  public init(_ name: String, value: Type, cellClass: AnyClass, transformer: Type -> Internal, reverse: Internal -> Type) {
-    valueTransformer = transformer
-    reverseValueTransformer = reverse
-    self.value = value
+  public init(_ name: String, value: Type, options: [Type], cellClass: AnyClass) {
+    self.options = options
+    currentValue = value
     super.init(name, cellClass: cellClass)
   }
-  
-  // MARK: PreviousValue
-  
-  var previousValue: Type?
 
-  // MARK: Value
-  
-  public var value: Type? {
-    didSet {
-      if previousValue != value {
-        didSetValue(oldValue: oldValue, newValue: value)
-      }
-    }
-  }
-
-  var internalValue: Internal? {
-    get {
-      return FormUtilities.convertValue(value, transformer: valueTransformer)
-    }
-    set {
-      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
-    }
-  }
-
-  var valueTransformer: Type -> Internal
-  var reverseValueTransformer: Internal -> Type
-
-  func didSetValue(#oldValue: Type?, newValue: Type?) {
-    error = FormUtilities.validateValue(newValue, validator: validator)
-    if error == nil {
-      section?.didUpdate(field: self)
-    }
-    else {
-      previousValue = oldValue
-      value = oldValue
-    }
-  }
-
-  // MARK: Values
-
-  var options: [Type] = []
-
-  func option(index: Int) -> Type {
-    return options[index]
-  }
-
-  var optionCount: Int {
-    return options.count
-  }
-
-  func representation(index: Int) -> Representation? {
-    return representationTransformer?(option(index))
-  }
-
-  var representationTransformer: (Type -> Representation)?
-
-  // MARK: Validation
-
-  public var validator: ((Type) -> (NSError?))? 
-  public var error: NSError?
+  // MARK: - FormElementProtocol
 
   // MARK: Serialization
 
   public override func serialize() -> (String, Any?) {
-    return (name, value)
+    return (name, currentValue)
   }
+
+  // MARK: - FormDataProtocol
+
+  // MARK: Options
+
+  private var options: [Type]
+
+  public func option(position: Int) -> Type {
+    return options[position]
+  }
+
+  public func optionIndex(option: Type) -> Int {
+    return find(options, option)!
+  }
+
+  public var optionCount: Int {
+    return options.count
+  }
+
+  // MARK: Values
+
+  public final var currentValue: Type? {
+    didSet {
+      didSetValue(oldValue: oldValue, newValue: currentValue)
+    }
+  }
+
+  public func didSetValue(#oldValue: Type?, newValue: Type?) {
+    if previousValue == newValue {
+      return
+    }
+
+    error = validate(newValue)
+    if error != nil {
+      previousValue = oldValue
+      currentValue = oldValue
+    }
+  }
+  
+  public var previousValue: Type?
+
+  public var internalValue: Internal? {
+    get {
+      return typeToInternal(currentValue)
+    }
+    set(newOption) {
+      currentValue = internalToType(newOption)
+    }
+  }
+  
+  // MARK: - Value transformers
+
+  public func typeToInternal(value: Type?) -> Internal? {
+    if value == nil {
+      return nil
+    }
+    else {
+      return value as? Internal
+    }
+  }
+
+  public func internalToType(internalValue: Internal?) -> Type? {
+    if internalValue == nil {
+      return nil
+    }
+    else {
+      return internalValue as? Type
+    }
+  }
+
+  public func typeToRepresentation(value: Type?) -> Representation? {
+    if value == nil {
+      return nil
+    }
+    else {
+      return value as? Representation
+    }
+  }
+
+  // MARK: - Validation
+
+  public func validate(value: Type?) -> NSError? {
+    return nil
+  }
+
+  public var error: NSError?
 
 }

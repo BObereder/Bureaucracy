@@ -13,18 +13,22 @@ public typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bo
 public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralConvertible>, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
 
   public init(_ name: String, value: Type) {
-    let transformer: Type -> Internal = { return $0 as Internal }
-    let reverse: Internal -> Type = { return $0 as Type }
-
-    super.init(name, value: value, cellClass: FormCell.self, transformer: transformer, reverse: reverse)
-    options = [true, false]
+    super.init(name, value: value, options: [true, false], cellClass: FormCell.self)
     accessibilityLabel = name
-    representationTransformer = { return $0 as Representation }
-    didSelect = { self.internalValue = true }
   }
 
-  override func didSetValue(#oldValue: Type?, newValue: Type?) {
-    error = FormUtilities.validateValue(newValue, validator: validator)
+  // MARK: - FormElementProtocol
+
+  public override func didSelect() {
+    internalValue = true
+  }
+
+  // MARK: - FormDataProtocol
+
+  // MARK: Options
+
+  public override func didSetValue(#oldValue: Type?, newValue: Type?) {
+    super.didSetValue(oldValue: oldValue, newValue: newValue)
     if error == nil {
       if let theValue = newValue as? Bool {
         if theValue == true {
@@ -33,4 +37,19 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
       }
     }
   }
+
+  // MARK: Value transformers
+
+  public override func typeToInternal(value: Type?) -> Internal? {
+    return value as? Internal
+  }
+
+  public override func internalToType(internalValue: Internal?) -> Type? {
+    return internalValue as? Type
+  }
+
+  public override func typeToRepresentation(value: Type?) -> Representation? {
+    return value as? Representation
+  }
+
 }

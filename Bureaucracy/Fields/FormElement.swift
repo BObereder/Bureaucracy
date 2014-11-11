@@ -12,19 +12,31 @@ public func ==(lhs: FormElement, rhs: FormElement) -> Bool {
   return lhs === rhs
 }
 
-public class FormElement: Equatable {
+public class FormElement: FormElementProtocol {
 
   public init(_ name: String, cellClass: AnyClass) {
     self.cellClass = cellClass
     self.name = name
     self.accessibilityLabel = "FormElement"
   }
+
+  // MARK: - Section relationship
+
+  public weak var section: FormSection?
+
+  public var fieldIndex: Int {
+    return find(section!, self)!
+  }
+
+  // MARK: - Titles
   
   public var name: String
   public var localizedTitle: String?
+  public var accessibilityLabel: String?
+
+  // MARK: - Interface
+
   public var cellClass: AnyClass
-  public weak var section: FormSection?
-  public var accessibilityLabel: String
 
   public func registerReusableView(tableView: UITableView) {
     tableView.registerClass(cellClass, forCellReuseIdentifier: cellClass.description())
@@ -36,26 +48,26 @@ public class FormElement: Equatable {
     return cell
   }
   
-  public func update(cell: FormCell) {
+  public func configureCell(cell: FormCell) {
     cell.textLabel.text = localizedTitle ?? name
     cell.accessibilityLabel = accessibilityLabel
   }
 
-  public func serialize() -> (String, Any?) {
-    return (name, nil)
-  }
-
-  public var index: Int {
-    return find(section!, self)!
-  }
-
-  public var didSelect: () -> () = {
-    println("selected")
-  }
+  // MARK: - Callbacks
 
   // FIXME: Workaround for UIKit not supporting Generics, should be moved into FormField and accept Internal type
   public func didChangeInternalValue(cell: FormCell) {
     // noop
   }
-  
+
+  public func didSelect() {
+    // noop
+  }
+
+  // MARK: - Serialization
+
+  public func serialize() -> (String, Any?) {
+    return (name, nil)
+  }
+
 }

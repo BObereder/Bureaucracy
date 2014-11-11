@@ -13,7 +13,7 @@ public class FormCell: UITableViewCell {
 
   public var formElement: FormElement? {
     didSet {
-      formElement?.update(self)
+      formElement?.configureCell(self)
     }
   }
   

@@ -15,9 +15,9 @@ public class ForwardingElement: FormElement {
     self.accessibilityLabel = "ForwardingElement"
   }
   
-  public override func update(cell: FormCell) {
+  public override func configureCell(cell: FormCell) {
     cell.accessoryType = .DisclosureIndicator
-    super.update(cell)
+    super.configureCell(cell)
   }
   
 }
