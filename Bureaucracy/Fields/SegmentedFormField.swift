@@ -9,7 +9,7 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: protocol<Equatable, Printable>, Internal, Representation>: FormField<Type, Internal, Representation> {
+public class SegmentedFormField<Type: protocol<Equatable, Printable>>: FormField<Type, Int, String> {
 
   public init(_ name: String, value: Type, options: [Type]) {
     super.init(name, value: value, options: options, cellClass: SegmentedFormCell.self)
@@ -27,18 +27,18 @@ public class SegmentedFormField<Type: protocol<Equatable, Printable>, Internal, 
   }
 
   public override func configureCell(cell: FormCell) {
-    if let realCell = cell as? SegmentedFormCell {
-      realCell.segmentedControl.accessibilityLabel = "SegmentedControl"
-      realCell.segmentedControl.removeAllSegments()
+    if let segmentedCell = cell as? SegmentedFormCell {
+      segmentedCell.segmentedControl.accessibilityLabel = "SegmentedControl"
+      segmentedCell.segmentedControl.removeAllSegments()
 
       for i in 0..<optionCount {
-        if let title = typeToRepresentation(option(i)) as? String {
-          realCell.segmentedControl.insertSegmentWithTitle(title, atIndex: realCell.segmentedControl.numberOfSegments, animated: false)
+        if let title = typeToRepresentation(option(i)) {
+          segmentedCell.segmentedControl.insertSegmentWithTitle(title, atIndex: segmentedCell.segmentedControl.numberOfSegments, animated: false)
         }
       }
 
       if let index = internalValue {
-        realCell.segmentedControl.selectedSegmentIndex = index as Int
+        segmentedCell.segmentedControl.selectedSegmentIndex = index
       }
     }
   }
@@ -47,35 +47,46 @@ public class SegmentedFormField<Type: protocol<Equatable, Printable>, Internal, 
 
   public override func didChangeInternalValue(cell: FormCell) {
     if let field = cell.formElement as? SegmentedFormField {
-      field.internalValue = (cell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex as? Internal
+      field.internalValue = (cell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex
     }
     super.didChangeInternalValue(cell)
   }
 
   // MARK: - FormDataProtocol
 
+  // MARK: Values
+
+  public override var internalValue: Int? {
+    get {
+      return typeToInternal(currentValue)
+    }
+    set(newOption) {
+      currentValue = internalToType(newOption)
+    }
+  }
+
   // MARK: Value transformers
 
-  public override func typeToInternal(value: Type?) -> Internal? {
+  public override func typeToInternal(value: Type?) -> Int? {
     if value == nil {
       return nil
     }
     else {
-      return optionIndex(value!) as? Internal
+      return optionIndex(value!)
     }
   }
 
-  public override func internalToType(internalValue: Internal?) -> Type? {
+  public override func internalToType(internalValue: Int?) -> Type? {
     if internalValue == nil {
       return nil
     }
     else {
-      return option(internalValue! as Int)
+      return option(internalValue!)
     }
   }
 
-  public override func typeToRepresentation(value: Type?) -> Representation? {
-    return value?.description as? Representation
+  public override func typeToRepresentation(value: Type?) -> String? {
+    return value?.description
   }
 
 }
