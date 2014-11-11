@@ -23,9 +23,9 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   func register(tableView: UITableView) {
     self.tableView = tableView
 
-    SwiftHelpers.each(form) { (var section) in
-      SwiftHelpers.each(section) { (var item) in
-        item.registerReusableView(tableView)
+    for section in form {
+      for field in section {
+        field.registerReusableView(tableView)
       }
     }
   }

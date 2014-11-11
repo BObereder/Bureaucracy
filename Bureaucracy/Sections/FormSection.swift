@@ -13,56 +13,83 @@ public func ==(lhs: FormSection, rhs: FormSection) -> Bool {
   return lhs === rhs
 }
 
-public class FormSection: SequenceType, Equatable {
+public class FormSection: Equatable, CollectionType {
 
   public init(_ name: String) {
     self.name = name
   }
 
-  public var name: String
-  public var localizedTitle: String?
+  // MARK: - Form relationship
+
   public var form: Form?
-
-  var items: [FormElement] = []
-
-  public func item(index: Int) -> FormElement {
-    return items[index]
-  }
-
-  public var count: Int {
-    return items.count
-  }
 
   public var index: Int {
     return find(form!.sections, self)!
   }
 
-  public func append(item: FormElement) -> FormElement {
-    item.section = self
-    items.append(item)
-    return item
+  // MARK: - Titles
+
+  public var name: String
+  public var localizedTitle: String?
+
+  // MARK: - Fields
+
+  private var fields: [FormElement] = []
+
+  public func append(field: FormElement) -> FormElement {
+    field.section = self
+    fields.append(field)
+    return field
   }
+
+  public func removeAll() {
+    fields.removeAll(keepCapacity: false)
+  }
+
+  public var count: Int {
+    return fields.count
+  }
+
+  // MARK: - CollectionType
+
+  public subscript(position: Int) -> FormElement {
+    return fields[position]
+  }
+
+  public final var startIndex: Int {
+    return 0
+  }
+
+  public final var endIndex: Int {
+    return fields.count
+  }
+
+  // MARK: - Serialization
 
   public func serialize() -> [String: Any?] {
-    return items
-      .map { (var el) -> (String, Any?) in
-        el.serialize()
-      }
-      .reduce([:]) { (var dict, tuple) -> [String: Any?] in
-        var (key, value) = tuple
-        dict[key] = value
-        return dict
-      }
+    var dict = [String: Any?]()
+
+    for x in self {
+      let (key, value) = x.serialize()
+      dict[key] = value
+    }
+
+    return dict
   }
 
-  public func didUpdate(#item: FormElement?) {
-    form?.didUpdate(section: self, item: item)
+  // MARK: - Callbacks
+
+  public func didUpdate(#field: FormElement?) {
+    form?.didUpdate(section: self, field: field)
   }
 
   // MARK: - SequenceType
 
-  public func generate() -> GenericGenerator<FormElement> {
-    return GenericGenerator(items: self.items)
+  public func generate() -> GeneratorOf<FormElement> {
+    var i = 0
+    return GeneratorOf<FormElement> {
+      return i == self.count ? .None : self[i++]
+    }
   }
 
 }

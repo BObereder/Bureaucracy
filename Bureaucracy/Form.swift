@@ -9,7 +9,7 @@
 import Foundation
 import SwiftHelpers
 
-public class Form: SequenceType {
+public class Form: CollectionType {
 
   public init() {}
 
@@ -18,9 +18,25 @@ public class Form: SequenceType {
 
   public var title: String? {
     didSet {
-      delegate?.didUpdateForm(self, section: nil, item: nil)
+      delegate?.didUpdateForm(self, section: nil, field: nil)
     }
   }
+
+  // MARK: CollectionType
+
+  public subscript(position: Int) -> FormSection {
+    return sections[position]
+  }
+
+  public var startIndex: Int {
+    return 0
+  }
+
+  public var endIndex: Int {
+    return sections.count
+  }
+
+  // MARK: -
 
   public var sections: [FormSection] = []
 
@@ -33,7 +49,7 @@ public class Form: SequenceType {
   }
 
   public func item(#indexPath: NSIndexPath) -> FormElement {
-    return sections[indexPath.section].item(indexPath.item)
+    return sections[indexPath.section][indexPath.item]
   }
 
   public func addSection(name: String) -> FormSection {
@@ -43,12 +59,12 @@ public class Form: SequenceType {
   public func addSection(section: FormSection) -> FormSection {
     section.form = self
     sections += [section]
-    delegate?.didUpdateForm(self, section: section, item: nil)
+    delegate?.didUpdateForm(self, section: section, field: nil)
     return section
   }
 
-  public func didUpdate(#section: FormSection?, item: FormElement?) {
-    delegate?.didUpdateForm(self, section: section, item: nil)
+  public func didUpdate(#section: FormSection?, field: FormElement?) {
+    delegate?.didUpdateForm(self, section: section, field: nil)
   }
 
   public func serialize() -> [[String: Any?]] {
@@ -68,5 +84,5 @@ public class Form: SequenceType {
 }
 
 public protocol FormDelegate: class {
-  func didUpdateForm(form: Form, section: FormSection?, item: FormElement?)
+  func didUpdateForm(form: Form, section: FormSection?, field: FormElement?)
 }

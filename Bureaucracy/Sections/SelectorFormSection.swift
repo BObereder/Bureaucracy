@@ -8,35 +8,44 @@
 
 import UIKit
 
-public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSection, FormDataProtocol {
+public func ==<Type>(lhs: SelectorFormSection<Type>, rhs: SelectorFormSection<Type>) -> Bool {
+  return lhs === rhs
+}
+
+public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSection, FormDataSectionProtocol {
 
   public typealias Internal = Int
   public typealias Representation = String
 
-  public init(_ name: String, value: Type, options: [Type]) {
-    valueTransformer = { return find(options, $0)! }
-    reverseValueTransformer = { return options[$0] }
-
-    super.init(name)
-
+  public init(_ name: String, value: Type?, options: [Type]) {
     self.options = options
     self.value = value
-    internalValue = valueTransformer(value)
+    super.init(name)
+  }
 
-    representationTransformer = { (var x) -> Representation in
-      return "\(x)"
+  // MARK: - Fields
+
+  public override var count: Int {
+    return options.count
+  }
+
+  // MARK: - CollectionType
+
+  public override subscript(position: Int) -> FormElement {
+    if (position == endIndex) {
+      let object = option(position)
+      let element = append(SelectorGroupFormField("\(name).\(position)", value: object == value))
+      element.localizedTitle = typeToRepresentation(object)
+      return element
     }
-
-    for i in 0..<options.count {
-      var x = options[i]
-      let field = append(SelectorGroupFormField("\(name).\(i)", value: x == value))
-      field.localizedTitle = representationTransformer?(x)
+    else {
+      return super[position]
     }
   }
   
-  // MARK: FormDataProtocol
+  // MARK: - Options
 
-  var options: [Type] = []
+  private var options: [Type]
 
   func option(index: Int) -> Type {
     return options[index]
@@ -46,11 +55,23 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     return options.count
   }
 
-  public var value: Type? {
+  // MARK: - Values
+
+  public final var value: Type? {
     didSet {
-      if previousValue != value {
-        didSetValue(oldValue: oldValue, newValue: value)
-      }
+      didSetValue(oldValue: oldValue, newValue: value)
+    }
+  }
+
+  func didSetValue(#oldValue: Type?, newValue: Type?) {
+    if previousValue == newValue {
+      return
+    }
+
+    error = validate(newValue)
+    if error != nil {
+      previousValue = oldValue
+      value = oldValue
     }
   }
 
@@ -58,50 +79,69 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   var internalValue: Internal? {
     get {
-      return FormUtilities.convertValue(value, transformer: valueTransformer)
+      return typeToInternal(value)
     }
-    set {
-      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
-    }
-  }
-
-  var valueTransformer: Type -> Internal
-  var reverseValueTransformer: Internal -> Type
-
-  func didSetValue(#oldValue: Type?, newValue: Type?) {
-    error = FormUtilities.validateValue(newValue, validator: validator)
-    if error != nil {
-      previousValue = oldValue
-      value = oldValue
+    set(newOption) {
+      value = internalToType(newOption)
     }
   }
 
-  func representation(index: Int) -> Representation? {
-    return representationTransformer?(option(index))
+  // MARK: - Value transformers
+
+  public func typeToInternal(value: Type?) -> Internal? {
+    if value == nil {
+      return nil
+    }
+    else {
+      return find(options, value!)
+    }
   }
 
-  public var representationTransformer: ((Type) -> (Representation))?
+  public func internalToType(internalValue: Internal?) -> Type? {
+    if internalValue == nil {
+      return nil
+    }
+    else {
+      return options[internalValue!]
+    }
+  }
 
-  public var validator: ((Type) -> (NSError?))?
+  public func typeToRepresentation(value: Type?) -> Representation? {
+    if value == nil {
+      return nil
+    }
+    else {
+      return value!.description
+    }
+  }
+
+  // MARK: - Validation
+
+  func validate(value: Type?) -> NSError? {
+    return nil
+  }
+
   public var error: NSError?
+
+  // MARK: - Serialization
 
   public override func serialize() -> [String: Any?] {
     return [name: value]
   }
 
-  // MARK: FormSection
+  // MARK: - Callbacks
 
-  public override func didUpdate(#item: FormElement?) {
-    for aItem in items {
-      if item === aItem {
-        internalValue = item?.index
+  public override func didUpdate(#field: FormElement?) {
+    for x in self {
+      if field == x {
+        internalValue = field?.index
       }
-      else if let theItem = aItem as? SelectorGroupFormField {
-        theItem.value = false
+      else {
+        (x as? SelectorGroupFormField)?.value = false
       }
     }
 
-    form?.didUpdate(section: self, item: item)
+    form?.didUpdate(section: self, field: field)
   }
 
 }

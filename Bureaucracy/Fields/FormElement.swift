@@ -46,7 +46,7 @@ public class FormElement: Equatable {
   }
 
   public var index: Int {
-    return find(section!.items, self)!
+    return find(section!, self)!
   }
 
   public var didSelect: () -> () = {

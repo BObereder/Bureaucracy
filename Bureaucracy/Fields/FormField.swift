@@ -46,7 +46,7 @@ public class FormField<Type: Equatable, Internal, Representation>: FormElement, 
   func didSetValue(#oldValue: Type?, newValue: Type?) {
     error = FormUtilities.validateValue(newValue, validator: validator)
     if error == nil {
-      section?.didUpdate(item: self)
+      section?.didUpdate(field: self)
     }
     else {
       previousValue = oldValue

@@ -6,23 +6,52 @@
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
-import Foundation
-import UIKit
-import SwiftHelpers
 import CoreData
+import Foundation
+import SwiftHelpers
+import UIKit
 
-public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormDataProtocol, NSFetchedResultsControllerDelegate {
+public func ==<Type: NSManagedObject>(lhs: CoreDataSelectorFormSection<Type>, rhs: CoreDataSelectorFormSection<Type>) -> Bool {
+  return lhs === rhs
+}
+
+public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, FormDataSectionProtocol, NSFetchedResultsControllerDelegate {
 
   public typealias Internal = Int
   public typealias Representation = String
 
-  public init(_ name: String, fetchRequest: NSFetchRequest, managedObjectContext: NSManagedObjectContext) {
+  public init(_ name: String, value: Type?, fetchRequest: NSFetchRequest, managedObjectContext: NSManagedObjectContext) {
     self.fetchRequest = fetchRequest
     self.managedObjectContext = managedObjectContext
     super.init(name)
   }
 
-  // MARK: FormDataProtocol
+  // MARK: - Fields
+
+  public override var count: Int {
+    if let section = fetchedResultsController.sections?[0] as? NSFetchedResultsSectionInfo {
+      return section.numberOfObjects
+    }
+    else {
+      return 0
+    }
+  }
+
+  // MARK: - CollectionType
+
+  public override subscript(position: Int) -> FormElement {
+    if (position == endIndex) {
+      let object = option(position)
+      let element = append(SelectorGroupFormField("\(name).\(position)", value: object == value))
+      element.localizedTitle = typeToRepresentation(object)
+      return element
+    }
+    else {
+      return super[position]
+    }
+  }
+
+  // MARK: - Options
 
   func option(index: Int) -> Type {
     let indexPath = NSIndexPath(forItem: index, inSection: 0)
@@ -33,14 +62,28 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
     if let section: NSFetchedResultsSectionInfo = fetchedResultsController.sections?.first as? NSFetchedResultsSectionInfo {
       return section.numberOfObjects
     }
-    return 0
+    else {
+      return 0
+    }
   }
 
-  public var value: Type? {
+  // MARK: - Values
+
+  public final var value: Type? {
     didSet {
-      if previousValue === value {
-        didSetValue(oldValue: oldValue, newValue: value)
-      }
+      didSetValue(oldValue: oldValue, newValue: value)
+    }
+  }
+
+  func didSetValue(#oldValue: Type?, newValue: Type?) {
+    if previousValue == newValue {
+      return
+    }
+
+    error = validate(newValue)
+    if error != nil {
+      previousValue = oldValue
+      value = oldValue
     }
   }
 
@@ -48,60 +91,67 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
 
   var internalValue: Internal? {
     get {
-      return FormUtilities.convertValue(value, transformer: valueTransformer)
+      return typeToInternal(value)
     }
-    set {
-      (value, error) = FormUtilities.convertInternalValue(newValue, transformer: reverseValueTransformer, validator: validator)
-    }
-  }
-
-  lazy var valueTransformer: Type -> Internal = {
-    return self.fetchedResultsController.indexPathForObject($0)!.item
-  }
-
-  lazy var reverseValueTransformer: Internal -> Type = {
-    return self.fetchedResultsController.objectAtIndexPath(NSIndexPath(forItem: $0, inSection: 0)) as Type
-  }
-
-  func didSetValue(#oldValue: Type?, newValue: Type?) {
-    error = FormUtilities.validateValue(newValue, validator: validator)
-    if error != nil {
-      previousValue = oldValue
-      value = oldValue
+    set(newOption) {
+      value = internalToType(newOption)
     }
   }
 
-  func representation(index: Int) -> Representation? {
-    return representationTransformer?(option(index))
+  // MARK: - Value transformers
+
+  public func typeToInternal(value: Type?) -> Internal? {
+    if value == nil {
+      return nil
+    }
+    else {
+      return self.fetchedResultsController.indexPathForObject(value!)!.item
+    }
   }
 
-  public var representationTransformer: (Type -> Representation)?
-  public var validator: (Type -> NSError?)?
+  public func internalToType(internalValue: Internal?) -> Type? {
+    if internalValue == nil {
+      return nil
+    }
+    else {
+      return self.fetchedResultsController.objectAtIndexPath(NSIndexPath(forItem: internalValue!, inSection: 0)) as? Type
+    }
+  }
+
+  public func typeToRepresentation(value: Type?) -> Representation? {
+    return value?.description
+  }
+
+  // MARK: - Validators
+
+  public func validate(value: Type?) -> NSError? {
+    return nil
+  }
+
   public var error: NSError?
 
-  // MARK: FormSection
-
-  public override func item(index: Int) -> FormElement {
-    if (index == items.count) {
-      let object: Type = option(index)
-      let element = SelectorGroupFormField("\(name).\(index)", value: value == nil ? false : object === value!)
-      let field = append(element)
-      field.localizedTitle = representationTransformer?(object)
-      return field
-    }
-
-    return items[index]
-  }
-
-  public override var count: Int {
-    return optionCount
-  }
+  // MARK: - Serialization
 
   public override func serialize() -> [String: Any?] {
     return [name: value]
   }
 
-  // MARK: CoreData
+  // MARK: - Callbacks
+
+  public override func didUpdate(#field: FormElement?) {
+    for x in self {
+      if field == x {
+        internalValue = field?.index
+      }
+      else {
+        (x as? SelectorGroupFormField)?.value = false
+      }
+    }
+
+    form?.didUpdate(section: self, field: field)
+  }
+
+  // MARK: - CoreData
 
   var fetchRequest: NSFetchRequest
 
@@ -110,33 +160,13 @@ public class CoreDataSelectorFormSection<Type: AnyObject>: FormSection, FormData
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let controller = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: self.name)
     controller.delegate = self
-
-    var error: NSError?
-    if !controller.performFetch(&error) {
-      println("\(error?.localizedDescription)")
-    }
-
+    controller.performFetch(&self.error)
     return controller
   }()
 
   public func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    items.removeAll(keepCapacity: false)
+    self.removeAll()
     form?.reloadInterface()
-  }
-
-  // MARK: FormSection
-
-  public override func didUpdate(#item: FormElement?) {
-    for aItem in items {
-      if item === aItem {
-        internalValue = item?.index
-      }
-      else if let theItem = aItem as? SelectorGroupFormField {
-        theItem.value = false
-      }
-    }
-
-    form?.didUpdate(section: self, item: item)
   }
 
 }
