@@ -57,7 +57,7 @@ public class FormElement: FormElementProtocol {
 
   // FIXME: Workaround for UIKit not supporting Generics, should be moved into FormField and accept Internal type
   public func didChangeInternalValue(cell: FormCell) {
-    // noop
+    section?.didUpdate(field: self)
   }
 
   public func didSelect() {
