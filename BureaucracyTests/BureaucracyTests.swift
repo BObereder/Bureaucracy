@@ -282,7 +282,7 @@ class BureaucracyTests: XCTestCase {
     // SegmentedCell
     let segmentedCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 1, inSection: 0)) as SegmentedFormCell
     let segmentedControl = segmentedCell.segmentedControl
-    XCTAssertEqual(segmentedControl!.accessibilityLabel!, "SegmentedFormField", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
+    XCTAssertEqual(segmentedControl!.accessibilityLabel!, "SegmentedControl", "SegmentedControll of SegmentedFormCell is expected to have the standard accessibilityLabel")
     
     // SelectorGroupFormField
     let selectorGroupFormFieldCell = tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 1))
