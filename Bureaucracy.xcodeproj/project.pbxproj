@@ -8,8 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		7808CDDE19FEA1C600A83C6C /* ForwardingCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */; };
-		782ED0711A135E5300C758AC /* SegmentedFormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782ED0701A135E5300C758AC /* SegmentedFormFieldTests.swift */; };
-		782ED0751A135F1000C758AC /* ForwardingElementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 782ED0741A135F1000C758AC /* ForwardingElementTests.swift */; };
 		7884543D1A01141E004507BD /* ForwardingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884543C1A01141E004507BD /* ForwardingElement.swift */; };
 		78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
@@ -25,11 +23,10 @@
 		FAC10D3A1A092B95005C7252 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC10D381A092B95005C7252 /* FormSection.swift */; };
 		FAC10D3B1A092B95005C7252 /* SelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC10D391A092B95005C7252 /* SelectorFormSection.swift */; };
 		FAC20AFB19F7E56A00F7CB28 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC20AFA19F7E56A00F7CB28 /* FormField.swift */; };
-		FACB24F11A135D3100B2FC4F /* FormElementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB24F01A135D3100B2FC4F /* FormElementTests.swift */; };
+		FACB25351A136D3C00B2FC4F /* FormElementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB24F71A1361A900B2FC4F /* FormElementTests.swift */; };
 		FAD4062019F69B50003ABE75 /* FormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4061F19F69B50003ABE75 /* FormElement.swift */; };
 		FAE0651519F5322E00279C6E /* Bureaucracy.h in Headers */ = {isa = PBXBuildFile; fileRef = FAE0651419F5322E00279C6E /* Bureaucracy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0650F19F5322E00279C6E /* Bureaucracy.framework */; };
-		FAE0652219F5322E00279C6E /* BureaucracyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0652119F5322E00279C6E /* BureaucracyTests.swift */; };
 		FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0652B19F5327C00279C6E /* FormDataSource.swift */; };
 		FAE0653919F53BEE00279C6E /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0653319F53B8900279C6E /* SwiftHelpers.framework */; };
 /* End PBXBuildFile section */
@@ -77,7 +74,7 @@
 		FAC10D381A092B95005C7252 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		FAC10D391A092B95005C7252 /* SelectorFormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorFormSection.swift; sourceTree = "<group>"; };
 		FAC20AFA19F7E56A00F7CB28 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
-		FACB24F01A135D3100B2FC4F /* FormElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormElementTests.swift; sourceTree = "<group>"; };
+		FACB24F71A1361A900B2FC4F /* FormElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormElementTests.swift; sourceTree = "<group>"; };
 		FAD4061F19F69B50003ABE75 /* FormElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormElement.swift; sourceTree = "<group>"; };
 		FAE0650F19F5322E00279C6E /* Bureaucracy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bureaucracy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE0651319F5322E00279C6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -191,9 +188,10 @@
 			isa = PBXGroup;
 			children = (
 				FAE0652119F5322E00279C6E /* BureaucracyTests.swift */,
-				FAE0651F19F5322E00279C6E /* Supporting Files */,
+				FACB24F71A1361A900B2FC4F /* FormElementTests.swift */,
 				782ED0701A135E5300C758AC /* SegmentedFormFieldTests.swift */,
 				782ED0741A135F1000C758AC /* ForwardingElementTests.swift */,
+				FAE0651F19F5322E00279C6E /* Supporting Files */,
 			);
 			path = BureaucracyTests;
 			sourceTree = "<group>";
@@ -378,10 +376,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FACB24F11A135D3100B2FC4F /* FormElementTests.swift in Sources */,
-				FAE0652219F5322E00279C6E /* BureaucracyTests.swift in Sources */,
-				782ED0711A135E5300C758AC /* SegmentedFormFieldTests.swift in Sources */,
-				782ED0751A135F1000C758AC /* ForwardingElementTests.swift in Sources */,
+				FACB25351A136D3C00B2FC4F /* FormElementTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
