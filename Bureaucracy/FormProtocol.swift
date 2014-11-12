@@ -15,7 +15,7 @@ public protocol FormElementProtocol: Equatable {
   // MARK: Section relationship
 
   weak var section: FormSection? { get set }
-  var fieldIndex: Int { get }
+  var fieldIndex: Int? { get }
 
   // MARK: Titles
 
@@ -48,7 +48,7 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   // MARK: Form relationship
 
   weak var form: Form? { get set }
-  var sectionIndex: Int { get }
+  var sectionIndex: Int? { get }
 
   // MARK: Titles
 

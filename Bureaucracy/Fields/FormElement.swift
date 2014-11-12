@@ -24,8 +24,11 @@ public class FormElement: FormElementProtocol {
 
   public weak var section: FormSection?
 
-  public var fieldIndex: Int {
-    return find(section!, self)!
+  public var fieldIndex: Int? {
+    if let elements = section {
+      return find(elements, self)
+    }
+    return nil
   }
 
   // MARK: - Titles

@@ -23,8 +23,11 @@ public class FormSection: FormSectionProtocol {
 
   public weak var form: Form?
 
-  public var sectionIndex: Int {
-    return find(form!.sections, self)!
+  public var sectionIndex: Int? {
+    if let sections = form?.sections {
+      return find(sections, self)
+    }
+    return nil
   }
 
   // MARK: - Titles
