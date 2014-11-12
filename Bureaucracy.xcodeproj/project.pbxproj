@@ -23,6 +23,7 @@
 		FAC10D3A1A092B95005C7252 /* FormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC10D381A092B95005C7252 /* FormSection.swift */; };
 		FAC10D3B1A092B95005C7252 /* SelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC10D391A092B95005C7252 /* SelectorFormSection.swift */; };
 		FAC20AFB19F7E56A00F7CB28 /* FormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAC20AFA19F7E56A00F7CB28 /* FormField.swift */; };
+		FACB24F11A135D3100B2FC4F /* FormElementTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FACB24F01A135D3100B2FC4F /* FormElementTests.swift */; };
 		FAD4062019F69B50003ABE75 /* FormElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAD4061F19F69B50003ABE75 /* FormElement.swift */; };
 		FAE0651519F5322E00279C6E /* Bureaucracy.h in Headers */ = {isa = PBXBuildFile; fileRef = FAE0651419F5322E00279C6E /* Bureaucracy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0650F19F5322E00279C6E /* Bureaucracy.framework */; };
@@ -72,6 +73,7 @@
 		FAC10D381A092B95005C7252 /* FormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSection.swift; sourceTree = "<group>"; };
 		FAC10D391A092B95005C7252 /* SelectorFormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorFormSection.swift; sourceTree = "<group>"; };
 		FAC20AFA19F7E56A00F7CB28 /* FormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormField.swift; sourceTree = "<group>"; };
+		FACB24F01A135D3100B2FC4F /* FormElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormElementTests.swift; sourceTree = "<group>"; };
 		FAD4061F19F69B50003ABE75 /* FormElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormElement.swift; sourceTree = "<group>"; };
 		FAE0650F19F5322E00279C6E /* Bureaucracy.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Bureaucracy.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE0651319F5322E00279C6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -186,6 +188,7 @@
 			children = (
 				FAE0652119F5322E00279C6E /* BureaucracyTests.swift */,
 				FAE0651F19F5322E00279C6E /* Supporting Files */,
+				FACB24F01A135D3100B2FC4F /* FormElementTests.swift */,
 			);
 			path = BureaucracyTests;
 			sourceTree = "<group>";
@@ -370,6 +373,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FACB24F11A135D3100B2FC4F /* FormElementTests.swift in Sources */,
 				FAE0652219F5322E00279C6E /* BureaucracyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
