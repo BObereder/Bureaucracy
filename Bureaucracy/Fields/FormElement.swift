@@ -53,7 +53,7 @@ public class FormElement: FormElementProtocol {
 
   public func configureCell(cell: FormCell) {
     cell.textLabel.text = localizedTitle ?? name
-    cell.accessibilityLabel = accessibilityLabel
+    cell.accessibilityLabel = "\(accessibilityLabel).cell"
   }
 
   // MARK: - Callbacks
