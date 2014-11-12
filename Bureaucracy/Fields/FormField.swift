@@ -59,6 +59,7 @@ public class FormField<Type: Equatable, Internal, Representation>: FormElement, 
     if error != nil {
       previousValue = oldValue
       currentValue = oldValue
+      section?.didUpdate(field: self)
     }
   }
   

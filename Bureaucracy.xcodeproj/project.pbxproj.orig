@@ -192,8 +192,12 @@
 			children = (
 				FAE0652119F5322E00279C6E /* BureaucracyTests.swift */,
 				FAE0651F19F5322E00279C6E /* Supporting Files */,
+<<<<<<< HEAD
+				FACB24F01A135D3100B2FC4F /* FormElementTests.swift */,
+=======
 				782ED0701A135E5300C758AC /* SegmentedFormFieldTests.swift */,
 				782ED0741A135F1000C758AC /* ForwardingElementTests.swift */,
+>>>>>>> FETCH_HEAD
 			);
 			path = BureaucracyTests;
 			sourceTree = "<group>";
