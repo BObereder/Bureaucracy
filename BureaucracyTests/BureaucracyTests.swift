@@ -14,7 +14,7 @@ class FormTestDelegate: FormDelegate {
   
   var calledDidUpdateForm: Bool = false
   
-  func didUpdateForm(form: Form, section: FormSection?, item: FormElement?) {
+  func didUpdateForm(form: Form, section: FormSection?, field: FormElement?) {
     calledDidUpdateForm = true
   }
 }
@@ -110,12 +110,8 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    let allProductsField = testSection.append(ForwardingElement("Test Element"))
-    
-    allProductsField.didSelect = {
-      allProductsField.formSection!.form!.delegate!.didUpdateForm(allProductsField.formSection!.form!, section: testSection, item: allProductsField)
-    }
-    
+    let allProductsField = testSection.append(TestForwardingElement("Test Element"))
+
     // Test Form
     XCTAssertTrue(form?.item(indexPath: NSIndexPath(forRow: 0, inSection: 0)) === allProductsField, "Expected the field that was previously added to the form")
     XCTAssertEqual(form!.numberOfFieldsInSection(0), 1, "Section should have an element")
@@ -133,7 +129,7 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    let segmentedField = SegmentedFormField<TestCountry, Int, String>("SegmentedField", value: .Germany, values: [.Germany, .Austria])
+    let segmentedField = SegmentedFormField<TestCountry>("SegmentedField", value: .Germany, options: [.Germany, .Austria])
     testSection.append(segmentedField)
     
     // Test Form
@@ -161,7 +157,7 @@ class BureaucracyTests: XCTestCase {
     XCTAssertFalse((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Should be reset")
     
     // Test Field Validation
-    segmentedField.value = .Germany
+    segmentedField.currentValue = .Germany
     XCTAssertTrue((form!.delegate! as FormTestDelegate).calledDidUpdateForm, "Value change did not update the FormDelegate")
     XCTAssertNil(segmentedField.error, "There should not be an error after setting the value")
     
@@ -173,8 +169,8 @@ class BureaucracyTests: XCTestCase {
     
     // Add Section and ForwardingElement
     let testSection = form!.addSection("Test Section")
-    
-    let transformer: TestGender -> Int = { (var genderType) -> (Int) in
+    let segmentedField = SegmentedFormField<TestGender>("SegmentedField", value: .Female, options: [.Female, .Male])
+    segmentedField.ty = { (var genderType) -> (Int) in
       switch genderType {
       case .Female:
         return 0
@@ -196,7 +192,7 @@ class BureaucracyTests: XCTestCase {
       }
     }
     
-    let segmentedField = SegmentedFormField<TestGender, Int, String>("SegmentedField", value: .Female, values: [.Female, .Male], transformer: transformer, reverse: reverse)
+    
     segmentedField.validator = { (var genderType) -> NSError? in
       switch genderType {
       case .Female, .Male:
@@ -250,18 +246,18 @@ class BureaucracyTests: XCTestCase {
     XCTAssertTrue(segmentedField.error != nil, "There should be an error after setting an invalid value")
     
     // Test Field
-    XCTAssertEqual(segmentedField.representationValues!, ["Female", "Male"], "Representation is expected to return the values set in representationTransformer ")
+    XCTAssertEqual(segmentedField.description, ["Female", "Male"], "Representation is expected to return the values set in representationTransformer ")
   }
   
   func test05AccessibilityTest() {
     // Add Section and Elements
     let testSection = form!.addSection("Test Section")
     let testElement = testSection.append(ForwardingElement("Test Element"))
-    let segmentedField = SegmentedFormField<TestCountry, Int, String>("SegmentedField", value: .Germany, values: [.Germany, .Austria])
+    let segmentedField = SegmentedFormField<TestCountry>("SegmentedField", value: .Germany, options: [.Germany, .Austria])
     testSection.append(segmentedField)
     
     // All Products Section
-    var section = SelectorFormSection("allProducts", value: AllProducts.sharedInstance, values: [AllProducts.sharedInstance])
+    var section = SelectorFormSection("allProducts", value: AllProducts.sharedInstance, options: [AllProducts.sharedInstance])
     let allProductsSection = form!.addSection(section)
     
     // Setup FormViewController and DataSoure
