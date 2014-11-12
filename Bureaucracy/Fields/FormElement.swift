@@ -17,7 +17,7 @@ public class FormElement: FormElementProtocol {
   public init(_ name: String, cellClass: AnyClass) {
     self.cellClass = cellClass
     self.name = name
-    self.accessibilityLabel = "FormElement"
+    self.accessibilityLabel = name
   }
 
   // MARK: - Section relationship
@@ -47,7 +47,7 @@ public class FormElement: FormElementProtocol {
     cell.formElement = self
     return cell
   }
-  
+
   public func configureCell(cell: FormCell) {
     cell.textLabel.text = localizedTitle ?? name
     cell.accessibilityLabel = accessibilityLabel

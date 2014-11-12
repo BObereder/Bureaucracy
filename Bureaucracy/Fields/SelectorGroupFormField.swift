@@ -14,7 +14,6 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
 
   public init(_ name: String, value: Type) {
     super.init(name, value: value, options: [true, false], cellClass: FormCell.self)
-    accessibilityLabel = name
   }
 
   // MARK: - FormElementProtocol

@@ -13,7 +13,6 @@ public class SegmentedFormField<Type: protocol<Equatable, Printable>>: FormField
 
   public init(_ name: String, value: Type, options: [Type]) {
     super.init(name, value: value, options: options, cellClass: SegmentedFormCell.self)
-    accessibilityLabel = "SegmentedFormField"
   }
 
   // MARK: - FormElementProtocol
