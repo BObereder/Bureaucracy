@@ -39,7 +39,16 @@ class FormElementTests: XCTestCase {
     XCTAssertTrue(serialized.0 == "TestFormElement" && serialized.1 == nil, "Serialized element should be a tuple of name and nil")
   }
 
-  func test03elementRegistersDequeuesAndConfiguresCell() {
+  func test03compareElements() {
+    let element1 = FormElement("Element1", cellClass: FormCell.self)
+    let element2 = FormElement("Element1", cellClass: FormCell.self)
+    let element3 = element1
+
+    XCTAssertNotEqual(element1, element2, "Elements should not be equal")
+    XCTAssertEqual(element1, element3, "Elements should be equal")
+  }
+
+  func test04elementRegistersDequeuesAndConfiguresCell() {
     class CustomTableViewCell: FormCell { }
 
     class TableViewController: UITableViewController {
