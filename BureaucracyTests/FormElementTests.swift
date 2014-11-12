@@ -79,7 +79,7 @@ class FormElementTests: XCTestCase {
     window.hidden = false
 
     let cell = element.dequeueReusableView(viewController.tableView, forIndexPath: NSIndexPath(forRow: 0, inSection: 0))
-    XCTAssertTrue(cell is CustomTableViewCell, "Should be able do dequeue CustomTableViewCell")
+    XCTAssertTrue(cell is CustomTableViewCell, "Should be able do dequeue correct cell")
 
     element.configureCell(cell)
     XCTAssertNil(element.localizedTitle, "Localized title should initialize with nil")
