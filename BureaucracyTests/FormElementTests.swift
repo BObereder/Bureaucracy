@@ -12,33 +12,36 @@ import XCTest
 
 class FormElementTests: XCTestCase {
 
-  func test00elementHasSameNameAndAccessibilityLabel() {
-    let element = FormElement("TestFormElement", cellClass: UITableViewCell.self)
-    XCTAssertEqual(element.name, element.accessibilityLabel!, "Element's Name and AccessibilityLabel shoud be identical")
+  var element: FormElement?
+
+  override func setUp() {
+    super.setUp()
+    element = FormElement("TestFormElement", cellClass: FormCell.self)
   }
 
-  func test01danglingElementRaisesExceptionWhenGettingFieldIndex() {
-    let element = FormElement("TestFormElement", cellClass: UITableViewCell.self)
-    XCTAssertNil(element.section, "Section of dangling form element should be nil")
-    XCTAssertNil(element.fieldIndex, "Index of dangling form element should be nil")
+  func test00name() {
+    XCTAssertEqual(element!.name, element!.accessibilityLabel!, "Element's Name and AccessibilityLabel shoud be identical")
   }
 
-  func test02serializedElementIsATupleOfNameAndNil() {
-    let element = FormElement("TestFormElement", cellClass: UITableViewCell.self)
-    let serialized = element.serialize()
+  func test01danglingSectionAndIndex() {
+    XCTAssertNil(element!.section, "Section of dangling form element should be nil")
+    XCTAssertNil(element!.fieldIndex, "Index of dangling form element should be nil")
+  }
+
+  func test02serialize() {
+    let serialized = element!.serialize()
     XCTAssertTrue(serialized.0 == "TestFormElement" && serialized.1 == nil, "Serialized element should be a tuple of name and nil")
   }
 
-  func test03compareElements() {
+  func test03comparison() {
     let element1 = FormElement("Element1", cellClass: FormCell.self)
-    let element2 = FormElement("Element1", cellClass: FormCell.self)
-    let element3 = element1
+    let element2 = element!
 
-    XCTAssertNotEqual(element1, element2, "Elements should not be equal")
-    XCTAssertEqual(element1, element3, "Elements should be equal")
+    XCTAssertNotEqual(element!, element1, "Elements should not be equal")
+    XCTAssertEqual(element!, element2, "Elements should be equal")
   }
 
-  func test04elementRegistersDequeuesAndConfiguresCell() {
+  func test04workingWithCell() {
     class CustomTableViewCell: FormCell { }
 
     class TableViewController: UITableViewController {
