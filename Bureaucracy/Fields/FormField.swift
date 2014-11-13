@@ -58,10 +58,10 @@ public class FormField<Type: Equatable, Internal, Representation>: FormElement, 
     error = validate(newValue)
     if error != nil {
       currentValue = previousValue
-      section?.didUpdate(field: self)
     }
     else {
       previousValue = oldValue
+      section?.didUpdate(field: self)
     }
   }
   

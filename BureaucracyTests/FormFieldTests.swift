@@ -20,7 +20,7 @@ class FormFieldTests: FormElementTests {
     return options[0]
   }
 
-  var field: TestField {
+  var testField: TestField {
     return element as TestField
   }
 
@@ -35,24 +35,24 @@ class FormFieldTests: FormElementTests {
   }
 
   override func test02serialize() {
-    let serialized = field.serialize()
+    let serialized = testField.serialize()
     XCTAssertTrue(serialized.0 == "TestFormElement" && (serialized.1 as String) == "One", "Serialized element should be a tuple of name and current value, but it is \(serialized)")
   }
 
   override func test03comparison() {
     super.test03comparison()
     let field1 = TestField("Element1", value: defaultValue, options: options, cellClass: FormCell.self)
-    XCTAssertNotEqual(field, field1, "Elements should not be equal")
+    XCTAssertNotEqual(testField, field1, "Elements should not be equal")
   }
 
   func test05optionCount() {
-    XCTAssertEqual(field.optionCount, options.count, "Option count should equal to size of the options array")
+    XCTAssertEqual(testField.optionCount, options.count, "Option count should equal to size of the options array")
   }
 
   func test06directOptionAccess() {
     for i in 0..<options.count {
       let referenceOption = options[i]
-      let fieldOption = field.option(i)
+      let fieldOption = testField.option(i)
       XCTAssertEqual(fieldOption, referenceOption, "Option of field at index \(i) should be equal to \(referenceOption), but it is \(fieldOption)")
     }
   }
@@ -60,17 +60,35 @@ class FormFieldTests: FormElementTests {
   func test07reverseOptionAccess() {
     for x in options {
       let referenceIndex = find(options, x)!
-      let optionIndex = field.optionIndex(x)
+      let optionIndex = testField.optionIndex(x)
       XCTAssertEqual(optionIndex, referenceIndex, "Index of option \(x) should be equal to \(referenceIndex), but it is \(optionIndex)")
     }
   }
 
   func test08settingValue() {
-    XCTAssertEqual(field.currentValue!, defaultValue, "Initial field value should be equal to \(defaultValue), but it is \(field.currentValue)")
+    XCTAssertEqual(testField.currentValue!, defaultValue, "Initial field value should be equal to \(defaultValue), but it is \(testField.currentValue)")
 
-    field.currentValue = options[2]
-    XCTAssertEqual(field.currentValue!, options[2], "Updated field value should be equal to \(options[2]), but it is \(field.currentValue)")
-    XCTAssertEqual(field.previousValue!, defaultValue, "Previous field value should be equal to \(field.previousValue), but it is \(defaultValue)")
+    testField.currentValue = options[2]
+    XCTAssertEqual(testField.currentValue!, options[2], "Updated field value should be equal to \(options[2]), but it is \(testField.currentValue)")
+    XCTAssertEqual(testField.previousValue!, defaultValue, "Previous field value should be equal to \(testField.previousValue), but it is \(defaultValue)")
+    XCTAssertEqual(testField.internalValue!, testField.currentValue!, "Internal value should be equal to current value")
+  }
+
+  func test09fieldUpdates() {
+    class TestSection: FormSection {
+      var updated = false
+      var testField: FormElement?
+      override func didUpdate(#field: FormElement?) {
+        XCTAssertEqual(field!, testField!)
+        updated = true
+      }
+    }
+
+    let section = TestSection("TestSection")
+    section.testField = testField
+    section.append(testField)
+    testField.currentValue = options[2]
+    XCTAssertTrue(section.updated, "Field update should've triggered didUpdate method in section")
   }
 
 }
