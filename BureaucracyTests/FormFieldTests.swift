@@ -12,7 +12,7 @@ import XCTest
 
 class FormFieldTests: FormElementTests {
 
-  typealias TestField = FormField<String, String, String>
+  typealias TestField = FormField<String, String>
 
   let options = ["One", "Two", "Three"]
 
@@ -27,11 +27,6 @@ class FormFieldTests: FormElementTests {
   override func setUp() {
     super.setUp()
     element = TestField("TestFormElement", value: defaultValue, options: options, cellClass: FormCell.self)
-  }
-
-  override func tearDown() {
-    // Put teardown code here. This method is called after the invocation of each test method in the class.
-    super.tearDown()
   }
 
   override func test02serialize() {
@@ -68,13 +63,18 @@ class FormFieldTests: FormElementTests {
   func test08settingValue() {
     XCTAssertEqual(testField.currentValue!, defaultValue, "Initial field value should be equal to \(defaultValue), but it is \(testField.currentValue)")
 
-    testField.currentValue = options[2]
+    testField.currentValue = options[1]
+    XCTAssertEqual(testField.currentValue!, options[1], "Updated field value should be equal to \(options[1]), but it is \(testField.currentValue)")
+    XCTAssertEqual(testField.previousValue!, defaultValue, "Previous field value should be equal to \(defaultValue), but it is \(testField.previousValue)")
+    XCTAssertEqual(testField.internalValue!, testField.currentValue!, "Internal value should be equal to current value")
+
+    testField.internalValue = options[2]
     XCTAssertEqual(testField.currentValue!, options[2], "Updated field value should be equal to \(options[2]), but it is \(testField.currentValue)")
-    XCTAssertEqual(testField.previousValue!, defaultValue, "Previous field value should be equal to \(testField.previousValue), but it is \(defaultValue)")
+    XCTAssertEqual(testField.previousValue!, options[1], "Previous field value should be equal to \(options[1]), but it is \(testField.previousValue)")
     XCTAssertEqual(testField.internalValue!, testField.currentValue!, "Internal value should be equal to current value")
   }
 
-  func test09fieldUpdates() {
+  func test10fieldUpdates() { // TODO: Move to section tests
     class TestSection: FormSection {
       var updated = false
       var testField: FormElement?

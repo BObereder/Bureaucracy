@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class FormField<Type: Equatable, Internal, Representation>: FormElement, FormDataProtocol {
+public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol {
   
   public init(_ name: String, value: Type, options: [Type], cellClass: AnyClass) {
     self.options = options
@@ -93,15 +93,6 @@ public class FormField<Type: Equatable, Internal, Representation>: FormElement, 
     }
     else {
       return internalValue as? Type
-    }
-  }
-
-  public func typeToRepresentation(value: Type?) -> Representation? {
-    if value == nil {
-      return nil
-    }
-    else {
-      return value as? Representation
     }
   }
 

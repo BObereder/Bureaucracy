@@ -9,7 +9,7 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: protocol<Equatable, Printable>>: FormField<Type, Int, String> {
+public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepresentationProtocol {
 
   public init(_ name: String, value: Type, options: [Type]) {
     super.init(name, value: value, options: options, cellClass: SegmentedFormCell.self)
@@ -84,8 +84,8 @@ public class SegmentedFormField<Type: protocol<Equatable, Printable>>: FormField
     }
   }
 
-  public override func typeToRepresentation(value: Type?) -> String? {
-    return value?.description
+  public func typeToRepresentation(value: Type?) -> String? {
+    return "\(value)"
   }
 
 }

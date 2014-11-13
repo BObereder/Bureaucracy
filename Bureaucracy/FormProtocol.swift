@@ -6,7 +6,7 @@
 //  Copyright (c) 2014 Alexander Kolov. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 // MARK: - FormElementProtocol
 
@@ -41,6 +41,17 @@ public protocol FormElementProtocol: Equatable {
   
 }
 
+// MARK: - FormRepresentationProtocol
+
+public protocol FormRepresentationProtocol {
+
+  typealias Type
+  typealias Representation
+
+  func typeToInternal(value: Type?) -> Representation?
+
+}
+
 // MARK: - FormSectionProtocol
 
 public protocol FormSectionProtocol: Equatable, CollectionType {
@@ -70,7 +81,6 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
 public protocol FormDataProtocol {
 
   typealias Type
-  typealias Representation
   typealias Internal
 
   // MARK: Options
@@ -90,7 +100,6 @@ public protocol FormDataProtocol {
 
   func typeToInternal(value: Type?) -> Internal?
   func internalToType(internalValue: Internal?) -> Type?
-  func typeToRepresentation(value: Type?) -> Representation?
 
   // MARK: Validation
 

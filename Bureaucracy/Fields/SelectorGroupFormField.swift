@@ -10,7 +10,7 @@ import Foundation
 
 public typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bool>
 
-public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralConvertible>, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal, Representation> {
+public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralConvertible>, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal>, FormRepresentationProtocol {
 
   public init(_ name: String, value: Type) {
     super.init(name, value: value, options: [true, false], cellClass: FormCell.self)
@@ -47,7 +47,7 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
     return internalValue as? Type
   }
 
-  public override func typeToRepresentation(value: Type?) -> Representation? {
+  public func typeToRepresentation(value: Type?) -> Representation? {
     return value as? Representation
   }
 

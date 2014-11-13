@@ -11,6 +11,7 @@
 		7884543D1A01141E004507BD /* ForwardingElement.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7884543C1A01141E004507BD /* ForwardingElement.swift */; };
 		78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
+		FA02001A1A14FDA50062384B /* SegmentedFormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */; };
 		FA45562F1A0B82EA00960033 /* SelectorGroupFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */; };
 		FA4BF9FB1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */; };
 		FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */; };
@@ -58,11 +59,12 @@
 
 /* Begin PBXFileReference section */
 		7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingCell.swift; sourceTree = "<group>"; };
-		782ED0701A135E5300C758AC /* SegmentedFormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormFieldTests.swift; sourceTree = "<group>"; };
+		782ED0701A135E5300C758AC /* SegmentedFormFieldTests-old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegmentedFormFieldTests-old.swift"; sourceTree = "<group>"; };
 		782ED0741A135F1000C758AC /* ForwardingElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingElementTests.swift; sourceTree = "<group>"; };
 		7884543C1A01141E004507BD /* ForwardingElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingElement.swift; sourceTree = "<group>"; };
 		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
+		FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormFieldTests.swift; sourceTree = "<group>"; };
 		FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorGroupFormField.swift; sourceTree = "<group>"; };
 		FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataSelectorFormSection.swift; sourceTree = "<group>"; };
 		FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidationError.swift; sourceTree = "<group>"; };
@@ -191,8 +193,9 @@
 			children = (
 				FACB24F71A1361A900B2FC4F /* FormElementTests.swift */,
 				FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */,
+				FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */,
+				782ED0701A135E5300C758AC /* SegmentedFormFieldTests-old.swift */,
 				FAE0652119F5322E00279C6E /* BureaucracyTests.swift */,
-				782ED0701A135E5300C758AC /* SegmentedFormFieldTests.swift */,
 				782ED0741A135F1000C758AC /* ForwardingElementTests.swift */,
 				FAE0651F19F5322E00279C6E /* Supporting Files */,
 			);
@@ -380,6 +383,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FA66BFDF1A13AA4800A53201 /* FormFieldTests.swift in Sources */,
+				FA02001A1A14FDA50062384B /* SegmentedFormFieldTests.swift in Sources */,
 				FACB25351A136D3C00B2FC4F /* FormElementTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
