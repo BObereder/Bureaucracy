@@ -10,7 +10,7 @@ import UIKit
 
 public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol {
   
-  public init(_ name: String, value: Type, options: [Type], cellClass: AnyClass) {
+  public init(_ name: String, value: Type, options: [Type]) {
     self.options = options
     currentValue = value
     super.init(name)

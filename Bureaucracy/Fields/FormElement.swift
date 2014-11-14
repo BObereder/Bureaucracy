@@ -39,11 +39,11 @@ public class FormElement: FormElementProtocol {
   // MARK: - Interface
 
   public func registerReusableView(tableView: UITableView) {
-    tableView.registerClass(FormCell.self, forCellReuseIdentifier: FormCell.description())
+    tableView.registerClass(FormCell.self, forCellReuseIdentifier: name)
   }
 
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(FormCell.description(), forIndexPath: indexPath) as FormCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath) as FormCell
     cell.formElement = self
     return cell
   }

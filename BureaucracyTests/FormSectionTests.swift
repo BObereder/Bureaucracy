@@ -67,7 +67,13 @@ class FormSectionTests: XCTestCase {
     let empty = testSection!.serialize()
     XCTAssertEqual(empty.count, 0, "Serialized form of empty section should also be empty")
 
+    let element = FormElement("TestElement")
+    let field = FormField<String, String>("TestField", value: "zero", options: ["zero", "one", "two"])
+    let segmentedField = SegmentedFormField<String>("SegmentedTestField", value: "segment0", options: ["segment0", "segment1", "segment2"])
 
+    testSection!.append(element)
+    testSection!.append(field)
+    testSection!.append(segmentedField)
   }
 
   func test02comparison() {

@@ -13,7 +13,7 @@ public typealias SelectorGroupFormField = _SelectorGroupFormField<Bool, Bool, Bo
 public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralConvertible>, Internal: BooleanLiteralConvertible, Representation>: FormField<Type, Internal>, FormRepresentationProtocol {
 
   public init(_ name: String, value: Type) {
-    super.init(name, value: value, options: [true, false], cellClass: FormCell.self)
+    super.init(name, value: value, options: [true, false])
   }
 
   // MARK: - FormElementProtocol

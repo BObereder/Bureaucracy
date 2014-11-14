@@ -11,8 +11,8 @@ import SwiftHelpers
 
 public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepresentationProtocol {
 
-  public init(_ name: String, value: Type, options: [Type]) {
-    super.init(name, value: value, options: options, cellClass: SegmentedFormCell.self)
+  public override init(_ name: String, value: Type, options: [Type]) {
+    super.init(name, value: value, options: options)
   }
 
   // MARK: - FormElementProtocol
@@ -22,7 +22,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
   public override func registerReusableView(tableView: UITableView) {
     let bundle = NSBundle(forClass: FormCell.self)
     let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
-    tableView.registerNib(nib, forCellReuseIdentifier: FormCell.description())
+    tableView.registerNib(nib, forCellReuseIdentifier: SegmentedFormCell.self.description())
   }
 
   public override func configureCell(cell: FormCell) {

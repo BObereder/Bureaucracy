@@ -26,7 +26,7 @@ class FormFieldTests: FormElementTests {
 
   override func setUp() {
     super.setUp()
-    element = TestField("TestFormElement", value: defaultValue, options: options, cellClass: FormCell.self)
+    element = TestField("TestFormElement", value: defaultValue, options: options)
   }
 
   override func test01serialize() {
@@ -36,7 +36,7 @@ class FormFieldTests: FormElementTests {
 
   override func test02comparison() {
     super.test02comparison()
-    let field1 = TestField("Element1", value: defaultValue, options: options, cellClass: FormCell.self)
+    let field1 = TestField("Element1", value: defaultValue, options: options)
     XCTAssertNotEqual(testField, field1, "Elements should not be equal")
   }
 
