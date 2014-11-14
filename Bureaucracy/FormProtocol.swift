@@ -25,7 +25,6 @@ public protocol FormElementProtocol: Equatable {
 
   // MARK: Interface
 
-  var cellClass: AnyClass { get set }
   func registerReusableView(tableView: UITableView)
   func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell
   func configureCell(cell: FormCell)

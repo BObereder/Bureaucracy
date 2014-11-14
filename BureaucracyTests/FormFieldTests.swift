@@ -29,22 +29,22 @@ class FormFieldTests: FormElementTests {
     element = TestField("TestFormElement", value: defaultValue, options: options, cellClass: FormCell.self)
   }
 
-  override func test02serialize() {
+  override func test01serialize() {
     let serialized = testField.serialize()
     XCTAssertTrue(serialized.0 == "TestFormElement" && (serialized.1 as String) == "One", "Serialized element should be a tuple of name and current value, but it is \(serialized)")
   }
 
-  override func test03comparison() {
-    super.test03comparison()
+  override func test02comparison() {
+    super.test02comparison()
     let field1 = TestField("Element1", value: defaultValue, options: options, cellClass: FormCell.self)
     XCTAssertNotEqual(testField, field1, "Elements should not be equal")
   }
 
-  func test05optionCount() {
+  func test04optionCount() {
     XCTAssertEqual(testField.optionCount, options.count, "Option count should equal to size of the options array")
   }
 
-  func test06directOptionAccess() {
+  func test05directOptionAccess() {
     for i in 0..<options.count {
       let referenceOption = options[i]
       let fieldOption = testField.option(i)
@@ -52,7 +52,7 @@ class FormFieldTests: FormElementTests {
     }
   }
 
-  func test07reverseOptionAccess() {
+  func test06reverseOptionAccess() {
     for x in options {
       let referenceIndex = find(options, x)!
       let optionIndex = testField.optionIndex(x)
@@ -60,7 +60,7 @@ class FormFieldTests: FormElementTests {
     }
   }
 
-  func test08settingValue() {
+  func test07values() {
     XCTAssertEqual(testField.currentValue!, defaultValue, "Initial field value should be equal to \(defaultValue), but it is \(testField.currentValue)")
 
     testField.currentValue = options[1]

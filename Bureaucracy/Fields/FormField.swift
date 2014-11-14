@@ -13,7 +13,7 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
   public init(_ name: String, value: Type, options: [Type], cellClass: AnyClass) {
     self.options = options
     currentValue = value
-    super.init(name, cellClass: cellClass)
+    super.init(name)
   }
 
   // MARK: - FormElementProtocol

@@ -10,10 +10,6 @@ import UIKit
 
 public class ForwardingElement: FormElement {
   
-  public init(_ name: String) {
-    super.init(name, cellClass: FormCell.self)
-  }
-  
   public override func configureCell(cell: FormCell) {
     cell.accessoryType = .DisclosureIndicator
     super.configureCell(cell)

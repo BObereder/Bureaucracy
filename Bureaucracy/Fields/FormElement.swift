@@ -14,8 +14,7 @@ public func ==(lhs: FormElement, rhs: FormElement) -> Bool {
 
 public class FormElement: FormElementProtocol {
 
-  public init(_ name: String, cellClass: AnyClass) {
-    self.cellClass = cellClass
+  public init(_ name: String) {
     self.name = name
     self.accessibilityLabel = name
   }
@@ -39,14 +38,12 @@ public class FormElement: FormElementProtocol {
 
   // MARK: - Interface
 
-  public var cellClass: AnyClass
-
   public func registerReusableView(tableView: UITableView) {
-    tableView.registerClass(cellClass, forCellReuseIdentifier: cellClass.description())
+    tableView.registerClass(FormCell.self, forCellReuseIdentifier: FormCell.description())
   }
 
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
-    let cell = tableView.dequeueReusableCellWithIdentifier(cellClass.description(), forIndexPath: indexPath) as FormCell
+    let cell = tableView.dequeueReusableCellWithIdentifier(FormCell.description(), forIndexPath: indexPath) as FormCell
     cell.formElement = self
     return cell
   }

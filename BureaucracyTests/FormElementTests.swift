@@ -16,34 +16,29 @@ class FormElementTests: XCTestCase {
 
   override func setUp() {
     super.setUp()
-    element = FormElement("TestFormElement", cellClass: FormCell.self)
+    element = FormElement("TestFormElement")
   }
 
-  func test00name() {
+  func test00initialization() {
     XCTAssertEqual(element!.name, element!.accessibilityLabel!, "Element's Name and AccessibilityLabel shoud be identical")
-  }
-
-  func test01danglingSectionAndIndex() {
     XCTAssertNil(element!.section, "Section of dangling form element should be nil")
     XCTAssertNil(element!.fieldIndex, "Index of dangling form element should be nil")
   }
 
-  func test02serialize() {
+  func test01serialize() {
     let serialized = element!.serialize()
     XCTAssertTrue(serialized.0 == "TestFormElement" && serialized.1 == nil, "Serialized element should be a tuple of name and nil")
   }
 
-  func test03comparison() {
-    let element1 = FormElement("Element1", cellClass: FormCell.self)
+  func test02comparison() {
+    let element1 = FormElement("Element1")
     let element2 = element!
 
     XCTAssertNotEqual(element!, element1, "Elements should not be equal")
     XCTAssertEqual(element!, element2, "Elements should be equal")
   }
 
-  func test04workingWithCell() {
-    class CustomTableViewCell: FormCell { }
-
+  func test03userInterface() {
     class TableViewController: UITableViewController {
 
       init(_ element: FormElement) {
@@ -71,18 +66,17 @@ class FormElementTests: XCTestCase {
       }
 
       override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(CustomTableViewCell.description(), forIndexPath: indexPath) as UITableViewCell
+        return tableView.dequeueReusableCellWithIdentifier(FormCell.description(), forIndexPath: indexPath) as UITableViewCell
       }
     }
 
-    let element = FormElement("TestFormElement", cellClass: CustomTableViewCell.self)
+    let element = FormElement("TestFormElement")
     let viewController = TableViewController(element)
     let window = UIWindow(frame: CGRectMake(0, 0, 320, 480))
     window.rootViewController = viewController
     window.hidden = false
 
     let cell = element.dequeueReusableView(viewController.tableView, forIndexPath: NSIndexPath(forRow: 0, inSection: 0))
-    XCTAssertTrue(cell is CustomTableViewCell, "Should be able do dequeue correct cell")
 
     element.configureCell(cell)
     XCTAssertNil(element.localizedTitle, "Localized title should initialize with nil")
