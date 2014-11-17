@@ -63,7 +63,14 @@ class FormSectionTests: XCTestCase {
     XCTAssertEqual(elements1, elements3, "\(elements1) should equal \(elements3)")
   }
 
-  func test01serialize() {
+  func test02comparison() {
+    let section1 = testSection!
+    let section2 = FormSection(self.testSectionName)
+    XCTAssertEqual(testSection!, section1, "Sections should be equal")
+    XCTAssertNotEqual(section1, section2, "Sections should not be equal")
+  }
+
+  func test04serialize() {
     let empty = testSection!.serialize()
     XCTAssertEqual(empty.count, 0, "Serialized form of empty section should also be empty")
 
@@ -74,10 +81,39 @@ class FormSectionTests: XCTestCase {
     testSection!.append(element)
     testSection!.append(field)
     testSection!.append(segmentedField)
+
+    let serialized = testSection!.serialize()
+    let serializedTestElement = serialized["TestElement"]!
+    let serializedTestField = serialized["TestField"] as String
+    let serializedSegmentedTestField = serialized["SegmentedTestField"] as String
+    XCTAssertTrue(serializedTestElement == nil, "Value of TestElement should be nil, but it is \(serializedTestElement)")
+    XCTAssertEqual(serializedTestField, "zero", "Value of TestField should be zero, but it is \(serializedTestField)")
+    XCTAssertEqual(serializedSegmentedTestField, "segment0", "Value of TestField should be segment0, but it is \(serializedSegmentedTestField)")
   }
 
-  func test02comparison() {
+  func test05updating() {
+    class TestFormSection: FormSection {
+      var updatedFields = [FormElement]()
+      override func didUpdate(#field: FormElement?) {
+        super.didUpdate(field: field)
+        updatedFields.append(field!)
+      }
+    }
 
+    let section = TestFormSection("TestFormSection")
+    let field = FormField<String, String>("TestField", value: "zero", options: ["zero", "one", "two"])
+    let segmentedField = SegmentedFormField<String>("SegmentedTestField", value: "segment0", options: ["segment0", "segment1", "segment2"])
+
+    section.append(field)
+    section.append(segmentedField)
+
+    field.currentValue = "one"
+    segmentedField.internalValue = 2
+
+    XCTAssertEqual(section.updatedFields[0], field, "TestField should be the first field updated")
+    XCTAssertEqual(field.internalValue!, "one", "Internal value of TestField should be one, but it is \(field.internalValue)")
+    XCTAssertEqual(section.updatedFields[1], segmentedField, "SegmentedTestField should be the second field updated")
+    XCTAssertEqual(segmentedField.currentValue!, "segment2", "Current value of TestField should be segment2, but it is \(segmentedField.currentValue)")
   }
 
 }

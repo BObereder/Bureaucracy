@@ -78,21 +78,4 @@ class SegmentedFormFieldTest: FormElementTests {
     XCTFail("Implement this")
   }
 
-  func test10fieldUpdates() { // TODO: Move to section tests
-    class TestSection: FormSection {
-      var updated = false
-      var testField: FormElement?
-      override func didUpdate(#field: FormElement?) {
-        XCTAssertEqual(field!, testField!)
-        updated = true
-      }
-    }
-
-    let section = TestSection("TestSection")
-    section.testField = testField
-    section.append(testField)
-    testField.currentValue = options[2]
-    XCTAssertTrue(section.updated, "Field update should've triggered didUpdate method in section")
-  }
-
 }
