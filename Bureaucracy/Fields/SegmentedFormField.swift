@@ -85,7 +85,12 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
   }
 
   public func typeToRepresentation(value: Type?) -> String? {
-    return "\(value)"
+    if let aValue = value {
+      return "\(aValue)"
+    }
+    else {
+      return nil
+    }
   }
 
 }
