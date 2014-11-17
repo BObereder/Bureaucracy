@@ -75,7 +75,60 @@ class SegmentedFormFieldTest: FormElementTests {
   }
 
   func test08segmentedControl() {
-    XCTFail("Implement this")
+    class TableViewController: UITableViewController {
+
+      init(_ element: FormElement) {
+        theElement = element
+        super.init(nibName: nil, bundle: nil)
+      }
+
+      required init(coder aDecoder: NSCoder) {
+        theElement = nil
+        super.init(coder: aDecoder)
+      }
+
+      var theElement: FormElement?
+
+      override func viewDidLoad() {
+        theElement?.registerReusableView(tableView)
+      }
+
+      override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 1
+      }
+
+      override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+      }
+
+      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        return tableView.dequeueReusableCellWithIdentifier(FormCell.description(), forIndexPath: indexPath) as UITableViewCell
+      }
+    }
+
+    let viewController = TableViewController(testField)
+    let window = UIWindow(frame: CGRectMake(0, 0, 320, 480))
+    window.rootViewController = viewController
+    window.hidden = false
+
+    let cell = testField.dequeueReusableView(viewController.tableView, forIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as SegmentedFormCell
+
+    testField.configureCell(cell)
+    XCTAssertNotNil(cell.segmentedControl, "Segmented control should not be nil")
+    XCTAssertEqual(cell.segmentedControl.accessibilityLabel, "SegmentedControl", "Acessibility label should be equal to SegmentedControl")
+    XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 0, "Segment 0 should be selected")
+
+    for i in 0..<options.count {
+      let segmentTitle = cell.segmentedControl.titleForSegmentAtIndex(i)!
+      let elementTitle = options[i]
+      XCTAssertEqual(segmentTitle, elementTitle, "Title of segment \(i) should be equal to \(elementTitle), but it is \(segmentTitle)")
+    }
+
+    testField.currentValue = options[1]
+    XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 1, "Segment 1 should be selected")
+
+    cell.segmentedControl.selectedSegmentIndex = 2
+    XCTAssertEqual(testField.currentValue!, options[2], "Segment 2 should be selected")
   }
 
 }
