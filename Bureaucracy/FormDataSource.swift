@@ -37,7 +37,7 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   // MARK: - UITableViewDataSource
 
   public func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-    return form.numberOfSections()
+    return form.numberOfSections
   }
 
   public func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

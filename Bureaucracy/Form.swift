@@ -40,7 +40,7 @@ public class Form: CollectionType {
 
   public var sections: [FormSection] = []
 
-  public func numberOfSections() -> Int {
+  public var numberOfSections: Int {
     return sections.count
   }
 
