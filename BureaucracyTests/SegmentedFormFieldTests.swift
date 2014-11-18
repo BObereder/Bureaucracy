@@ -10,7 +10,7 @@ import Bureaucracy
 import UIKit
 import XCTest
 
-class SegmentedFormFieldTest: FormElementTests {
+class SegmentedFormFieldTests: FormElementTests {
 
   typealias TestField = SegmentedFormField<String>
 
