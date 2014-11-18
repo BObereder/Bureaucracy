@@ -22,6 +22,7 @@ public class FormElement: FormElementProtocol {
   // MARK: - Section relationship
 
   public weak var section: FormSection?
+  public weak var currentCell: FormCell?
 
   public var fieldIndex: Int? {
     if let elements = section {
@@ -45,6 +46,7 @@ public class FormElement: FormElementProtocol {
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(name, forIndexPath: indexPath) as FormCell
     cell.formElement = self
+    currentCell = cell
     return cell
   }
 

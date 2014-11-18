@@ -55,6 +55,13 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
 
   // MARK: Values
 
+  public override func didSetValue(#oldValue: Type?, newValue: Type?) {
+    super.didSetValue(oldValue: oldValue, newValue: newValue)
+    if let index = internalValue {
+      (currentCell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex = index
+    }
+  }
+
   public override var internalValue: Int? {
     get {
       return typeToInternal(currentValue)
