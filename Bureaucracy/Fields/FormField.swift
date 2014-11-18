@@ -10,7 +10,7 @@ import UIKit
 
 public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol {
   
-  public init(_ name: String, value: Type, options: [Type]) {
+  public init(_ name: String, value: Type?, options: [Type]?) {
     self.options = options
     currentValue = value
     super.init(name)
@@ -28,18 +28,18 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
 
   // MARK: Options
 
-  private var options: [Type]
+  private var options: [Type]?
 
   public func option(position: Int) -> Type {
-    return options[position]
+    return options![position]
   }
 
   public func optionIndex(option: Type) -> Int {
-    return find(options, option)!
+    return find(options!, option)!
   }
 
   public var optionCount: Int {
-    return options.count
+    return options!.count
   }
 
   // MARK: Values

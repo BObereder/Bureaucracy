@@ -11,7 +11,7 @@ import SwiftHelpers
 
 public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepresentationProtocol {
 
-  public override init(_ name: String, value: Type, options: [Type]) {
+  public override init(_ name: String, value: Type?, options: [Type]?) {
     super.init(name, value: value, options: options)
   }
 
