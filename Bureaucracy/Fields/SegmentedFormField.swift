@@ -68,7 +68,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
 
   public override func typeToInternal(value: Type?) -> Int? {
     if value == nil {
-      return nil
+      return -1
     }
     else {
       return optionIndex(value!)
