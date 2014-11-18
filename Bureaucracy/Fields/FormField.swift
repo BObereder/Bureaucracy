@@ -12,8 +12,8 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
   
   public init(_ name: String, value: Type?, options: [Type]?) {
     self.options = options
-    currentValue = value
     super.init(name)
+    currentValue = value
   }
 
   // MARK: - FormElementProtocol
@@ -44,25 +44,24 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
 
   // MARK: Values
 
+  private var _currentValue: Type?
+
   public final var currentValue: Type? {
-    didSet {
-      didSetValue(oldValue: oldValue, newValue: currentValue)
+    set {
+      error = validate(newValue)
+      if error == nil {
+        previousValue = _currentValue
+        _currentValue = newValue
+        didSetValue()
+      }
+    }
+    get {
+      return _currentValue
     }
   }
 
-  public func didSetValue(#oldValue: Type?, newValue: Type?) {
-    if previousValue == newValue {
-      return
-    }
-
-    error = validate(newValue)
-    if error == nil {
-      previousValue = oldValue
-      section?.didUpdate(field: self)
-    }
-    else {
-      currentValue = previousValue
-    }
+  public func didSetValue() {
+    section?.didUpdate(field: self)
   }
 
   public var previousValue: Type?

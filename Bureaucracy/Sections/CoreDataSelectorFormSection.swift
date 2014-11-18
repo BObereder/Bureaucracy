@@ -73,22 +73,25 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   // MARK: - Values
 
+  private var _currentValue: Type?
+
   public final var currentValue: Type? {
-    didSet {
-      didSetValue(oldValue: oldValue, newValue: currentValue)
+    set {
+      error = validate(newValue)
+      if error == nil {
+        previousValue = _currentValue
+        _currentValue = newValue
+        didSetValue()
+      }
+    }
+    get {
+      return _currentValue
     }
   }
 
-  public func didSetValue(#oldValue: Type?, newValue: Type?) {
-    if previousValue == newValue {
-      return
-    }
-
-    error = validate(newValue)
-    if error != nil {
-      previousValue = oldValue
-      currentValue = oldValue
-    }
+  public func didSetValue() {
+    let field = filter(self) { return ($0 as? SelectorGroupFormField)?.currentValue == true }
+    form?.didUpdate(section: self, field: field.first)
   }
 
   public var previousValue: Type?

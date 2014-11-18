@@ -26,10 +26,9 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
 
   // MARK: Options
 
-  public override func didSetValue(#oldValue: Type?, newValue: Type?) {
-    super.didSetValue(oldValue: oldValue, newValue: newValue)
+  public override func didSetValue() {
     if error == nil {
-      if let theValue = newValue as? Bool {
+      if let theValue = currentValue as? Bool {
         if theValue == true {
           section?.didUpdate(field: self)
         }

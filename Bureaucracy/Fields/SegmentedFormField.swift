@@ -9,9 +9,7 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: Equatable>: FormField<Type, Internal>, FormRepresentationProtocol {
-
-  public typealias Internal = Int
+public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepresentationProtocol {
 
   public override init(_ name: String, value: Type?, options: [Type]?) {
     super.init(name, value: value, options: options)
@@ -39,7 +37,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Internal>, For
       }
 
       if let index = internalValue {
-        segmentedCell.segmentedControl.selectedSegmentIndex = index
+        segmentedCell.segmentedControl.selectedSegmentIndex = index as Int
       }
     }
   }
@@ -57,14 +55,14 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Internal>, For
 
   // MARK: Values
 
-  public override func didSetValue(#oldValue: Type?, newValue: Type?) {
-    super.didSetValue(oldValue: oldValue, newValue: newValue)
+  public override func didSetValue() {
+    super.didSetValue()
     if let index = internalValue {
-      (currentCell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex = index
+      (currentCell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex = index as Int
     }
   }
 
-  public override var internalValue: Internal? {
+  public override var internalValue: Int? {
     get {
       return typeToInternal(currentValue)
     }
@@ -75,7 +73,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Internal>, For
 
   // MARK: Value transformers
 
-  public override func typeToInternal(value: Type?) -> Internal? {
+  public override func typeToInternal(value: Type?) -> Int? {
     if value == nil {
       return -1
     }
@@ -84,12 +82,12 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Internal>, For
     }
   }
 
-  public override func internalToType(internalValue: Internal?) -> Type? {
+  public override func internalToType(internalValue: Int?) -> Type? {
     if internalValue == nil {
       return nil
     }
     else {
-      return option(internalValue!)
+      return option(internalValue! as Int)
     }
   }
 
