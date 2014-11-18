@@ -56,12 +56,12 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     }
 
     error = validate(newValue)
-    if error != nil {
-      currentValue = previousValue
-    }
-    else {
+    if error == nil {
       previousValue = oldValue
       section?.didUpdate(field: self)
+    }
+    else {
+      currentValue = previousValue
     }
   }
 
