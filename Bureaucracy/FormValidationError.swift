@@ -10,7 +10,7 @@ import UIKit
 
 public class FormValidationError: NSError {
 
-  init() {
+  public init() {
     super.init(domain: "com.bureaucracy", code: 1, userInfo: nil)
   }
 
