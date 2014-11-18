@@ -81,11 +81,11 @@ class FormElementTests: XCTestCase {
     element.configureCell(cell)
     XCTAssertNil(element.localizedTitle, "Localized title should initialize with nil")
     XCTAssertEqual(cell.accessibilityLabel, "\(element.accessibilityLabel).cell", "AcessibilityLabel should be set")
-    XCTAssertEqual(cell.textLabel.text!, element.name, "Cell text label should be equal to Element's name if localizedTitle is nil")
+    XCTAssertEqual(cell.textLabel!.text!, element.name, "Cell text label should be equal to Element's name if localizedTitle is nil")
 
     element.localizedTitle = "Localized title"
     element.configureCell(cell)
-    XCTAssertEqual(cell.textLabel.text!, element.localizedTitle!, "Cell text label should be equal to Element's name localizedTitle")
+    XCTAssertEqual(cell.textLabel!.text!, element.localizedTitle!, "Cell text label should be equal to Element's name localizedTitle")
   }
 
 }
