@@ -128,6 +128,7 @@ class SegmentedFormFieldTest: FormElementTests {
     XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 1, "Segment 1 should be selected")
 
     cell.segmentedControl.selectedSegmentIndex = 2
+    cell.didChangeValue(cell.segmentedControl) // We have to manually trigger this as it's not a user's touch
     XCTAssertEqual(testField.currentValue!, options[2], "Segment 2 should be selected")
   }
 
