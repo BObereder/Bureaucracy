@@ -9,7 +9,9 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepresentationProtocol {
+public class SegmentedFormField<Type: Equatable>: FormField<Type, Internal>, FormRepresentationProtocol {
+
+  public typealias Internal = Int
 
   public override init(_ name: String, value: Type?, options: [Type]?) {
     super.init(name, value: value, options: options)
@@ -62,7 +64,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
     }
   }
 
-  public override var internalValue: Int? {
+  public override var internalValue: Internal? {
     get {
       return typeToInternal(currentValue)
     }
@@ -73,7 +75,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
 
   // MARK: Value transformers
 
-  public override func typeToInternal(value: Type?) -> Int? {
+  public override func typeToInternal(value: Type?) -> Internal? {
     if value == nil {
       return -1
     }
@@ -82,7 +84,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
     }
   }
 
-  public override func internalToType(internalValue: Int?) -> Type? {
+  public override func internalToType(internalValue: Internal?) -> Type? {
     if internalValue == nil {
       return nil
     }
