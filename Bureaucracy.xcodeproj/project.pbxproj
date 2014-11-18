@@ -32,6 +32,7 @@
 		FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0650F19F5322E00279C6E /* Bureaucracy.framework */; };
 		FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0652B19F5327C00279C6E /* FormDataSource.swift */; };
 		FAE0653919F53BEE00279C6E /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0653319F53B8900279C6E /* SwiftHelpers.framework */; };
+		FAEC0AC11A1B5FCE00E8F709 /* FormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -60,8 +61,6 @@
 
 /* Begin PBXFileReference section */
 		7808CDDD19FEA1C600A83C6C /* ForwardingCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingCell.swift; sourceTree = "<group>"; };
-		782ED0701A135E5300C758AC /* SegmentedFormFieldTests-old.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "SegmentedFormFieldTests-old.swift"; sourceTree = "<group>"; };
-		782ED0741A135F1000C758AC /* ForwardingElementTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingElementTests.swift; sourceTree = "<group>"; };
 		7884543C1A01141E004507BD /* ForwardingElement.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForwardingElement.swift; sourceTree = "<group>"; };
 		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
@@ -87,9 +86,9 @@
 		FAE0651419F5322E00279C6E /* Bureaucracy.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Bureaucracy.h; sourceTree = "<group>"; };
 		FAE0651A19F5322E00279C6E /* BureaucracyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BureaucracyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE0652019F5322E00279C6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		FAE0652119F5322E00279C6E /* BureaucracyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BureaucracyTests.swift; sourceTree = "<group>"; };
 		FAE0652B19F5327C00279C6E /* FormDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataSource.swift; sourceTree = "<group>"; };
 		FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftHelpers.xcodeproj; path = Submodules/SwiftHelpers/SwiftHelpers.xcodeproj; sourceTree = "<group>"; };
+		FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -197,9 +196,7 @@
 				FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */,
 				FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */,
 				FA0200491A1636AE0062384B /* FormSectionTests.swift */,
-				782ED0701A135E5300C758AC /* SegmentedFormFieldTests-old.swift */,
-				FAE0652119F5322E00279C6E /* BureaucracyTests.swift */,
-				782ED0741A135F1000C758AC /* ForwardingElementTests.swift */,
+				FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */,
 				FAE0651F19F5322E00279C6E /* Supporting Files */,
 			);
 			path = BureaucracyTests;
@@ -387,6 +384,7 @@
 			files = (
 				FA66BFDF1A13AA4800A53201 /* FormFieldTests.swift in Sources */,
 				FA02004A1A1636AE0062384B /* FormSectionTests.swift in Sources */,
+				FAEC0AC11A1B5FCE00E8F709 /* FormTests.swift in Sources */,
 				FA02001A1A14FDA50062384B /* SegmentedFormFieldTests.swift in Sources */,
 				FACB25351A136D3C00B2FC4F /* FormElementTests.swift in Sources */,
 			);
