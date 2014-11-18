@@ -64,7 +64,7 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
       section?.didUpdate(field: self)
     }
   }
-  
+
   public var previousValue: Type?
 
   public var internalValue: Internal? {
