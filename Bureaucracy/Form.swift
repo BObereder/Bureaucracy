@@ -64,7 +64,7 @@ public class Form: CollectionType {
   }
 
   public func didUpdate(#section: FormSection?, field: FormElement?) {
-    delegate?.didUpdateForm(self, section: section, field: nil)
+    delegate?.didUpdateForm(self, section: section, field: field)
   }
 
   public func serialize() -> [[String: Any?]] {
