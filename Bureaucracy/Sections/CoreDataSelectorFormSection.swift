@@ -154,8 +154,6 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
         (x as? SelectorGroupFormField)?.currentValue = false
       }
     }
-
-    form?.didUpdate(section: self, field: field)
   }
 
   // MARK: - CoreData
