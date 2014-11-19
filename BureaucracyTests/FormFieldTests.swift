@@ -76,11 +76,13 @@ class FormFieldTests: FormElementTests {
 
   func test10fieldUpdates() { // TODO: Move to section tests
     class TestSection: FormSection {
-      var updated = false
+      var updatedValues = [String]()
       var testField: FormElement?
       override func didUpdate(#field: FormElement?) {
         XCTAssertEqual(field!, testField!)
-        updated = true
+        if let string = (field as? FormField<String, String>)?.currentValue {
+          updatedValues.append(string)
+        }
       }
     }
 
@@ -88,7 +90,15 @@ class FormFieldTests: FormElementTests {
     section.testField = testField
     section.append(testField)
     testField.currentValue = options[2]
-    XCTAssertTrue(section.updated, "Field update should've triggered didUpdate method in section")
+    testField.internalValue = options[1]
+    testField.currentValue = options[2]
+    testField.internalValue = options[1]
+    testField.currentValue = options[0]
+    testField.currentValue = options[0]
+    testField.currentValue = options[1]
+    testField.currentValue = options[1]
+
+    XCTAssertEqual(section.updatedValues, [options[2], options[1], options[2], options[1], options[0], options[1]] ,"Field update should've triggered didUpdate method in section")
   }
 
 }

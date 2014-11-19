@@ -66,7 +66,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   public final var currentValue: Type? {
     set {
       error = validate(newValue)
-      if error == nil {
+      if error == nil && newValue != _currentValue {
         previousValue = _currentValue
         _currentValue = newValue
         didSetValue()
