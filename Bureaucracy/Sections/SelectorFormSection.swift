@@ -69,7 +69,6 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
       if error == nil && newValue != _currentValue {
         previousValue = _currentValue
         _currentValue = newValue
-        didSetValue()
 
         for x in self {
           if newValue != nil && x.fieldIndex == optionIndex(newValue!) {
@@ -98,6 +97,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
     set(newOption) {
       currentValue = internalToType(newOption)
+      didSetValue()
     }
   }
 

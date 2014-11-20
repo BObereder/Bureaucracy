@@ -81,7 +81,6 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
       if error == nil {
         previousValue = _currentValue
         _currentValue = newValue
-        didSetValue()
 
         for x in self {
           if newValue != nil && x.fieldIndex == optionIndex(newValue!) {
@@ -110,6 +109,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
     }
     set(newOption) {
       currentValue = internalToType(newOption)
+      didSetValue()
     }
   }
 
