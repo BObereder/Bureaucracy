@@ -15,7 +15,6 @@
 		FA02004A1A1636AE0062384B /* FormSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0200491A1636AE0062384B /* FormSectionTests.swift */; };
 		FA45562F1A0B82EA00960033 /* SelectorGroupFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */; };
 		FA4BF9FB1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */; };
-		FA502B6D1A1B8C12007797E1 /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0653319F53B8900279C6E /* SwiftHelpers.framework */; };
 		FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */; };
 		FA66BFDF1A13AA4800A53201 /* FormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */; };
 		FABA4E9419F53E1400574A68 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9319F53E1400574A68 /* Form.swift */; };
@@ -32,46 +31,17 @@
 		FAE0651519F5322E00279C6E /* Bureaucracy.h in Headers */ = {isa = PBXBuildFile; fileRef = FAE0651419F5322E00279C6E /* Bureaucracy.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0650F19F5322E00279C6E /* Bureaucracy.framework */; };
 		FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAE0652B19F5327C00279C6E /* FormDataSource.swift */; };
-		FAE0653919F53BEE00279C6E /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE0653319F53B8900279C6E /* SwiftHelpers.framework */; };
 		FAEC0AC11A1B5FCE00E8F709 /* FormTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */; };
 		FAEC0AD11A1B7EE500E8F709 /* FieldValidationTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FAEC0AD01A1B7EE500E8F709 /* FieldValidationTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		FA267B281A1B85640003A5BA /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = FAE064A719F50DD900279C6E;
-			remoteInfo = SwiftHelpers;
-		};
-		FA502B6E1A1B8C19007797E1 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */;
-			proxyType = 1;
-			remoteGlobalIDString = FAE064A719F50DD900279C6E;
-			remoteInfo = SwiftHelpers;
-		};
 		FAE0651C19F5322E00279C6E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FAE0650619F5322E00279C6E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = FAE0650E19F5322E00279C6E;
 			remoteInfo = Bureaucracy;
-		};
-		FAE0653219F53B8900279C6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FAE064A819F50DD900279C6E;
-			remoteInfo = SwiftHelpers;
-		};
-		FAE0653419F53B8900279C6E /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */;
-			proxyType = 2;
-			remoteGlobalIDString = FAE064B319F50DD900279C6E;
-			remoteInfo = SwiftHelpersTests;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -103,7 +73,6 @@
 		FAE0651A19F5322E00279C6E /* BureaucracyTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BureaucracyTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		FAE0652019F5322E00279C6E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		FAE0652B19F5327C00279C6E /* FormDataSource.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormDataSource.swift; sourceTree = "<group>"; };
-		FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftHelpers.xcodeproj; path = Submodules/SwiftHelpers/SwiftHelpers.xcodeproj; sourceTree = "<group>"; };
 		FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormTests.swift; sourceTree = "<group>"; };
 		FAEC0AD01A1B7EE500E8F709 /* FieldValidationTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FieldValidationTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -113,7 +82,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FAE0653919F53BEE00279C6E /* SwiftHelpers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -121,7 +89,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				FA502B6D1A1B8C12007797E1 /* SwiftHelpers.framework in Frameworks */,
 				FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -165,7 +132,6 @@
 		FAE0650519F5322E00279C6E = {
 			isa = PBXGroup;
 			children = (
-				FAE0653619F53B8D00279C6E /* Submodules */,
 				FAE0651119F5322E00279C6E /* Bureaucracy */,
 				FAE0651E19F5322E00279C6E /* BureaucracyTests */,
 				FAE0651019F5322E00279C6E /* Products */,
@@ -229,23 +195,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		FAE0652E19F53B8900279C6E /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				FAE0653319F53B8900279C6E /* SwiftHelpers.framework */,
-				FAE0653519F53B8900279C6E /* SwiftHelpersTests.xctest */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		FAE0653619F53B8D00279C6E /* Submodules */ = {
-			isa = PBXGroup;
-			children = (
-				FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */,
-			);
-			name = Submodules;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -272,7 +221,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				FA267B291A1B85640003A5BA /* PBXTargetDependency */,
 			);
 			name = Bureaucracy;
 			productName = Bureaucracy;
@@ -290,7 +238,6 @@
 			buildRules = (
 			);
 			dependencies = (
-				FA502B6F1A1B8C19007797E1 /* PBXTargetDependency */,
 				FAE0651D19F5322E00279C6E /* PBXTargetDependency */,
 			);
 			name = BureaucracyTests;
@@ -325,12 +272,6 @@
 			mainGroup = FAE0650519F5322E00279C6E;
 			productRefGroup = FAE0651019F5322E00279C6E /* Products */;
 			projectDirPath = "";
-			projectReferences = (
-				{
-					ProductGroup = FAE0652E19F53B8900279C6E /* Products */;
-					ProjectRef = FAE0652D19F53B8900279C6E /* SwiftHelpers.xcodeproj */;
-				},
-			);
 			projectRoot = "";
 			targets = (
 				FAE0650E19F5322E00279C6E /* Bureaucracy */,
@@ -338,23 +279,6 @@
 			);
 		};
 /* End PBXProject section */
-
-/* Begin PBXReferenceProxy section */
-		FAE0653319F53B8900279C6E /* SwiftHelpers.framework */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.framework;
-			path = SwiftHelpers.framework;
-			remoteRef = FAE0653219F53B8900279C6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-		FAE0653519F53B8900279C6E /* SwiftHelpersTests.xctest */ = {
-			isa = PBXReferenceProxy;
-			fileType = wrapper.cfbundle;
-			path = SwiftHelpersTests.xctest;
-			remoteRef = FAE0653419F53B8900279C6E /* PBXContainerItemProxy */;
-			sourceTree = BUILT_PRODUCTS_DIR;
-		};
-/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FAE0650D19F5322E00279C6E /* Resources */ = {
@@ -415,16 +339,6 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		FA267B291A1B85640003A5BA /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftHelpers;
-			targetProxy = FA267B281A1B85640003A5BA /* PBXContainerItemProxy */;
-		};
-		FA502B6F1A1B8C19007797E1 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			name = SwiftHelpers;
-			targetProxy = FA502B6E1A1B8C19007797E1 /* PBXContainerItemProxy */;
-		};
 		FAE0651D19F5322E00279C6E /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = FAE0650E19F5322E00279C6E /* Bureaucracy */;
