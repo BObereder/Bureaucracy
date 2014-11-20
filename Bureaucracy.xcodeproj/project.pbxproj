@@ -17,6 +17,7 @@
 		FA4BF9FB1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */; };
 		FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */; };
 		FA66BFDF1A13AA4800A53201 /* FormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */; };
+		FAAF12801A1DFC7E00C72B24 /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAF127F1A1DFC7E00C72B24 /* SwiftHelpers.framework */; };
 		FABA4E9419F53E1400574A68 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9319F53E1400574A68 /* Form.swift */; };
 		FABA4E9919F54CE000574A68 /* SegmentedFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */; };
 		FABA4E9F19F54D7200574A68 /* SegmentedFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */; };
@@ -56,6 +57,7 @@
 		FA4BF9FA1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataSelectorFormSection.swift; sourceTree = "<group>"; };
 		FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormValidationError.swift; sourceTree = "<group>"; };
 		FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormFieldTests.swift; sourceTree = "<group>"; };
+		FAAF127F1A1DFC7E00C72B24 /* SwiftHelpers.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftHelpers.framework; path = "../../../../../../Library/Developer/Xcode/DerivedData/Stylight-gtrjmwbmdqeczyawuswbunxbszra/Build/Products/Debug-iphoneos/SwiftHelpers.framework"; sourceTree = "<group>"; };
 		FABA4E9319F53E1400574A68 /* Form.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Form.swift; sourceTree = "<group>"; };
 		FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormField.swift; sourceTree = "<group>"; };
 		FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormCell.swift; sourceTree = "<group>"; };
@@ -82,6 +84,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAAF12801A1DFC7E00C72B24 /* SwiftHelpers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,6 +99,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		FAAF12851A1DFEFB00C72B24 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				FAAF127F1A1DFC7E00C72B24 /* SwiftHelpers.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		FABA4E9719F54C9900574A68 /* Fields */ = {
 			isa = PBXGroup;
 			children = (
@@ -134,6 +145,7 @@
 			children = (
 				FAE0651119F5322E00279C6E /* Bureaucracy */,
 				FAE0651E19F5322E00279C6E /* BureaucracyTests */,
+				FAAF12851A1DFEFB00C72B24 /* Frameworks */,
 				FAE0651019F5322E00279C6E /* Products */,
 			);
 			sourceTree = "<group>";
@@ -440,6 +452,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Stylight-gtrjmwbmdqeczyawuswbunxbszra/Build/Products/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Bureaucracy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -458,6 +474,10 @@
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Stylight-gtrjmwbmdqeczyawuswbunxbszra/Build/Products/Debug-iphoneos",
+				);
 				INFOPLIST_FILE = Bureaucracy/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;

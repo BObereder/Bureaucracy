@@ -70,6 +70,14 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
         previousValue = _currentValue
         _currentValue = newValue
         didSetValue()
+
+        for x in self {
+          if newValue != nil && x.fieldIndex == optionIndex(newValue!) {
+            (x as? SelectorGroupFormField)?.currentValue = true
+            continue
+          }
+          (x as? SelectorGroupFormField)?.currentValue = false
+        }
       }
     }
     get {

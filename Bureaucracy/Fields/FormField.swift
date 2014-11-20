@@ -52,7 +52,6 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
       if error == nil && newValue != _currentValue {
         previousValue = _currentValue
         _currentValue = newValue
-        didSetValue()
       }
     }
     get {
@@ -72,6 +71,7 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     }
     set(newOption) {
       currentValue = internalToType(newOption)
+      didSetValue()
     }
   }
   
