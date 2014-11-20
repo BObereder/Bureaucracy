@@ -39,7 +39,7 @@ class FormTests: XCTestCase {
       let element2 = FormField<Int, Int>("\(section.name)-TestElement2", value: 0, options: [0, 1, 2])
       section.append(element2)
 
-      let element3 = SegmentedFormField<String>("\(section.name)-TestElement3", value: "A", options: ["A", "B", "C"])
+      let element3 = SegmentedFormField<String, Int>("\(section.name)-TestElement3", value: "A", options: ["A", "B", "C"])
       section.append(element3)
     }
 
@@ -67,7 +67,7 @@ class FormTests: XCTestCase {
       let element2 = FormField<Int, Int>("\(section.name)-TestElement2", value: 0, options: [0, 1, 2])
       section.append(element2)
 
-      let element3 = SegmentedFormField<String>("\(section.name)-TestElement3", value: "A", options: ["A", "B", "C"])
+      let element3 = SegmentedFormField<String, Int>("\(section.name)-TestElement3", value: "A", options: ["A", "B", "C"])
       section.append(element3)
     }
 
@@ -101,16 +101,16 @@ class FormTests: XCTestCase {
     }
 
     let delegate = TestFormDelegate()
-    let field = testForm.addSection("TestSection").append(SegmentedFormField<String>("TestField", value: "A", options: ["A", "B", "C"]))
+    let field = testForm.addSection("TestSection").append(SegmentedFormField<String, Int>("TestField", value: "A", options: ["A", "B", "C"]))
     testForm.delegate = delegate
 
-    let segmentedField = (field as? SegmentedFormField<String>)!
     segmentedField.currentValue = "B"
+    let segmentedField = (field as? SegmentedFormField<String, Int>)!
 
     XCTAssertTrue(delegate.updatedForm! === testForm, "Form should have been updated")
     XCTAssertEqual(delegate.updatedSection!, testForm.sections[0], "Section should have been updated")
     XCTAssertEqual(delegate.updatedField!, segmentedField, "Field should have been updated")
-    XCTAssertEqual((delegate.updatedField as? SegmentedFormField<String>)!.internalValue!, 1, "Internal value of the updated field should have changed")
+    XCTAssertEqual((delegate.updatedField as? SegmentedFormField<String, Int>)!.internalValue!, 1, "Internal value of the updated field should have changed")
   }
 
 }

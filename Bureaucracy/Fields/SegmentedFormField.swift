@@ -9,7 +9,7 @@
 import Foundation
 import SwiftHelpers
 
-public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepresentationProtocol {
+public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormField<Type, Internal>, FormRepresentationProtocol {
 
   public override init(_ name: String, value: Type?, options: [Type]?) {
     super.init(name, value: value, options: options)
@@ -46,7 +46,7 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
 
   public override func didChangeInternalValue(cell: FormCell) {
     if let field = cell.formElement as? SegmentedFormField {
-      field.internalValue = (cell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex
+      field.internalValue = (cell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex as? Internal
     }
     super.didChangeInternalValue(cell)
   }
@@ -62,27 +62,18 @@ public class SegmentedFormField<Type: Equatable>: FormField<Type, Int>, FormRepr
     }
   }
 
-  public override var internalValue: Int? {
-    get {
-      return typeToInternal(currentValue)
-    }
-    set(newOption) {
-      currentValue = internalToType(newOption)
-    }
-  }
-
   // MARK: Value transformers
 
-  public override func typeToInternal(value: Type?) -> Int? {
+  public override func typeToInternal(value: Type?) -> Internal? {
     if value == nil {
       return -1
     }
     else {
-      return optionIndex(value!)
+      return optionIndex(value!) as? Internal
     }
   }
 
-  public override func internalToType(internalValue: Int?) -> Type? {
+  public override func internalToType(internalValue: Internal?) -> Type? {
     if internalValue == nil {
       return nil
     }

@@ -12,7 +12,7 @@ import XCTest
 
 class SegmentedFormFieldTests: FormElementTests {
 
-  typealias TestField = SegmentedFormField<String>
+  typealias TestField = SegmentedFormField<String, Int>
 
   let options = ["One", "Two", "Three"]
 
@@ -26,7 +26,7 @@ class SegmentedFormFieldTests: FormElementTests {
 
   override func setUp() {
     super.setUp()
-    element = SegmentedFormField("TestSegmentedFormField", value: options[0], options: options)
+    element = TestField("TestSegmentedFormField", value: options[0], options: options)
   }
 
   override func test01serialize() {

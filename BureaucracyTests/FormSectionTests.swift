@@ -76,7 +76,7 @@ class FormSectionTests: XCTestCase {
 
     let element = FormElement("TestElement")
     let field = FormField<String, String>("TestField", value: "zero", options: ["zero", "one", "two"])
-    let segmentedField = SegmentedFormField<String>("SegmentedTestField", value: "segment0", options: ["segment0", "segment1", "segment2"])
+    let segmentedField = SegmentedFormField<String, Int>("SegmentedTestField", value: "segment0", options: ["segment0", "segment1", "segment2"])
 
     testSection!.append(element)
     testSection!.append(field)
@@ -102,7 +102,7 @@ class FormSectionTests: XCTestCase {
 
     let section = TestFormSection("TestFormSection")
     let field = FormField<String, String>("TestField", value: "zero", options: ["zero", "one", "two"])
-    let segmentedField = SegmentedFormField<String>("SegmentedTestField", value: "segment0", options: ["segment0", "segment1", "segment2"])
+    let segmentedField = SegmentedFormField<String, Int>("SegmentedTestField", value: "segment0", options: ["segment0", "segment1", "segment2"])
 
     section.append(field)
     section.append(segmentedField)
