@@ -104,8 +104,8 @@ class FormTests: XCTestCase {
     let field = testForm.addSection("TestSection").append(SegmentedFormField<String, Int>("TestField", value: "A", options: ["A", "B", "C"]))
     testForm.delegate = delegate
 
-    segmentedField.currentValue = "B"
     let segmentedField = (field as? SegmentedFormField<String, Int>)!
+    segmentedField.internalValue = 1
 
     XCTAssertTrue(delegate.updatedForm! === testForm, "Form should have been updated")
     XCTAssertEqual(delegate.updatedSection!, testForm.sections[0], "Section should have been updated")

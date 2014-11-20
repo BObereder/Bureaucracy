@@ -93,7 +93,7 @@ public protocol FormDataProtocol {
   var currentValue: Type? { get set }
   var previousValue: Type? { get set }
   var internalValue: Internal? { get set }
-  func didSetValue()
+  func didSetInternalValue()
 
   // MARK: Value transformers
 

@@ -59,10 +59,6 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     }
   }
 
-  public func didSetValue() {
-    section?.didUpdate(field: self)
-  }
-
   public var previousValue: Type?
 
   public var internalValue: Internal? {
@@ -71,8 +67,14 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     }
     set(newOption) {
       currentValue = internalToType(newOption)
-      didSetValue()
+      if error == nil && currentValue != previousValue {
+        didSetInternalValue()
+      }
     }
+  }
+
+  public func didSetInternalValue() {
+    section?.didUpdate(field: self)
   }
   
   // MARK: - Value transformers

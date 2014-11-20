@@ -26,7 +26,7 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
 
   // MARK: Options
 
-  public override func didSetValue() {
+  public override func didSetInternalValue() {
     if error == nil {
       if let theValue = currentValue as? Bool {
         if theValue == true {

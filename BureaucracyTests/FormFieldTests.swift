@@ -96,9 +96,9 @@ class FormFieldTests: FormElementTests {
     testField.currentValue = options[0]
     testField.currentValue = options[0]
     testField.currentValue = options[1]
-    testField.currentValue = options[1]
+    testField.internalValue = options[1]
 
-    XCTAssertEqual(section.updatedValues, [options[2], options[1], options[2], options[1], options[0], options[1]] ,"Field update should've triggered didUpdate method in section")
+    XCTAssertEqual(section.updatedValues, [options[1], options[1], options[1]] ,"Field update should've triggered didUpdate method in section")
   }
 
 }

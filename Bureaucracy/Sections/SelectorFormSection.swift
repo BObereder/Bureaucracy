@@ -84,7 +84,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
   }
 
-  public func didSetValue() {
+  public func didSetInternalValue() {
     let field = filter(self) { return ($0 as? SelectorGroupFormField)?.currentValue == true }
     form?.didUpdate(section: self, field: field.first)
   }
@@ -97,7 +97,9 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
     set(newOption) {
       currentValue = internalToType(newOption)
-      didSetValue()
+      if error == nil && currentValue != previousValue {
+        didSetInternalValue()
+      }
     }
   }
 

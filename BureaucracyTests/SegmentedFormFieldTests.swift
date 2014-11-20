@@ -124,7 +124,7 @@ class SegmentedFormFieldTests: FormElementTests {
       XCTAssertEqual(segmentTitle, elementTitle, "Title of segment \(i) should be equal to \(elementTitle), but it is \(segmentTitle)")
     }
 
-    testField.currentValue = options[1]
+    testField.internalValue = 1
     XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 1, "Segment 1 should be selected")
 
     cell.segmentedControl.selectedSegmentIndex = 2

@@ -108,11 +108,13 @@ class FormSectionTests: XCTestCase {
     section.append(segmentedField)
 
     field.currentValue = "one"
+
+    XCTAssertEqual(section.updatedFields.count, 0, "There should be no update event")
+    XCTAssertEqual(field.internalValue!, "one", "Internal value of TestField should be one, but it is \(field.internalValue)")
+
     segmentedField.internalValue = 2
 
-    XCTAssertEqual(section.updatedFields[0], field, "TestField should be the first field updated")
-    XCTAssertEqual(field.internalValue!, "one", "Internal value of TestField should be one, but it is \(field.internalValue)")
-    XCTAssertEqual(section.updatedFields[1], segmentedField, "SegmentedTestField should be the second field updated")
+    XCTAssertEqual(section.updatedFields[0], segmentedField, "SegmentedTestField should be the second field updated")
     XCTAssertEqual(segmentedField.currentValue!, "segment2", "Current value of TestField should be segment2, but it is \(segmentedField.currentValue)")
   }
 
