@@ -18,6 +18,7 @@
 		FA5D1B7B19F665C3004F1931 /* FormValidationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA5D1B7A19F665C3004F1931 /* FormValidationError.swift */; };
 		FA66BFDF1A13AA4800A53201 /* FormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */; };
 		FAAF12801A1DFC7E00C72B24 /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAF127F1A1DFC7E00C72B24 /* SwiftHelpers.framework */; };
+		FAAF12861A1E0B6C00C72B24 /* SwiftHelpers.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAAF127F1A1DFC7E00C72B24 /* SwiftHelpers.framework */; };
 		FABA4E9419F53E1400574A68 /* Form.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9319F53E1400574A68 /* Form.swift */; };
 		FABA4E9919F54CE000574A68 /* SegmentedFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */; };
 		FABA4E9F19F54D7200574A68 /* SegmentedFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */; };
@@ -93,6 +94,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FAE0651B19F5322E00279C6E /* Bureaucracy.framework in Frameworks */,
+				FAAF12861A1E0B6C00C72B24 /* SwiftHelpers.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -495,6 +497,7 @@
 					"$(inherited)",
 					"/Users/alex/Projects/stylight/iOS/stylight-ios-app-2/Submodules/XCTestCaseExtenstions/build/Debug-iphoneos",
 					"/Users/alex/Projects/stylight/iOS/stylight-ios-app-2/Submodules/SwiftHelpers/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Stylight-gtrjmwbmdqeczyawuswbunxbszra/Build/Products/Debug-iphoneos",
 				);
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
@@ -514,6 +517,7 @@
 					"$(inherited)",
 					"/Users/alex/Projects/stylight/iOS/stylight-ios-app-2/Submodules/XCTestCaseExtenstions/build/Debug-iphoneos",
 					"/Users/alex/Projects/stylight/iOS/stylight-ios-app-2/Submodules/SwiftHelpers/build/Debug-iphoneos",
+					"$(USER_LIBRARY_DIR)/Developer/Xcode/DerivedData/Stylight-gtrjmwbmdqeczyawuswbunxbszra/Build/Products/Debug-iphoneos",
 				);
 				INFOPLIST_FILE = BureaucracyTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
