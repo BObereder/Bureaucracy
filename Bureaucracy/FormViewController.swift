@@ -16,6 +16,7 @@ public class FormViewController: UIViewController, UITableViewDelegate {
     didSet {
       tableView.dataSource = dataSource
       dataSource?.register(tableView)
+      tableView.reloadData()
     }
   }
 
