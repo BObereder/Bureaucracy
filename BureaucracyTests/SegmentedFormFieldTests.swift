@@ -107,7 +107,7 @@ class SegmentedFormFieldTests: FormElementTests {
     }
 
     let viewController = TableViewController(testField)
-    let window = UIWindow(frame: CGRectMake(0, 0, 320, 480))
+    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
     window.rootViewController = viewController
     window.hidden = false
 
