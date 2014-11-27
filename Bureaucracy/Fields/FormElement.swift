@@ -35,7 +35,7 @@ public class FormElement: FormElementProtocol {
   
   public var name: String
   public var localizedTitle: String?
-  public var accessibilityLabel: String?
+  public var accessibilityLabel: String
 
   // MARK: - Interface
 

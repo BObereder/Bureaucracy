@@ -21,7 +21,7 @@ public protocol FormElementProtocol: Equatable {
 
   var name: String { get set }
   var localizedTitle: String? { get set }
-  var accessibilityLabel: String? { get set }
+  var accessibilityLabel: String { get set }
 
   // MARK: Interface
 
