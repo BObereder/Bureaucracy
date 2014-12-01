@@ -9,6 +9,10 @@
 import Foundation
 import SwiftHelpers
 
+public protocol FormDelegate: class {
+  func didUpdateForm(form: Form, section: FormSection?, field: FormElement?)
+}
+
 public class Form: CollectionType {
 
   public init() {}
@@ -87,8 +91,4 @@ public class Form: CollectionType {
     return GenericGenerator(items: sections)
   }
 
-}
-
-public protocol FormDelegate: class {
-  func didUpdateForm(form: Form, section: FormSection?, field: FormElement?)
 }
