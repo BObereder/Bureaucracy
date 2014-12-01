@@ -80,6 +80,14 @@ public class FormSection: FormSectionProtocol {
     return dict
   }
 
+  // MARK: Reset
+
+  public func reset() {
+    for x in self {
+      x.reset()
+    }
+  }
+
   // MARK: - Callbacks
 
   public func didUpdate(#field: FormElement?) {

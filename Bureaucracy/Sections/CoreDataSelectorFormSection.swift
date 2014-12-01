@@ -24,6 +24,8 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
     self.fetchRequest = fetchRequest
     self.managedObjectContext = managedObjectContext
     super.init(name)
+    currentValue = value
+    initialValue = value
   }
 
   // MARK: - Fields
@@ -72,6 +74,8 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   }
 
   // MARK: - Values
+
+  var initialValue: Type?
 
   private var _currentValue: Type?
 
@@ -151,6 +155,12 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   public override func serialize() -> [String: Any?] {
     return [name: currentValue]
+  }
+
+  // MARK: Reset
+
+  public override func reset() {
+    currentValue = initialValue
   }
 
   // MARK: - Callbacks

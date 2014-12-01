@@ -90,6 +90,7 @@ class SegmentedFormFieldTests: FormElementTests {
       var theElement: FormElement?
 
       override func viewDidLoad() {
+        super.viewDidLoad()
         theElement?.registerReusableView(tableView)
       }
 
@@ -107,9 +108,7 @@ class SegmentedFormFieldTests: FormElementTests {
     }
 
     let viewController = TableViewController(testField)
-    let window = UIWindow(frame: UIScreen.mainScreen().bounds)
-    window.rootViewController = viewController
-    window.hidden = false
+    viewController.view.frame = UIScreen.mainScreen().bounds
 
     let cell = testField.dequeueReusableView(viewController.tableView, forIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as SegmentedFormCell
 
@@ -130,6 +129,9 @@ class SegmentedFormFieldTests: FormElementTests {
     cell.segmentedControl.selectedSegmentIndex = 2
     cell.didChangeValue(cell.segmentedControl) // We have to manually trigger this as it's not a user's touch
     XCTAssertEqual(testField.currentValue!, options[2], "Segment 2 should be selected")
+
+    testField.reset()
+    XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 0, "Reset should revert segmented control to initial state")
   }
 
 }

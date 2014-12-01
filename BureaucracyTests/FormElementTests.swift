@@ -20,7 +20,7 @@ class FormElementTests: XCTestCase {
   }
 
   func test00initialization() {
-    XCTAssertEqual(element!.name, element!.accessibilityLabel!, "Element's Name and AccessibilityLabel shoud be identical")
+    XCTAssertEqual(element!.name, element!.accessibilityLabel, "Element's Name and AccessibilityLabel shoud be identical")
     XCTAssertNil(element!.section, "Section of dangling form element should be nil")
     XCTAssertNil(element!.fieldIndex, "Index of dangling form element should be nil")
   }

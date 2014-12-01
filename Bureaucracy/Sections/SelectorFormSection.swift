@@ -21,6 +21,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     self.options = options
     super.init(name)
     currentValue = value
+    initialValue = value
   }
 
   // MARK: - Fields
@@ -60,6 +61,8 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   }
 
   // MARK: - Values
+
+  var initialValue: Type?
 
   private var _currentValue: Type?
 
@@ -139,6 +142,12 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   public override func serialize() -> [String: Any?] {
     return [name: currentValue]
+  }
+
+  // MARK: Reset
+
+  public override func reset() {
+    currentValue = initialValue
   }
 
   // MARK: - Callbacks

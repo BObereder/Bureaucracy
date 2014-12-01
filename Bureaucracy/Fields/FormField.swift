@@ -14,6 +14,7 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     self.options = options
     super.init(name)
     currentValue = value
+    initialValue = value
   }
 
   // MARK: - FormElementProtocol
@@ -22,6 +23,12 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
 
   public override func serialize() -> (String, Any?) {
     return (name, currentValue)
+  }
+
+  // MARK: Reset
+
+  public override func reset() {
+    currentValue = initialValue
   }
 
   // MARK: - FormDataProtocol
@@ -44,18 +51,21 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
 
   // MARK: Values
 
+  var initialValue: Type?
+
   private var _currentValue: Type?
 
   public final var currentValue: Type? {
+    get {
+      return _currentValue
+    }
     set {
       error = validate(newValue)
       if error == nil && newValue != _currentValue {
         previousValue = _currentValue
         _currentValue = newValue
+        didSetInternalValue()
       }
-    }
-    get {
-      return _currentValue
     }
   }
 
@@ -67,9 +77,6 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     }
     set(newOption) {
       currentValue = internalToType(newOption)
-      if error == nil && currentValue != previousValue {
-        didSetInternalValue()
-      }
     }
   }
 

@@ -37,6 +37,10 @@ public protocol FormElementProtocol: Equatable {
   // MARK: Serialization
 
   func serialize() -> (String, Any?)
+
+  // MARK: Reset
+
+  func reset()
   
 }
 
@@ -72,6 +76,10 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   // MARK: Callbacks
 
   func didUpdate(#field: FormElement?)
+
+  // MARK: Reset
+
+  func reset()
 
 }
 

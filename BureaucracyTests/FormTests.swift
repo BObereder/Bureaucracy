@@ -111,6 +111,9 @@ class FormTests: XCTestCase {
     XCTAssertEqual(delegate.updatedSection!, testForm.sections[0], "Section should have been updated")
     XCTAssertEqual(delegate.updatedField!, segmentedField, "Field should have been updated")
     XCTAssertEqual((delegate.updatedField as? SegmentedFormField<String, Int>)!.internalValue!, 1, "Internal value of the updated field should have changed")
+
+    testForm.reset()
+    XCTAssertEqual((field as SegmentedFormField<String, Int>).currentValue!, "A", "Reset should've reset form to initial state")
   }
 
 }

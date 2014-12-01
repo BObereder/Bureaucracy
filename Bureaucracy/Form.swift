@@ -71,6 +71,12 @@ public class Form: CollectionType {
     return sections.map { $0.serialize() }
   }
 
+  public func reset() {
+    for x in self {
+      x.reset()
+    }
+  }
+
   public func reloadInterface() {
     dataSource?.reloadTable()
   }

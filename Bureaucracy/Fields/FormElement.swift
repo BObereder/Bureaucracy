@@ -72,4 +72,10 @@ public class FormElement: FormElementProtocol {
     return (name, nil)
   }
 
+  // MARK: Reset
+
+  public func reset() {
+    // noop
+  }
+
 }
