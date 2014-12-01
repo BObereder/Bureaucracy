@@ -8,9 +8,7 @@
 
 import UIKit
 
-public class FormViewController: UIViewController, UITableViewDelegate {
-
-  @IBOutlet weak public var tableView: UITableView!
+public class FormViewController: UITableViewController {
 
   public var dataSource: FormDataSource? {
     didSet {
@@ -20,14 +18,9 @@ public class FormViewController: UIViewController, UITableViewDelegate {
     }
   }
 
-  public override func viewDidLoad() {
-    super.viewDidLoad()
-    tableView.delegate = self
-  }
-
   // MARK: - UITableViewDelegate
 
-  public func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+  public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
     dataSource?.form.item(indexPath: indexPath).didSelect()
   }
 
