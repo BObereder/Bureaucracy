@@ -17,7 +17,7 @@ public class FormDataSource: NSObject, UITableViewDataSource {
     form.dataSource = self
   }
   
-  var form: Form
+  public var form: Form
   weak var tableView: UITableView?
 
   func register(tableView: UITableView) {
