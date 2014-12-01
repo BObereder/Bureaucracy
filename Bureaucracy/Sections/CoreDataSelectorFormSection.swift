@@ -61,7 +61,10 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   }
 
   public func optionIndex(option: Type) -> Int {
-    return self.fetchedResultsController.indexPathForObject(option)!.item
+    if let indexPath = fetchedResultsController.indexPathForObject(option) {
+      return indexPath.item
+    }
+    return NSNotFound
   }
 
   public var optionCount: Int {
