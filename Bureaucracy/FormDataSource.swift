@@ -31,6 +31,7 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   }
 
   public func reloadTable() {
+    map(tableView) { self.register($0) }
     tableView?.reloadData()
   }
 

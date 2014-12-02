@@ -67,6 +67,44 @@ public class Form: CollectionType {
     return section
   }
 
+  public func insertSection(section: FormSection, before: String) -> FormSection {
+    var idx: Int?
+    for i in 0..<numberOfSections {
+      if self[i].name == before {
+        idx = i
+        break
+      }
+    }
+
+    section.form = self
+    sections.insert(section, atIndex: idx!)
+    delegate?.didUpdateForm(self, section: section, field: nil)
+    return section
+  }
+
+  public func insertSection(section: FormSection, after: String) -> FormSection {
+    var idx: Int?
+    for i in 0..<numberOfSections {
+      if self[i].name == after {
+        idx = i
+        break
+      }
+    }
+
+    section.form = self
+    sections.insert(section, atIndex: idx! + 1)
+    delegate?.didUpdateForm(self, section: section, field: nil)
+    return section
+  }
+
+  public func removeSection(name: String) {
+    sections = sections.filter { $0.name != name }
+  }
+
+  public func removeSection(section: FormSection) {
+    sections = sections.filter { $0 != section }
+  }
+
   public func didUpdate(#section: FormSection?, field: FormElement?) {
     delegate?.didUpdateForm(self, section: section, field: field)
   }
