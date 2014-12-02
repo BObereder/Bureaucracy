@@ -71,8 +71,14 @@ public class Form: CollectionType {
     delegate?.didUpdateForm(self, section: section, field: field)
   }
 
-  public func serialize() -> [[String: Any?]] {
-    return sections.map { $0.serialize() }
+  public func serialize() -> [String: [String: Any?]] {
+    var dict = [String: [String: Any?]]()
+
+    for x in self {
+      dict[x.name] = x.serialize()
+    }
+
+    return dict
   }
 
   public func reset() {
