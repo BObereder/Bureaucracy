@@ -36,6 +36,7 @@ public class FormElement: FormElementProtocol {
   public var name: String
   public var localizedTitle: String?
   public var accessibilityLabel: String
+  public var accessoryType: UITableViewCellAccessoryType?
 
   // MARK: - Interface
 
@@ -53,6 +54,10 @@ public class FormElement: FormElementProtocol {
   public func configureCell(cell: FormCell) {
     cell.textLabel?.text = localizedTitle ?? name
     cell.accessibilityLabel = "\(accessibilityLabel).cell"
+
+    if let accessoryType = accessoryType ?? section?.accessoryType(field: self) {
+      cell.accessoryType = accessoryType
+    }
   }
 
   // MARK: - Callbacks

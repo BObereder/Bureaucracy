@@ -94,6 +94,10 @@ public class FormSection: FormSectionProtocol {
     form?.didUpdate(section: self, field: field)
   }
 
+  public func accessoryType(#field: FormElement) -> UITableViewCellAccessoryType? {
+    return nil
+  }
+
   // MARK: - SequenceType
 
   public func generate() -> GeneratorOf<FormElement> {
