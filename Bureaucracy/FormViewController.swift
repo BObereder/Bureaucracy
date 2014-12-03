@@ -20,6 +20,10 @@ public class FormViewController: UITableViewController, FormDelegate {
     }
   }
 
+  public var form: Form? {
+    return dataSource?.form
+  }
+
   // MARK: - FormDelegate
 
   public func didUpdateForm(form: Form, section: FormSection?, field: FormElement?) {
@@ -29,7 +33,7 @@ public class FormViewController: UITableViewController, FormDelegate {
   // MARK: - UITableViewDelegate
 
   public override func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-    dataSource?.form.item(indexPath: indexPath).didSelect()
+    form?.item(indexPath: indexPath).didSelect()
   }
 
 }
