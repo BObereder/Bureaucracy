@@ -119,11 +119,27 @@ public class Form: CollectionType {
     return dict
   }
 
+  // MARK: - Reset
+
+  public func undo() {
+    for x in self {
+      x.undo()
+    }
+  }
+
+  public func revert() {
+    for x in self {
+      x.revert()
+    }
+  }
+
   public func reset() {
     for x in self {
       x.reset()
     }
   }
+
+  // MARK: - Reload
 
   public func reloadForm() {
     dataSource?.reloadTable()
