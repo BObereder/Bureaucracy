@@ -93,6 +93,10 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   /// Resets section to empty value
   func reset()
 
+  // MARK: Reload
+
+  func reload(rowAnimation animation: UITableViewRowAnimation)
+
 }
 
 // MARK: - FormDataProtocol

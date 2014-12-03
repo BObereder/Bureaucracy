@@ -86,21 +86,27 @@ public class FormSection: FormSectionProtocol {
     for x in self {
       x.undo()
     }
-    form?.reloadSection(self)
+    reload()
   }
 
   public func revert() {
     for x in self {
       x.revert()
     }
-    form?.reloadSection(self)
+    reload()
   }
 
   public func reset() {
     for x in self {
       x.reset()
     }
-    form?.reloadSection(self)
+    reload()
+  }
+
+  // MARK: - Reload
+
+  public func reload(rowAnimation animation: UITableViewRowAnimation = .Automatic) {
+    form?.reloadSection(self, withRowAnimation: animation)
   }
 
   // MARK: - Callbacks
