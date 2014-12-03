@@ -31,8 +31,14 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   }
 
   public func reloadTable() {
-    map(tableView) { self.register($0) }
-    tableView?.reloadData()
+    if let tableView = tableView {
+      register(tableView)
+      tableView.reloadData()
+    }
+  }
+
+  public func reloadSection(section: Int, withRowAnimation animation: UITableViewRowAnimation = .Automatic) {
+    tableView?.reloadSections(NSIndexSet(index: section), withRowAnimation: animation)
   }
 
   // MARK: - UITableViewDataSource

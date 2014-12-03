@@ -194,7 +194,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   public func controllerDidChangeContent(controller: NSFetchedResultsController) {
     self.removeAll()
-    form?.reloadInterface()
+    form?.reloadForm()
   }
 
 }

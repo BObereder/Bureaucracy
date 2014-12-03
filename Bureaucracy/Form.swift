@@ -125,7 +125,7 @@ public class Form: CollectionType {
     }
   }
 
-  public func reloadInterface() {
+  public func reloadForm() {
     dataSource?.reloadTable()
   }
 
