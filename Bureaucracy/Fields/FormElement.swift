@@ -55,9 +55,9 @@ public class FormElement: FormElementProtocol {
     cell.textLabel?.text = localizedTitle ?? name
     cell.accessibilityLabel = "\(accessibilityLabel).cell"
 
-    if let accessoryType = accessoryType ?? section?.accessoryType(field: self) {
-      cell.accessoryType = accessoryType
-    }
+    var x = section?.accessoryType(field: self)
+
+    cell.accessoryType = (accessoryType ?? section?.accessoryType(field: self)) ?? .None
   }
 
   // MARK: - Callbacks
@@ -78,6 +78,14 @@ public class FormElement: FormElementProtocol {
   }
 
   // MARK: Reset
+
+  public func undo() {
+    // noop
+  }
+
+  public func revert() {
+    // noop
+  }
 
   public func reset() {
     // noop

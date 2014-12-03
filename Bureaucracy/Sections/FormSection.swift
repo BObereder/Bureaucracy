@@ -82,10 +82,25 @@ public class FormSection: FormSectionProtocol {
 
   // MARK: Reset
 
+  public func undo() {
+    for x in self {
+      x.undo()
+    }
+    form?.reloadSection(self)
+  }
+
+  public func revert() {
+    for x in self {
+      x.revert()
+    }
+    form?.reloadSection(self)
+  }
+
   public func reset() {
     for x in self {
       x.reset()
     }
+    form?.reloadSection(self)
   }
 
   // MARK: - Callbacks

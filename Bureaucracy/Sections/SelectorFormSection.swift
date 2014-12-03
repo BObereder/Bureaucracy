@@ -146,8 +146,19 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   // MARK: Reset
 
-  public override func reset() {
+  public override func undo() {
+    currentValue = previousValue
+    form?.reloadSection(self)
+  }
+
+  public override func revert() {
     currentValue = initialValue
+    form?.reloadSection(self)
+  }
+
+  public override func reset() {
+    currentValue = nil
+    form?.reloadSection(self)
   }
 
   // MARK: - Callbacks

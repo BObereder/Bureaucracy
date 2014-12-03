@@ -41,6 +41,11 @@ public protocol FormElementProtocol: Equatable {
 
   // MARK: Reset
 
+  /// Returns field to the previous value
+  func undo()
+  /// Returns field to the initial value
+  func revert()
+  /// Resets field to empty value
   func reset()
   
 }
@@ -81,6 +86,11 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
 
   // MARK: Reset
 
+  /// Returns section to the previous value
+  func undo()
+  /// Returns section to the initial value
+  func revert()
+  /// Resets section to empty value
   func reset()
 
 }

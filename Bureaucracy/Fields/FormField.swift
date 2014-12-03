@@ -27,8 +27,16 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
 
   // MARK: Reset
 
-  public override func reset() {
+  public override func undo() {
+    currentValue = previousValue
+  }
+
+  public override func revert() {
     currentValue = initialValue
+  }
+
+  public override func reset() {
+    currentValue = nil
   }
 
   // MARK: - FormDataProtocol

@@ -129,6 +129,10 @@ public class Form: CollectionType {
     dataSource?.reloadTable()
   }
 
+  public func reloadSection(section: FormSection, withRowAnimation animation: UITableViewRowAnimation = .Automatic) {
+    dataSource?.reloadSection(section.sectionIndex!, withRowAnimation: animation)
+  }
+
   // MARK: - SequenceType
 
   public func generate() -> GenericGenerator<FormSection> {
