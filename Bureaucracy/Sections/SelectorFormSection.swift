@@ -87,11 +87,6 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
     }
   }
 
-  public func didSetInternalValue() {
-    let field = filter(self) { return ($0 as? SelectorGroupFormField)?.currentValue == true }
-    form?.didUpdate(section: self, field: field.first)
-  }
-
   public var previousValue: Type?
 
   public var internalValue: Internal? {
@@ -99,11 +94,18 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
       return typeToInternal(currentValue)
     }
     set(newOption) {
-      currentValue = internalToType(newOption)
-      if error == nil && currentValue != previousValue {
+      let newValue = internalToType(newOption)
+      let different = currentValue != newValue
+      currentValue = newValue
+      if error == nil && different {
         didSetInternalValue()
       }
     }
+  }
+
+  public func didSetInternalValue() {
+    let field = filter(self) { return ($0 as? SelectorGroupFormField)?.currentValue == true }
+    form?.didUpdate(section: self, field: field.first)
   }
 
   // MARK: - Value transformers
@@ -146,19 +148,25 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
 
   // MARK: Reset
 
-  public override func undo() {
+  public override func undo(_ shouldReload: Bool = true) {
     currentValue = previousValue
-    form?.reloadSection(self)
+    if shouldReload {
+      reload()
+    }
   }
 
-  public override func revert() {
+  public override func revert(_ shouldReload: Bool = true) {
     currentValue = initialValue
-    form?.reloadSection(self)
+    if shouldReload {
+      reload()
+    }
   }
 
-  public override func reset() {
+  public override func reset(_ shouldReload: Bool = true) {
     currentValue = nil
-    form?.reloadSection(self)
+    if shouldReload {
+      reload()
+    }
   }
 
   // MARK: - Callbacks

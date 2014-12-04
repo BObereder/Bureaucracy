@@ -85,7 +85,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   public final var currentValue: Type? {
     set {
       error = validate(newValue)
-      if error == nil {
+      if error == nil && _currentValue != newValue {
         previousValue = _currentValue
         _currentValue = newValue
 
@@ -110,8 +110,10 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
       return typeToInternal(currentValue)
     }
     set(newOption) {
-      currentValue = internalToType(newOption)
-      if error == nil && currentValue != previousValue {
+      let newValue = internalToType(newOption)
+      let different = newValue != currentValue
+      currentValue = newValue
+      if error == nil && different {
         didSetInternalValue()
       }
     }
@@ -162,20 +164,25 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   // MARK: Reset
 
-  public override func undo() {
+  public override func undo(_ shouldReload: Bool = true) {
     currentValue = previousValue
-    form?.reloadSection(self)
+    if shouldReload {
+      reload()
+    }
   }
 
-
-  public override func revert() {
+  public override func revert(_ shouldReload: Bool = true) {
     currentValue = initialValue
-    form?.reloadSection(self)
+    if shouldReload {
+      reload()
+    }
   }
 
-  public override func reset() {
+  public override func reset(_ shouldReload: Bool = true) {
     currentValue = nil
-    form?.reloadSection(self)
+    if shouldReload {
+      reload()
+    }
   }
 
   // MARK: - Callbacks
@@ -206,7 +213,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
 
   public func controllerDidChangeContent(controller: NSFetchedResultsController) {
     self.removeAll()
-    form?.reloadForm()
+    form?.reload()
   }
 
 }

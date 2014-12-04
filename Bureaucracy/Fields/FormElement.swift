@@ -63,7 +63,7 @@ public class FormElement: FormElementProtocol {
   // MARK: - Callbacks
 
   // FIXME: Workaround for UIKit not supporting Generics, should be moved into FormField and accept Internal type
-  public func didChangeInternalValue(cell: FormCell) {
+  public func cellDidChangeInternalValue(cell: FormCell) {
     // noop
   }
 
@@ -79,16 +79,22 @@ public class FormElement: FormElementProtocol {
 
   // MARK: Reset
 
-  public func undo() {
+  public func undo(_ shouldReload: Bool = true) {
     // noop
   }
 
-  public func revert() {
+  public func revert(_ shouldReload: Bool = true) {
     // noop
   }
 
-  public func reset() {
+  public func reset(_ shouldReload: Bool = true) {
     // noop
+  }
+
+  // MARK: Reload
+
+  public func reload(rowAnimation animation: UITableViewRowAnimation = .Automatic) {
+    section?.form?.reloadField(self, withRowAnimation: animation)
   }
 
 }

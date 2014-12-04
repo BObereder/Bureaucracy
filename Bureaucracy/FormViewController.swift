@@ -11,17 +11,17 @@ import UIKit
 
 public class FormViewController: UITableViewController, FormDelegate {
 
-  public var dataSource: FormDataSource? {
-    didSet {
-      tableView.dataSource = dataSource
-      dataSource?.register(tableView)
-      dataSource?.form.delegate = self
-      tableView.reloadData()
-    }
-  }
+  public var dataSource: FormDataSource?
 
   public var form: Form? {
-    return dataSource?.form
+    didSet {
+      if let form = form {
+        dataSource = FormDataSource(form: form)
+        tableView.dataSource = dataSource
+        dataSource?.register(tableView)
+        tableView.reloadData()
+      }
+    }
   }
 
   // MARK: - FormDelegate

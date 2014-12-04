@@ -32,7 +32,7 @@ public protocol FormElementProtocol: Equatable {
 
   // MARK: Callbacks
 
-  func didChangeInternalValue(cell: FormCell)
+  func cellDidChangeInternalValue(cell: FormCell)
   func didSelect()
 
   // MARK: Serialization
@@ -42,11 +42,11 @@ public protocol FormElementProtocol: Equatable {
   // MARK: Reset
 
   /// Returns field to the previous value
-  func undo()
+  func undo(shouldReload: Bool)
   /// Returns field to the initial value
-  func revert()
+  func revert(shouldReload: Bool)
   /// Resets field to empty value
-  func reset()
+  func reset(shouldReload: Bool)
   
 }
 
@@ -87,11 +87,11 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   // MARK: Reset
 
   /// Returns section to the previous value
-  func undo()
+  func undo(shouldReload: Bool)
   /// Returns section to the initial value
-  func revert()
+  func revert(shouldReload: Bool)
   /// Resets section to empty value
-  func reset()
+  func reset(shouldReload: Bool)
 
   // MARK: Reload
 

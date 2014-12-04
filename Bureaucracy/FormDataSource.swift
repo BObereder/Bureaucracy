@@ -41,6 +41,10 @@ public class FormDataSource: NSObject, UITableViewDataSource {
     tableView?.reloadSections(NSIndexSet(index: section), withRowAnimation: animation)
   }
 
+  public func reloadRow(row: NSIndexPath, withRowAnimation animation: UITableViewRowAnimation = .Automatic) {
+    tableView?.reloadRowsAtIndexPaths([row], withRowAnimation: animation)
+  }
+
   // MARK: - UITableViewDataSource
 
   public func numberOfSectionsInTableView(tableView: UITableView) -> Int {

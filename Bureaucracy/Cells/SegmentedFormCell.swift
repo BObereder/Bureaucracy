@@ -13,7 +13,7 @@ public class SegmentedFormCell: FormCell {
   @IBOutlet public weak var segmentedControl: UISegmentedControl!
 
   @IBAction public func didChangeValue(sender: UISegmentedControl) {
-    formElement?.didChangeInternalValue(self)
+    formElement?.cellDidChangeInternalValue(self)
   }
 
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {

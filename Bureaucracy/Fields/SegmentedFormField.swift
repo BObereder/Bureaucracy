@@ -44,11 +44,11 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
 
   // MARK: Callbacks
 
-  public override func didChangeInternalValue(cell: FormCell) {
+  public override func cellDidChangeInternalValue(cell: FormCell) {
     if let field = cell.formElement as? SegmentedFormField {
       field.internalValue = (cell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex as? Internal
     }
-    super.didChangeInternalValue(cell)
+    super.cellDidChangeInternalValue(cell)
   }
 
   // MARK: - FormDataProtocol

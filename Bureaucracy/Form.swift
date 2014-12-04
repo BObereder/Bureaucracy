@@ -123,30 +123,40 @@ public class Form: CollectionType {
 
   public func undo() {
     for x in self {
-      x.undo()
+      x.undo(false)
     }
+
+    reload()
   }
 
   public func revert() {
     for x in self {
-      x.revert()
+      x.revert(false)
     }
+
+    reload()
   }
 
   public func reset() {
     for x in self {
-      x.reset()
+      x.reset(false)
     }
+
+    reload()
   }
 
   // MARK: - Reload
 
-  public func reloadForm() {
+  public func reload() {
     dataSource?.reloadTable()
   }
 
   public func reloadSection(section: FormSection, withRowAnimation animation: UITableViewRowAnimation = .Automatic) {
     dataSource?.reloadSection(section.sectionIndex!, withRowAnimation: animation)
+  }
+
+  public func reloadField(field: FormElement, withRowAnimation animation: UITableViewRowAnimation = .Automatic) {
+    dataSource?.reloadRow(NSIndexPath(forRow: field.fieldIndex!, inSection: field.section!.sectionIndex!), withRowAnimation: animation)
   }
 
   // MARK: - SequenceType

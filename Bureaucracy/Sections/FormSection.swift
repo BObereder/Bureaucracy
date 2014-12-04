@@ -81,26 +81,34 @@ public class FormSection: FormSectionProtocol {
   }
 
   // MARK: Reset
-
-  public func undo() {
+  public func undo(_ shouldReload: Bool = true) {
     for x in self {
-      x.undo()
+      x.undo(false)
     }
-    reload()
+
+    if shouldReload {
+      reload()
+    }
   }
 
-  public func revert() {
+  public func revert(_ shouldReload: Bool = true) {
     for x in self {
-      x.revert()
+      x.revert(false)
     }
-    reload()
+
+    if shouldReload {
+      reload()
+    }
   }
 
-  public func reset() {
+  public func reset(_ shouldReload: Bool = true) {
     for x in self {
-      x.reset()
+      x.reset(false)
     }
-    reload()
+
+    if shouldReload {
+      reload()
+    }
   }
 
   // MARK: - Reload

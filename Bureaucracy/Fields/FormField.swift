@@ -27,16 +27,25 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
 
   // MARK: Reset
 
-  public override func undo() {
+  public override func undo(_ shouldReload: Bool = true) {
     currentValue = previousValue
+    if shouldReload {
+      reload()
+    }
   }
 
-  public override func revert() {
+  public override func revert(_ shouldReload: Bool = true) {
     currentValue = initialValue
+    if shouldReload {
+      reload()
+    }
   }
 
-  public override func reset() {
+  public override func reset(_ shouldReload: Bool = true) {
     currentValue = nil
+    if shouldReload {
+      reload()
+    }
   }
 
   // MARK: - FormDataProtocol
@@ -72,7 +81,6 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
       if error == nil && newValue != _currentValue {
         previousValue = _currentValue
         _currentValue = newValue
-        didSetInternalValue()
       }
     }
   }
@@ -84,7 +92,12 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
       return typeToInternal(currentValue)
     }
     set(newOption) {
-      currentValue = internalToType(newOption)
+      let newValue = internalToType(newOption)
+      let different = newValue != currentValue
+      currentValue = newValue
+      if error == nil && different {
+        didSetInternalValue()
+      }
     }
   }
 
