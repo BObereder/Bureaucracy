@@ -92,9 +92,10 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
         for x in self {
           if newValue != nil && x.fieldIndex == optionIndex(newValue!) {
             (x as? SelectorGroupFormField)?.currentValue = true
-            continue
           }
-          (x as? SelectorGroupFormField)?.currentValue = false
+          else {
+            (x as? SelectorGroupFormField)?.currentValue = false
+          }
         }
       }
     }
