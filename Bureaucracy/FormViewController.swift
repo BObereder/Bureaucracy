@@ -16,6 +16,7 @@ public class FormViewController: UITableViewController, FormDelegate {
   public var form: Form? {
     didSet {
       if let form = form {
+        form.delegate = self
         dataSource = FormDataSource(form: form)
         tableView.dataSource = dataSource
         dataSource?.register(tableView)
