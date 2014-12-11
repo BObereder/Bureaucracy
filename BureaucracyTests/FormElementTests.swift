@@ -20,7 +20,6 @@ class FormElementTests: XCTestCase {
   }
 
   func test00initialization() {
-    XCTAssertEqual(element!.name, element!.accessibilityLabel, "Element's Name and AccessibilityLabel shoud be identical")
     XCTAssertNil(element!.section, "Section of dangling form element should be nil")
     XCTAssertNil(element!.fieldIndex, "Index of dangling form element should be nil")
   }
@@ -80,7 +79,7 @@ class FormElementTests: XCTestCase {
 
     element.configureCell(cell)
     XCTAssertNil(element.localizedTitle, "Localized title should initialize with nil")
-    XCTAssertEqual(cell.accessibilityLabel, "\(element.accessibilityLabel).cell", "AcessibilityLabel should be set")
+    XCTAssertEqual(cell.accessibilityIdentifier, "\(element.name).cell", "Acessibility identifier should be set")
     XCTAssertEqual(cell.textLabel!.text!, element.name, "Cell text label should be equal to Element's name if localizedTitle is nil")
 
     element.localizedTitle = "Localized title"

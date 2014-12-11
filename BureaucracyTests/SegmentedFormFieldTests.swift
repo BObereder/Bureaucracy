@@ -114,7 +114,7 @@ class SegmentedFormFieldTests: FormElementTests {
 
     testField.configureCell(cell)
     XCTAssertNotNil(cell.segmentedControl, "Segmented control should not be nil")
-    XCTAssertEqual(cell.segmentedControl.accessibilityLabel, "SegmentedControl", "Acessibility label should be equal to SegmentedControl")
+    XCTAssertEqual(cell.segmentedControl.accessibilityIdentifier, "TestSegmentedFormField.cell.segmentedControl", "Acessibility label should be correct")
     XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 0, "Segment 0 should be selected")
 
     for i in 0..<options.count {

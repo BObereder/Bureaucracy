@@ -26,8 +26,10 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
   }
 
   public override func configureCell(cell: FormCell) {
+    cell.accessibilityIdentifier = "\(name).cell"
+
     if let segmentedCell = cell as? SegmentedFormCell {
-      segmentedCell.segmentedControl.accessibilityLabel = "SegmentedControl"
+      segmentedCell.segmentedControl.accessibilityIdentifier = "\(cell.accessibilityIdentifier).segmentedControl"
       segmentedCell.segmentedControl.removeAllSegments()
 
       for i in 0..<optionCount {

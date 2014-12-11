@@ -16,7 +16,6 @@ public class FormElement: FormElementProtocol {
 
   public init(_ name: String) {
     self.name = name
-    self.accessibilityLabel = name
   }
 
   // MARK: - Section relationship
@@ -35,7 +34,6 @@ public class FormElement: FormElementProtocol {
   
   public var name: String
   public var localizedTitle: String?
-  public var accessibilityLabel: String
   public var accessoryType: UITableViewCellAccessoryType?
 
   // MARK: - Interface
@@ -53,7 +51,7 @@ public class FormElement: FormElementProtocol {
 
   public func configureCell(cell: FormCell) {
     cell.textLabel?.text = localizedTitle ?? name
-    cell.accessibilityLabel = "\(accessibilityLabel).cell"
+    cell.accessibilityIdentifier = "\(name).cell"
 
     var x = section?.accessoryType(field: self)
 
