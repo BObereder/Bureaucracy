@@ -28,18 +28,20 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
   public override func configureCell(cell: FormCell) {
     cell.accessibilityIdentifier = "\(name).cell"
 
-    if let segmentedCell = cell as? SegmentedFormCell {
-      segmentedCell.segmentedControl.accessibilityIdentifier = "\(cell.accessibilityIdentifier).segmentedControl"
-      segmentedCell.segmentedControl.removeAllSegments()
+    if let cell = cell as? SegmentedFormCell {
+      let control = cell.segmentedControl
+
+      control.accessibilityIdentifier = "\(cell.accessibilityIdentifier).segmentedControl"
+      control.removeAllSegments()
 
       for i in 0..<optionCount {
         if let title = typeToRepresentation(option(i)) {
-          segmentedCell.segmentedControl.insertSegmentWithTitle(title, atIndex: segmentedCell.segmentedControl.numberOfSegments, animated: false)
+          control.insertSegmentWithTitle(title, atIndex: control.numberOfSegments, animated: false)
         }
       }
 
       if let index = internalValue {
-        segmentedCell.segmentedControl.selectedSegmentIndex = index as Int
+        control.selectedSegmentIndex = index as Int
       }
     }
   }
