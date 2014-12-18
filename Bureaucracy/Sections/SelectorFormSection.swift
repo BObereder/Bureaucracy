@@ -33,7 +33,7 @@ public class SelectorFormSection<Type: protocol<Equatable, Printable>>: FormSect
   // MARK: - CollectionType
 
   public override subscript(position: Int) -> FormElement {
-    if (position == endIndex) {
+    if position == endIndex {
       let object = option(position)
       let element = append(SelectorGroupFormField("\(name).\(position)", value: object == currentValue))
       element.localizedTitle = typeToRepresentation(object)
