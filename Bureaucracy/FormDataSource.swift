@@ -9,9 +9,20 @@
 import UIKit
 import SwiftHelpers
 
-public class FormDataSource: NSObject, UITableViewDataSource {
+public protocol FormDataSource: UITableViewDataSource {
 
-  public init(form: Form) {
+  init(form: Form)
+
+  func register(tableView: UITableView)
+  func reloadTable()
+  func reloadSection(section: Int, withRowAnimation animation: UITableViewRowAnimation)
+  func reloadRow(row: NSIndexPath, withRowAnimation animation: UITableViewRowAnimation)
+
+}
+
+public class BasicDataSource: NSObject, FormDataSource {
+
+  public required init(form: Form) {
     self.form = form
     super.init()
     form.dataSource = self
@@ -20,7 +31,7 @@ public class FormDataSource: NSObject, UITableViewDataSource {
   public var form: Form
   weak var tableView: UITableView?
 
-  func register(tableView: UITableView) {
+  public func register(tableView: UITableView) {
     self.tableView = tableView
 
     for section in form {

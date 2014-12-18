@@ -17,12 +17,16 @@ public class FormViewController: UITableViewController, FormDelegate {
     didSet {
       if let form = form {
         form.delegate = self
-        dataSource = FormDataSource(form: form)
+        dataSource = dataSource(form)
         tableView.dataSource = dataSource
         dataSource?.register(tableView)
         tableView.reloadData()
       }
     }
+  }
+
+  public func dataSource(form: Form) -> FormDataSource {
+    return BasicDataSource(form: form)
   }
 
   // MARK: - FormDelegate
