@@ -87,8 +87,8 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
   }
 
   public func typeToRepresentation(value: Type?) -> String? {
-    if let aValue = value {
-      return "\(aValue)"
+    if let value = value {
+      return "\(value)"
     }
     else {
       return nil

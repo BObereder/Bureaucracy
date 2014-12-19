@@ -17,10 +17,6 @@ public class FormCell: UITableViewCell {
     }
   }
   
-  public override func awakeFromNib() {
-    super.awakeFromNib()
-  }
-  
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     accessoryType = .None
