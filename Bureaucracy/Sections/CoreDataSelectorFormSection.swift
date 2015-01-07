@@ -15,7 +15,7 @@ public func ==<Type: NSManagedObject>(lhs: CoreDataSelectorFormSection<Type>, rh
   return lhs === rhs
 }
 
-public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, FormDataProtocol, NSFetchedResultsControllerDelegate {
+public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, FormDataProtocol {
 
   public typealias Internal = Int
   public typealias Representation = String
@@ -42,7 +42,7 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   // MARK: - CollectionType
 
   public override subscript(position: Int) -> FormElement {
-    if (position == endIndex) {
+    if position == endIndex {
       let object = option(position)
       let element = append(SelectorGroupFormField("\(name).\(position)", value: object == currentValue))
       element.localizedTitle = typeToRepresentation(object)
@@ -204,17 +204,30 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   var fetchRequest: NSFetchRequest
 
   var managedObjectContext: NSManagedObjectContext
+  lazy var fetchedResultsControllerDelegate: FetchedResultsControllerDelegate = {
+    return FetchedResultsControllerDelegate(section: self)
+  }()
 
   lazy var fetchedResultsController: NSFetchedResultsController = {
     let controller = NSFetchedResultsController(fetchRequest: self.fetchRequest, managedObjectContext: self.managedObjectContext, sectionNameKeyPath: nil, cacheName: self.name)
-    controller.delegate = self
+    controller.delegate = self.fetchedResultsControllerDelegate
     controller.performFetch(&self.error)
     return controller
   }()
 
-  public func controllerDidChangeContent(controller: NSFetchedResultsController) {
-    self.removeAll()
-    form?.reload()
+}
+
+class FetchedResultsControllerDelegate: NSFetchedResultsControllerDelegate {
+
+  init(section: FormSection) {
+    self.section = section
+  }
+
+  var section: FormSection?
+
+  func controllerDidChangeContent(controller: NSFetchedResultsController) {
+    section?.removeAll()
+    section?.reload()
   }
 
 }
