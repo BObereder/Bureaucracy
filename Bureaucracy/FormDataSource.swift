@@ -33,12 +33,7 @@ public class BasicDataSource: NSObject, FormDataSource {
 
   public func register(tableView: UITableView) {
     self.tableView = tableView
-
-    for section in form {
-      for field in section {
-        field.registerReusableView(tableView)
-      }
-    }
+    form.register(tableView)
   }
 
   public func reloadTable() {

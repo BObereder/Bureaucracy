@@ -53,7 +53,7 @@ class FormElementTests: XCTestCase {
       var theElement: FormElement?
 
       override func viewDidLoad() {
-        theElement?.registerReusableView(tableView)
+        theElement?.register(tableView)
       }
 
       override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

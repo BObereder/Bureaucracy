@@ -117,6 +117,14 @@ public class FormSection: FormSectionProtocol {
     form?.reloadSection(self, withRowAnimation: animation)
   }
 
+  // MARK: - Interface
+
+  public func register(tableView: UITableView) {
+    for field in self {
+      field.register(tableView)
+    }
+  }
+
   // MARK: - Callbacks
 
   public func didUpdate(#field: FormElement?) {

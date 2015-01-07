@@ -25,7 +25,8 @@ public protocol FormElementProtocol: Equatable {
 
   // MARK: Interface
 
-  func registerReusableView(tableView: UITableView)
+  var cellReuseIdentifier: String { get }
+  func register(tableView: UITableView)
   func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell
   func configureCell(cell: FormCell)
 
@@ -77,6 +78,10 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   // MARK: Serialization
 
   func serialize() -> [String: Any?]
+
+  // MARK: Interface
+
+  func register(tableView: UITableView)
 
   // MARK: Callbacks
 

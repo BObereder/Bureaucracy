@@ -19,10 +19,14 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
 
   // MARK: Interface
 
-  public override func registerReusableView(tableView: UITableView) {
-    let bundle = NSBundle(forClass: FormCell.self)
+  public override var cellReuseIdentifier: String {
+    return SegmentedFormCell.description()
+  }
+
+  public override func register(tableView: UITableView) {
+    let bundle = NSBundle(forClass: SegmentedFormCell.self)
     let nib: UINib! = UINib(nibName: "SegmentedFormCell", bundle: bundle)
-    tableView.registerNib(nib, forCellReuseIdentifier: name)
+    tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
   }
 
   public override func configureCell(cell: FormCell) {

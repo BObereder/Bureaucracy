@@ -91,7 +91,7 @@ class SegmentedFormFieldTests: FormElementTests {
 
       override func viewDidLoad() {
         super.viewDidLoad()
-        theElement?.registerReusableView(tableView)
+        theElement?.register(tableView)
       }
 
       override func numberOfSectionsInTableView(tableView: UITableView) -> Int {

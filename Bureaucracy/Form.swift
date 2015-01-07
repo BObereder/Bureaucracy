@@ -119,6 +119,12 @@ public class Form: CollectionType {
     return dict
   }
 
+  public func register(tableView: UITableView) {
+    for section in self {
+      section.register(tableView)
+    }
+  }
+
   // MARK: - Reset
 
   public func undo() {
