@@ -21,7 +21,6 @@ public protocol FormElementProtocol: Equatable {
 
   var name: String { get set }
   var localizedTitle: String? { get set }
-  var accessoryType: UITableViewCellAccessoryType? { get set }
 
   // MARK: Interface
 
@@ -82,11 +81,11 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   // MARK: Interface
 
   func register(tableView: UITableView)
+  func configureCell(#field: FormElement, cell: FormCell)
 
   // MARK: Callbacks
 
   func didUpdate(#field: FormElement?)
-  func accessoryType(#field: FormElement) -> UITableViewCellAccessoryType?
 
   // MARK: Reset
 

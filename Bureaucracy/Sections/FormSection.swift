@@ -125,14 +125,14 @@ public class FormSection: FormSectionProtocol {
     }
   }
 
+  public func configureCell(#field: FormElement, cell: FormCell) {
+    // noop
+  }
+
   // MARK: - Callbacks
 
   public func didUpdate(#field: FormElement?) {
     form?.didUpdate(section: self, field: field)
-  }
-
-  public func accessoryType(#field: FormElement) -> UITableViewCellAccessoryType? {
-    return nil
   }
 
   // MARK: - SequenceType
