@@ -129,6 +129,10 @@ public class FormSection: FormSectionProtocol {
     // noop
   }
 
+  public func isReselectable(#field: FormElement) -> Bool {
+    return form?.isReselectable(section: self, field: field) ?? false
+  }
+
   // MARK: - Callbacks
 
   public func didUpdate(#field: FormElement?) {

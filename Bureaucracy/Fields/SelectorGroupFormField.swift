@@ -26,10 +26,10 @@ public class _SelectorGroupFormField<Type: protocol<Equatable, BooleanLiteralCon
 
   // MARK: Options
 
-  public override func didSetInternalValue() {
+  public override func didSetInternalValue(#oldValue: Type?) {
     if error == nil {
       if let theValue = currentValue as? Bool {
-        if theValue == true {
+        if theValue == true || isReselectable(field: self) {
           section?.didUpdate(field: self)
         }
       }

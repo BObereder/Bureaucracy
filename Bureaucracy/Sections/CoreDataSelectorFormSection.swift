@@ -112,17 +112,19 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
     }
     set(newOption) {
       let newValue = internalToType(newOption)
-      let different = newValue != currentValue
+      let oldValue = currentValue
       currentValue = newValue
-      if error == nil && different {
-        didSetInternalValue()
+      if error == nil {
+        didSetInternalValue(oldValue: oldValue)
       }
     }
   }
 
-  public func didSetInternalValue() {
-    let field = filter(self) { return ($0 as? SelectorGroupFormField)?.currentValue == true }
-    form?.didUpdate(section: self, field: field.first)
+  public func didSetInternalValue(#oldValue: Type?) {
+    let field = filter(self) { return ($0 as? SelectorGroupFormField)?.currentValue == true }.first
+    if currentValue != oldValue || isReselectable(field: field!) {
+      form?.didUpdate(section: self, field: field)
+    }
   }
 
   // MARK: - Value transformers

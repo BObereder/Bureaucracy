@@ -93,16 +93,22 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
     }
     set(newOption) {
       let newValue = internalToType(newOption)
-      let different = newValue != currentValue
+      let oldValue = currentValue
       currentValue = newValue
-      if error == nil && different {
-        didSetInternalValue()
+      if error == nil {
+        didSetInternalValue(oldValue: oldValue)
       }
     }
   }
 
-  public func didSetInternalValue() {
-    section?.didUpdate(field: self)
+  public func didSetInternalValue(#oldValue: Type?) {
+    if currentValue != oldValue || isReselectable(field: self) {
+      section?.didUpdate(field: self)
+    }
+  }
+
+  public func isReselectable(#field: FormElement) -> Bool {
+    return section?.isReselectable(field: field) ?? false
   }
   
   // MARK: - Value transformers

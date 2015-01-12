@@ -109,6 +109,10 @@ public class Form: CollectionType {
     delegate?.didUpdateForm(self, section: section, field: field)
   }
 
+  public func isReselectable(#section: FormSection?, field: FormElement) -> Bool {
+    return false
+  }
+
   public func serialize() -> [String: [String: Any?]] {
     var dict = [String: [String: Any?]]()
 

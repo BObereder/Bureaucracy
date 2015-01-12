@@ -63,8 +63,8 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
 
   // MARK: Values
 
-  public override func didSetInternalValue() {
-    super.didSetInternalValue()
+  public override func didSetInternalValue(#oldValue: Type?) {
+    super.didSetInternalValue(oldValue: oldValue)
     if let index = internalValue {
       (currentCell as? SegmentedFormCell)?.segmentedControl.selectedSegmentIndex = index as Int
     }
