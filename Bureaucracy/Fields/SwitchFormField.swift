@@ -29,6 +29,7 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
   
   public override func configureCell(cell: FormCell) {
     cell.accessibilityIdentifier = "\(name).cell"
+    cell.switchControl.accessibilityIdentifier = "\(name).switch"
     
     if let cell = cell as? SwitchFormCell {
       cell.textLabel?.text = localizedTitle
@@ -53,7 +54,6 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
     if let currentCell = currentCell as? SwitchFormCell {
       currentCell.switchControl.setOn(internalValue as Bool, animated: true)
     }
-    
   }
 
 }
