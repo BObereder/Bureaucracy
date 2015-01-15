@@ -66,4 +66,8 @@ public class BasicDataSource: NSObject, FormDataSource {
     return field.dequeueReusableView(tableView, forIndexPath: indexPath)
   }
 
+  public func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    return form[section].localizedTitle
+  }
+
 }
