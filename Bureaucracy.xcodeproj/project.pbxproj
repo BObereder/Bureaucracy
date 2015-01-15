@@ -9,6 +9,9 @@
 /* Begin PBXBuildFile section */
 		78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
+		78E37F361A67B27600EC4381 /* SwitchFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E37F341A67B27600EC4381 /* SwitchFormCell.swift */; };
+		78E37F371A67B27600EC4381 /* SwitchFormCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 78E37F351A67B27600EC4381 /* SwitchFormCell.xib */; };
+		78E37F391A67B27E00EC4381 /* SwitchFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E37F381A67B27E00EC4381 /* SwitchFormField.swift */; };
 		FA02001A1A14FDA50062384B /* SegmentedFormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */; };
 		FA02004A1A1636AE0062384B /* FormSectionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA0200491A1636AE0062384B /* FormSectionTests.swift */; };
 		FA45562F1A0B82EA00960033 /* SelectorGroupFormField.swift in Sources */ = {isa = PBXBuildFile; fileRef = FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */; };
@@ -48,6 +51,9 @@
 /* Begin PBXFileReference section */
 		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
+		78E37F341A67B27600EC4381 /* SwitchFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormCell.swift; sourceTree = "<group>"; };
+		78E37F351A67B27600EC4381 /* SwitchFormCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SwitchFormCell.xib; sourceTree = "<group>"; };
+		78E37F381A67B27E00EC4381 /* SwitchFormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormField.swift; sourceTree = "<group>"; };
 		FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SegmentedFormFieldTests.swift; sourceTree = "<group>"; };
 		FA0200491A1636AE0062384B /* FormSectionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormSectionTests.swift; sourceTree = "<group>"; };
 		FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SelectorGroupFormField.swift; sourceTree = "<group>"; };
@@ -111,6 +117,7 @@
 				FAD4061F19F69B50003ABE75 /* FormElement.swift */,
 				FAC20AFA19F7E56A00F7CB28 /* FormField.swift */,
 				FABA4E9819F54CE000574A68 /* SegmentedFormField.swift */,
+				78E37F381A67B27E00EC4381 /* SwitchFormField.swift */,
 				FA45562E1A0B82EA00960033 /* SelectorGroupFormField.swift */,
 			);
 			path = Fields;
@@ -122,6 +129,8 @@
 				FABA4EA119F54E9000574A68 /* FormCell.swift */,
 				FABA4E9D19F54D7200574A68 /* SegmentedFormCell.swift */,
 				FABA4E9E19F54D7200574A68 /* SegmentedFormCell.xib */,
+				78E37F341A67B27600EC4381 /* SwitchFormCell.swift */,
+				78E37F351A67B27600EC4381 /* SwitchFormCell.xib */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -294,6 +303,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				FABA4EA019F54D7200574A68 /* SegmentedFormCell.xib in Resources */,
+				78E37F371A67B27600EC4381 /* SwitchFormCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -316,6 +326,7 @@
 				78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */,
 				FABA4E9919F54CE000574A68 /* SegmentedFormField.swift in Sources */,
 				FABA4EA219F54E9000574A68 /* FormCell.swift in Sources */,
+				78E37F361A67B27600EC4381 /* SwitchFormCell.swift in Sources */,
 				FAC10D3A1A092B95005C7252 /* FormSection.swift in Sources */,
 				FAE0652C19F5327C00279C6E /* FormDataSource.swift in Sources */,
 				FABA4E9419F53E1400574A68 /* Form.swift in Sources */,
@@ -323,6 +334,7 @@
 				78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */,
 				FA4BF9FB1A10DBDA00E5AC74 /* CoreDataSelectorFormSection.swift in Sources */,
 				FAD4062019F69B50003ABE75 /* FormElement.swift in Sources */,
+				78E37F391A67B27E00EC4381 /* SwitchFormField.swift in Sources */,
 				FA45562F1A0B82EA00960033 /* SelectorGroupFormField.swift in Sources */,
 				FABA4E9F19F54D7200574A68 /* SegmentedFormCell.swift in Sources */,
 				FABA4EA819F5634C00574A68 /* FormViewController.swift in Sources */,
