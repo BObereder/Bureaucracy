@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78B8D6CF1A68FF6400C87E5C /* SwitchFormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */; };
 		78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
 		78E37F361A67B27600EC4381 /* SwitchFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E37F341A67B27600EC4381 /* SwitchFormCell.swift */; };
@@ -39,6 +40,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		78B8D6D61A69010000C87E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAE064A819F50DD900279C6E;
+			remoteInfo = SwiftHelpers;
+		};
+		78B8D6D81A69010000C87E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAE064B319F50DD900279C6E;
+			remoteInfo = SwiftHelpersTests;
+		};
 		FAE0651C19F5322E00279C6E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FAE0650619F5322E00279C6E /* Project object */;
@@ -49,6 +64,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormFieldTests.swift; sourceTree = "<group>"; };
+		78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftHelpers.xcodeproj; path = Submodules/SwiftHelpers/SwiftHelpers.xcodeproj; sourceTree = "<group>"; };
 		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
 		78E37F341A67B27600EC4381 /* SwitchFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormCell.swift; sourceTree = "<group>"; };
@@ -103,6 +120,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78B8D6D21A69010000C87E5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78B8D6D71A69010000C87E5C /* SwiftHelpers.framework */,
+				78B8D6D91A69010000C87E5C /* SwiftHelpersTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FAAF12851A1DFEFB00C72B24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -148,6 +174,7 @@
 		FAE0650519F5322E00279C6E = {
 			isa = PBXGroup;
 			children = (
+				78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */,
 				FAE0651119F5322E00279C6E /* Bureaucracy */,
 				FAE0651E19F5322E00279C6E /* BureaucracyTests */,
 				FAAF12851A1DFEFB00C72B24 /* Frameworks */,
@@ -197,6 +224,7 @@
 				FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */,
 				FAEC0AD01A1B7EE500E8F709 /* FieldValidationTests.swift */,
 				FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */,
+				78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */,
 				FA0200491A1636AE0062384B /* FormSectionTests.swift */,
 				FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */,
 				FAE0651F19F5322E00279C6E /* Supporting Files */,
@@ -289,6 +317,12 @@
 			mainGroup = FAE0650519F5322E00279C6E;
 			productRefGroup = FAE0651019F5322E00279C6E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 78B8D6D21A69010000C87E5C /* Products */;
+					ProjectRef = 78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FAE0650E19F5322E00279C6E /* Bureaucracy */,
@@ -296,6 +330,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		78B8D6D71A69010000C87E5C /* SwiftHelpers.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftHelpers.framework;
+			remoteRef = 78B8D6D61A69010000C87E5C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		78B8D6D91A69010000C87E5C /* SwiftHelpersTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftHelpersTests.xctest;
+			remoteRef = 78B8D6D81A69010000C87E5C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FAE0650D19F5322E00279C6E /* Resources */ = {
@@ -350,6 +401,7 @@
 				FAEC0AC11A1B5FCE00E8F709 /* FormTests.swift in Sources */,
 				FA02001A1A14FDA50062384B /* SegmentedFormFieldTests.swift in Sources */,
 				FACB25351A136D3C00B2FC4F /* FormElementTests.swift in Sources */,
+				78B8D6CF1A68FF6400C87E5C /* SwitchFormFieldTests.swift in Sources */,
 				FAEC0AD11A1B7EE500E8F709 /* FieldValidationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

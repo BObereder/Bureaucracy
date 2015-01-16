@@ -75,63 +75,58 @@ class SegmentedFormFieldTests: FormElementTests {
   }
 
   func test08segmentedControl() {
-    class TableViewController: UITableViewController {
-
-      init(_ element: FormElement) {
-        theElement = element
-        super.init(nibName: nil, bundle: nil)
-      }
-
-      required init(coder aDecoder: NSCoder) {
-        theElement = nil
-        super.init(coder: aDecoder)
-      }
-
-      var theElement: FormElement?
-
+    
+    class TableViewController: FormViewController, FormDelegate {
+      
       override func viewDidLoad() {
         super.viewDidLoad()
-        theElement?.register(tableView)
+        let filterForm = TestForm()
+        filterForm.delegate = self
+        form = filterForm
       }
-
-      override func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 1
+      
+      func getTestCell() -> SegmentedFormCell {
+        return tableView.cellForRowAtIndexPath(NSIndexPath(forRow: 0, inSection: 0)) as SegmentedFormCell
       }
-
-      override func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-      }
-
-      override func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        return tableView.dequeueReusableCellWithIdentifier(FormCell.description(), forIndexPath: indexPath) as UITableViewCell
+      
+      override func didUpdateForm(form: Form, section: FormSection?, field: FormElement?) {
       }
     }
-
-    let viewController = TableViewController(testField)
+    
+    class TestForm: Form {
+      
+      override init() {
+        super.init()
+        let testSection = FormSection("TestSection")
+        testSection.append(SegmentedFormField<String, Int>("TestSegmentedFormField", value: "One", options: ["One", "Two", "Three"]))
+        addSection(testSection)
+      }
+    }
+    
+    let viewController = TableViewController()
     viewController.view.frame = UIScreen.mainScreen().bounds
 
-    let cell = testField.dequeueReusableView(viewController.tableView, forIndexPath: NSIndexPath(forRow: 0, inSection: 0)) as SegmentedFormCell
-
-    testField.configureCell(cell)
-    XCTAssertNotNil(cell.segmentedControl, "Segmented control should not be nil")
-    XCTAssertEqual(cell.segmentedControl.accessibilityIdentifier, "TestSegmentedFormField.cell.segmentedControl", "Acessibility label should be correct")
-    XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 0, "Segment 0 should be selected")
+    XCTAssertNotNil(viewController.getTestCell().segmentedControl, "Segmented control should not be nil")
+    XCTAssertEqual(viewController.getTestCell().segmentedControl.accessibilityIdentifier, "TestSegmentedFormField.segmentedControl", "Acessibility label should be correct")
+    XCTAssertEqual(viewController.getTestCell().segmentedControl.selectedSegmentIndex, 0, "Segment 0 should be selected")
 
     for i in 0..<options.count {
-      let segmentTitle = cell.segmentedControl.titleForSegmentAtIndex(i)!
+      let segmentTitle = viewController.getTestCell().segmentedControl.titleForSegmentAtIndex(i)!
       let elementTitle = options[i]
       XCTAssertEqual(segmentTitle, elementTitle, "Title of segment \(i) should be equal to \(elementTitle), but it is \(segmentTitle)")
     }
 
-    testField.internalValue = 1
-    XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 1, "Segment 1 should be selected")
-
-    cell.segmentedControl.selectedSegmentIndex = 2
-    cell.didChangeValue(cell.segmentedControl) // We have to manually trigger this as it's not a user's touch
-    XCTAssertEqual(testField.currentValue!, options[2], "Segment 2 should be selected")
-
-    testField.reset()
-    XCTAssertEqual(cell.segmentedControl.selectedSegmentIndex, 0, "Reset should revert segmented control to initial state")
+    let element = viewController.getTestCell().formElement as? SegmentedFormField<String, Int>
+    XCTAssertNotNil(element, "The cell should have an element")
+    element!.internalValue = 1
+    XCTAssertEqual(viewController.getTestCell().segmentedControl.selectedSegmentIndex, 1, "Segment 1 should be selected")
+    
+    viewController.getTestCell().segmentedControl.selectedSegmentIndex = 2
+    viewController.getTestCell().didChangeValue(viewController.getTestCell().segmentedControl) // We have to manually trigger this as it's not a user's touch
+    XCTAssertEqual(element!.currentValue!, options[2], "Segment 2 should be selected")
+    
+    element!.reset(true)
+    XCTAssertEqual(viewController.getTestCell().segmentedControl.selectedSegmentIndex, 0, "Reset should revert segmented control to initial state")
   }
 
 }
