@@ -40,6 +40,20 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		78B8D6D61A69010000C87E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAE064A819F50DD900279C6E;
+			remoteInfo = SwiftHelpers;
+		};
+		78B8D6D81A69010000C87E5C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = FAE064B319F50DD900279C6E;
+			remoteInfo = SwiftHelpersTests;
+		};
 		FAE0651C19F5322E00279C6E /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = FAE0650619F5322E00279C6E /* Project object */;
@@ -51,6 +65,7 @@
 
 /* Begin PBXFileReference section */
 		78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormFieldTests.swift; sourceTree = "<group>"; };
+		78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SwiftHelpers.xcodeproj; path = Submodules/SwiftHelpers/SwiftHelpers.xcodeproj; sourceTree = "<group>"; };
 		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
 		78E37F341A67B27600EC4381 /* SwitchFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormCell.swift; sourceTree = "<group>"; };
@@ -105,6 +120,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		78B8D6D21A69010000C87E5C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				78B8D6D71A69010000C87E5C /* SwiftHelpers.framework */,
+				78B8D6D91A69010000C87E5C /* SwiftHelpersTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		FAAF12851A1DFEFB00C72B24 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +174,7 @@
 		FAE0650519F5322E00279C6E = {
 			isa = PBXGroup;
 			children = (
+				78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */,
 				FAE0651119F5322E00279C6E /* Bureaucracy */,
 				FAE0651E19F5322E00279C6E /* BureaucracyTests */,
 				FAAF12851A1DFEFB00C72B24 /* Frameworks */,
@@ -292,6 +317,12 @@
 			mainGroup = FAE0650519F5322E00279C6E;
 			productRefGroup = FAE0651019F5322E00279C6E /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 78B8D6D21A69010000C87E5C /* Products */;
+					ProjectRef = 78B8D6D11A69010000C87E5C /* SwiftHelpers.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				FAE0650E19F5322E00279C6E /* Bureaucracy */,
@@ -299,6 +330,23 @@
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		78B8D6D71A69010000C87E5C /* SwiftHelpers.framework */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.framework;
+			path = SwiftHelpers.framework;
+			remoteRef = 78B8D6D61A69010000C87E5C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		78B8D6D91A69010000C87E5C /* SwiftHelpersTests.xctest */ = {
+			isa = PBXReferenceProxy;
+			fileType = wrapper.cfbundle;
+			path = SwiftHelpersTests.xctest;
+			remoteRef = 78B8D6D81A69010000C87E5C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
 		FAE0650D19F5322E00279C6E /* Resources */ = {
