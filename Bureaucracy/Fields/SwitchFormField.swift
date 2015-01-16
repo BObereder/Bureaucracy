@@ -33,7 +33,7 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
     if let cell = cell as? SwitchFormCell {
       cell.textLabel?.text = localizedTitle
       cell.switchControl.on = internalValue as Bool
-      cell.switchControl.accessibilityIdentifier = "\(cell.accessibilityIdentifier).switch"
+      cell.switchControl.accessibilityIdentifier = "\(name).switch"
     }
     section?.configureCell(field: self, cell: cell)
   }

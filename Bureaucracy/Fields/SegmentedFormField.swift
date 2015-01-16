@@ -35,7 +35,7 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
     if let cell = cell as? SegmentedFormCell {
       let control = cell.segmentedControl
 
-      control.accessibilityIdentifier = "\(cell.accessibilityIdentifier).segmentedControl"
+      control.accessibilityIdentifier = "\(name).segmentedControl"
       control.removeAllSegments()
 
       for i in 0..<optionCount {

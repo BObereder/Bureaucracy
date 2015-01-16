@@ -90,7 +90,6 @@ class SegmentedFormFieldTests: FormElementTests {
       }
       
       override func didUpdateForm(form: Form, section: FormSection?, field: FormElement?) {
-        println("updated Form")
       }
     }
     
