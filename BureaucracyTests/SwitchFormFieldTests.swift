@@ -70,6 +70,7 @@ class SwitchFormFieldTests: FormElementTests {
   }
   
   func test08switchControl() {
+    
     class TableViewController: FormViewController, FormDelegate {
       
       override func viewDidLoad() {
@@ -108,7 +109,7 @@ class SwitchFormFieldTests: FormElementTests {
     let element = viewController.getTestCell().formElement as? SwitchFormField<Bool, Bool>
     XCTAssertNotNil(element, "The cell should have an element")
     
-    element!.internalValue = options[1]
+    element!.internalValue = false
     XCTAssertEqual(viewController.getTestCell().switchControl.on, false, "Switch should be off")
     
     element!.reset(true)
