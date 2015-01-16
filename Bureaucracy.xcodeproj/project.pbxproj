@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		78B8D6CF1A68FF6400C87E5C /* SwitchFormFieldTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */; };
 		78CD458E19FFDFAB001DF3B9 /* FormProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */; };
 		78CD459019FFEE5E001DF3B9 /* FormUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */; };
 		78E37F361A67B27600EC4381 /* SwitchFormCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E37F341A67B27600EC4381 /* SwitchFormCell.swift */; };
@@ -49,6 +50,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormFieldTests.swift; sourceTree = "<group>"; };
 		78CD458D19FFDFAB001DF3B9 /* FormProtocol.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormProtocol.swift; sourceTree = "<group>"; };
 		78CD458F19FFEE5E001DF3B9 /* FormUtilities.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FormUtilities.swift; sourceTree = "<group>"; };
 		78E37F341A67B27600EC4381 /* SwitchFormCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SwitchFormCell.swift; sourceTree = "<group>"; };
@@ -197,6 +199,7 @@
 				FA66BFDE1A13AA4800A53201 /* FormFieldTests.swift */,
 				FAEC0AD01A1B7EE500E8F709 /* FieldValidationTests.swift */,
 				FA0200191A14FDA50062384B /* SegmentedFormFieldTests.swift */,
+				78B8D6CE1A68FF6400C87E5C /* SwitchFormFieldTests.swift */,
 				FA0200491A1636AE0062384B /* FormSectionTests.swift */,
 				FAEC0AC01A1B5FCE00E8F709 /* FormTests.swift */,
 				FAE0651F19F5322E00279C6E /* Supporting Files */,
@@ -350,6 +353,7 @@
 				FAEC0AC11A1B5FCE00E8F709 /* FormTests.swift in Sources */,
 				FA02001A1A14FDA50062384B /* SegmentedFormFieldTests.swift in Sources */,
 				FACB25351A136D3C00B2FC4F /* FormElementTests.swift in Sources */,
+				78B8D6CF1A68FF6400C87E5C /* SwitchFormFieldTests.swift in Sources */,
 				FAEC0AD11A1B7EE500E8F709 /* FieldValidationTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
