@@ -91,18 +91,21 @@ class FormFieldTests: FormElementTests {
     section.append(testField)
     testField.currentValue = options[2]
     testField.internalValue = options[1]
-    testField.currentValue = options[2]
-    testField.internalValue = options[1]
+    testField.currentValue = options[0]
+    testField.internalValue = options[2]
     testField.currentValue = options[0]
     testField.currentValue = options[0]
     testField.currentValue = options[1]
-    testField.internalValue = options[1]
+    testField.internalValue = options[0]
+    // setting the internalValue to the same value as currentValue does not update the field
+    testField.currentValue = options[2]
+    testField.internalValue = options[2]
 
-    testField.reset()
+    testField.reset(false)
 
     XCTAssertEqual(section.testField!.currentValue!, defaultValue, "Reset should return field to initial state")
 
-    let reference = [options[2], options[1], options[2], options[1], options[0], options[1], defaultValue]
+    let reference = [options[1], options[2], options[0]]
 
     XCTAssertEqual(section.updatedValues, reference, "Field update should've triggered didUpdate method in section")
   }
