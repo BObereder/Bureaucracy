@@ -107,7 +107,7 @@ class SegmentedFormFieldTests: FormElementTests {
     viewController.view.frame = UIScreen.mainScreen().bounds
 
     XCTAssertNotNil(viewController.getTestCell().segmentedControl, "Segmented control should not be nil")
-    XCTAssertEqual(viewController.getTestCell().segmentedControl.accessibilityIdentifier, "TestSegmentedFormField.cell.segmentedControl", "Acessibility label should be correct")
+    XCTAssertEqual(viewController.getTestCell().segmentedControl.accessibilityIdentifier, "TestSegmentedFormField.segmentedControl", "Acessibility label should be correct")
     XCTAssertEqual(viewController.getTestCell().segmentedControl.selectedSegmentIndex, 0, "Segment 0 should be selected")
 
     for i in 0..<options.count {

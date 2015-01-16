@@ -102,7 +102,7 @@ class SwitchFormFieldTests: FormElementTests {
     viewController.view.frame = UIScreen.mainScreen().bounds
 
     XCTAssertNotNil(viewController.getTestCell().switchControl, "Switch control should not be nil")
-    XCTAssertEqual(viewController.getTestCell().switchControl.accessibilityIdentifier, "TestSwitchFormField.cell.switch", "Acessibility label should be correct")
+    XCTAssertEqual(viewController.getTestCell().switchControl.accessibilityIdentifier, "TestSwitchFormField.switch", "Acessibility label should be correct")
     XCTAssertEqual(viewController.getTestCell().switchControl.on, true, "Switch should be on")
     
     let element = viewController.getTestCell().formElement as? SwitchFormField<Bool, Bool>
