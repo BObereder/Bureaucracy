@@ -73,7 +73,7 @@ class FormTests: XCTestCase {
 
     let serialized = testForm.serialize()
 
-    var i = 1
+    var i = 2
     for (key, value) in serialized {
       let element1 = value["TestSection\(i)-TestElement1"]
       let element2 = value["TestSection\(i)-TestElement2"] as Int
@@ -81,7 +81,7 @@ class FormTests: XCTestCase {
       XCTAssertTrue(element1? == nil, "First section element serialized value should be nil")
       XCTAssertEqual(element2, 0, "Second section element serialized value should be 0")
       XCTAssertEqual(element3, "A", "Third section element serialized value should be A")
-      i++
+      i--
     }
   }
 
