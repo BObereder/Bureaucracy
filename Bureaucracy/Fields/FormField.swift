@@ -42,7 +42,7 @@ public class FormField<Type: Equatable, Internal>: FormElement, FormDataProtocol
   }
 
   public override func reset(_ shouldReload: Bool = true) {
-    currentValue = nil
+    currentValue = initialValue
     if shouldReload {
       reload()
     }
