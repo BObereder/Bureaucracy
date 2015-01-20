@@ -50,10 +50,10 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
   // MARK: Values
   
   public override func didSetInternalValue(#oldValue: Type?) {
-    super.didSetInternalValue(oldValue: oldValue)
     if let currentCell = currentCell as? SwitchFormCell {
       currentCell.switchControl.setOn(internalValue as Bool, animated: true)
     }
+    super.didSetInternalValue(oldValue: oldValue)
   }
 
 }
