@@ -42,15 +42,13 @@ public class CoreDataSelectorFormSection<Type: NSManagedObject>: FormSection, Fo
   // MARK: - CollectionType
 
   public override subscript(position: Int) -> FormElement {
-    if position == endIndex {
+    while position >= endIndex {
       let object = option(position)
       let element = append(SelectorGroupFormField("\(name).\(position)", value: object == currentValue))
       element.localizedTitle = typeToRepresentation(object)
-      return element
     }
-    else {
-      return super[position]
-    }
+
+    return super[position]
   }
 
   // MARK: - Options
