@@ -81,7 +81,7 @@ public protocol FormSectionProtocol: Equatable, CollectionType {
   // MARK: Interface
 
   func register(tableView: UITableView)
-  func configureCell(#field: FormElement, cell: FormCell)
+  func configureCell(cell: FormCell, field: FormElement)
 
   // MARK: Callbacks
 

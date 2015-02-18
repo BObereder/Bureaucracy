@@ -125,8 +125,8 @@ public class FormSection: FormSectionProtocol {
     }
   }
 
-  public func configureCell(#field: FormElement, cell: FormCell) {
-    // noop
+  public func configureCell(cell: FormCell, field: FormElement) {
+    form?.configureCell(cell, field: field, section: self)
   }
 
   public func isReselectable(#field: FormElement) -> Bool {

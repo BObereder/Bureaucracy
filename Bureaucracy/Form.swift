@@ -129,7 +129,7 @@ public class Form: CollectionType {
     }
   }
 
-  // MARK: - Reset
+  // MARK: Reset
 
   public func undo() {
     for x in self {
@@ -155,7 +155,7 @@ public class Form: CollectionType {
     reload()
   }
 
-  // MARK: - Reload
+  // MARK: Reload
 
   public func reload() {
     dataSource?.reloadTable()
@@ -169,7 +169,13 @@ public class Form: CollectionType {
     dataSource?.reloadRow(NSIndexPath(forRow: field.fieldIndex!, inSection: field.section!.sectionIndex!), withRowAnimation: animation)
   }
 
-  // MARK: - SequenceType
+  // MARK: Interface
+
+  public func configureCell(cell: FormCell, field: FormElement, section: FormSection) {
+    // noop
+  }
+
+  // MARK: SequenceType
 
   public func generate() -> GenericGenerator<FormSection> {
     return GenericGenerator(items: sections)

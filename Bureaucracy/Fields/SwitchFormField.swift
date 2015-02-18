@@ -35,7 +35,7 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
       cell.switchControl.on = internalValue as Bool
       cell.switchControl.accessibilityIdentifier = "\(name).switch"
     }
-    section?.configureCell(field: self, cell: cell)
+    section?.configureCell(cell, field: self)
   }
   
   // MARK: Callbacks

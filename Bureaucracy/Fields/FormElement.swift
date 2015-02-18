@@ -55,7 +55,7 @@ public class FormElement: FormElementProtocol {
   public func configureCell(cell: FormCell) {
     cell.textLabel?.text = localizedTitle ?? name
     cell.accessibilityIdentifier = "\(name).cell"
-    section?.configureCell(field: self, cell: cell)
+    section?.configureCell(cell, field: self)
   }
 
   // MARK: - Callbacks
