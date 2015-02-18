@@ -30,7 +30,9 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
   }
 
   public override func configureCell(cell: FormCell) {
-    cell.accessibilityIdentifier = "\(name).cell"
+    super.configureCell(cell)
+
+    cell.textLabel?.text = nil
 
     if let cell = cell as? SegmentedFormCell {
       let control = cell.segmentedControl
