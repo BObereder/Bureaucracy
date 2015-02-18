@@ -27,7 +27,7 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
     tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
   }
   
-  public override func configureCell(cell: FormCell) {
+  public override func configureCell(cell: FormCell, tableView: UITableView) {
     cell.accessibilityIdentifier = "\(name).cell"
     
     if let cell = cell as? SwitchFormCell {
@@ -35,7 +35,7 @@ public class SwitchFormField<Type: Equatable, Internal: BooleanLiteralConvertibl
       cell.switchControl.on = internalValue as Bool
       cell.switchControl.accessibilityIdentifier = "\(name).switch"
     }
-    section?.configureCell(cell, field: self)
+    section?.configureCell(cell, tableView: tableView, field: self)
   }
   
   // MARK: Callbacks

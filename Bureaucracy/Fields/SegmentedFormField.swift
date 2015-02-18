@@ -29,8 +29,8 @@ public class SegmentedFormField<Type: Equatable, Internal: IntegerType>: FormFie
     tableView.registerNib(nib, forCellReuseIdentifier: cellReuseIdentifier)
   }
 
-  public override func configureCell(cell: FormCell) {
-    super.configureCell(cell)
+  public override func configureCell(cell: FormCell, tableView: UITableView) {
+    super.configureCell(cell, tableView: tableView)
 
     cell.textLabel?.text = nil
 

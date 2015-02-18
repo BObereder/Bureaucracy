@@ -11,12 +11,8 @@ import SwiftHelpers
 
 public class FormCell: UITableViewCell {
 
-  public var formElement: FormElement? {
-    didSet {
-      formElement?.configureCell(self)
-    }
-  }
-  
+  public var formElement: FormElement?
+
   public override init(style: UITableViewCellStyle, reuseIdentifier: String?) {
     super.init(style: style, reuseIdentifier: reuseIdentifier)
     accessoryType = .None

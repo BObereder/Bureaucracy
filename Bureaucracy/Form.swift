@@ -171,7 +171,7 @@ public class Form: CollectionType {
 
   // MARK: Interface
 
-  public func configureCell(cell: FormCell, field: FormElement, section: FormSection) {
+  public func configureCell(cell: FormCell, tableView: UITableView, field: FormElement, section: FormSection) {
     // noop
   }
 

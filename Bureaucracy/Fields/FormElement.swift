@@ -48,14 +48,15 @@ public class FormElement: FormElementProtocol {
   public func dequeueReusableView(tableView: UITableView, forIndexPath indexPath: NSIndexPath) -> FormCell {
     let cell = tableView.dequeueReusableCellWithIdentifier(cellReuseIdentifier, forIndexPath: indexPath) as FormCell
     cell.formElement = self
+    configureCell(cell, tableView: tableView)
     currentCell = cell
     return cell
   }
 
-  public func configureCell(cell: FormCell) {
+  public func configureCell(cell: FormCell, tableView: UITableView) {
     cell.textLabel?.text = localizedTitle ?? name
     cell.accessibilityIdentifier = "\(name).cell"
-    section?.configureCell(cell, field: self)
+    section?.configureCell(cell, tableView: tableView, field: self)
   }
 
   // MARK: - Callbacks

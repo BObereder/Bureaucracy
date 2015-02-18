@@ -125,8 +125,8 @@ public class FormSection: FormSectionProtocol {
     }
   }
 
-  public func configureCell(cell: FormCell, field: FormElement) {
-    form?.configureCell(cell, field: field, section: self)
+  public func configureCell(cell: FormCell, tableView: UITableView, field: FormElement) {
+    form?.configureCell(cell, tableView: tableView, field: field, section: self)
   }
 
   public func isReselectable(#field: FormElement) -> Bool {
