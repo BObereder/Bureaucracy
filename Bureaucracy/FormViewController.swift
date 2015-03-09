@@ -11,6 +11,12 @@ import UIKit
 
 public class FormViewController: UITableViewController, FormDelegate {
 
+  deinit {
+    tableView.dataSource = nil
+    tableView.delegate = nil
+    form?.delegate = nil
+  }
+
   public var dataSource: FormDataSource?
 
   public var form: Form? {
